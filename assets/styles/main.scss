@@ -1,0 +1,190 @@
+/*
+    Main css of the pages
+    Loads on all pages
+*/
+$body-bg: #02121D;
+$body-color: #fff;
+
+@import "font";
+
+$fading-color: #969DAB;
+$thor-green-color: #23DCC8;
+$thor-white-color: #fff;
+$thor-olive-color: #8BC540;
+
+html{
+    // it fixes few bugs on ipad safari
+    // font-size: 100%;
+    font-size: 100%;
+    // min-width: 93.75rem;
+}
+.menu-sized-container {
+    min-width: 89.375rem;
+    max-width: 89.375rem;
+    margin: 0rem auto;
+}
+.menu-content-sized-container{
+    max-width: 84.187rem;
+    min-width: 84.187rem;
+    margin: 0rem auto;
+}
+.outer-container{
+    margin: 0rem auto;
+    width: 70rem ;
+}
+.col,.row{
+    margin: 0;
+    padding: 0;
+}
+.fading-color{
+    color: $fading-color
+}
+.thor-green-color{
+    color: $thor-green-color
+}
+.thor-white-color{
+    color: $thor-white-color;
+}
+.thor-olive-color{
+    color: $thor-olive-color;
+}
+.fading-color{
+    color: $fading-color
+}
+.roboto20 {
+    font-family: Roboto;
+    font-size: 1.25rem ;
+}
+
+/* Spacing of the content */
+.spacing70 {
+    height: 4.375rem ;
+}
+.spacing50 {
+    height: 3.125rem ;
+}
+.spacing50.textAbove {
+    height: 2.625rem !important;
+}
+.spacing250 {
+    height: 15.625rem ;
+}
+.spacing20{
+    height: 1.25rem ;
+}
+.spacing100{
+    height: 6.25rem ;
+}
+
+.box-border-red{
+    border: 1px dashed red;
+}
+
+.box-border-green{
+    border: 1px dashed green;
+}
+
+.section-header{
+    
+    p{
+        font-size: 1.5rem ;
+        font-family: Roboto;;
+        text-align: left;
+        margin-bottom: 1.5rem ;
+        color: $thor-white-color;
+        margin: 0rem 0rem 0.625rem 0;
+    }
+    h2{
+        font-size: 3.6875rem ;
+        font-family: "Exo 2";
+        font-weight: 700;
+        color: $thor-white-color;
+        margin: 0rem 0rem 1.25rem 0;
+    }
+    
+}
+
+.section-paragraph{
+    font-size: 1.5rem ;
+    font-family: Roboto;;
+    text-align: left;
+    margin-bottom: 1.5rem ;
+    line-height: 2.125rem ;
+    p{
+        margin-bottom: 1.875rem ;
+    }
+}
+
+.title-section{
+    text-align: center;
+    h2 {
+        font-family: 'Exo 2';
+        text-transform: uppercase;
+        font-size: 2.5rem ;
+        font-weight: 700;
+        color: $thor-white-color;
+    }
+    p{
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 1.25rem ;
+        line-height: 1.875rem ;
+        color: $fading-color
+    }
+}
+
+/*iPad Pro 9.7"*/
+/* Portrait */
+@media only screen
+and (min-device-width: 48rem )
+and (max-device-width: 64rem )
+and (orientation: portrait)
+and (-webkit-min-device-pixel-ratio: 2),
+only screen
+and (min-device-width: 48rem )
+and (max-device-width: 64rem )
+and (orientation: landscape)
+and (-webkit-min-device-pixel-ratio: 2),
+/*iPad Pro 10.5"*/
+/* Portrait */
+only screen
+and (min-device-width: 52.125rem )
+and (max-device-width: 52.125rem )
+and (orientation: portrait)
+and (-webkit-min-device-pixel-ratio: 2),
+/* Landscape */
+only screen
+and (min-device-width: 69.5rem )
+and (max-device-width: 69.5rem )
+and (orientation: landscape)
+and (-webkit-min-device-pixel-ratio: 2),
+/*ipad PRo 12.9"*/
+/* Portrait */
+only screen
+and (min-device-width: 64rem )
+and (max-device-width: 64rem )
+and (orientation: portrait)
+and (-webkit-min-device-pixel-ratio: 2),
+/* Landscape */
+only screen
+and (min-device-width: 85.375rem )
+and (max-device-width: 85.375rem )
+and (orientation: landscape)
+and (-webkit-min-device-pixel-ratio: 2)
+{
+  .code-snippet{
+      font-size: 0.875rem !important;
+  }
+  .butsir-links a{
+  font-size: 0.75rem !important;
+  }
+  .menu-list {
+    padding: 0.75rem 0rem 0.625rem 0rem !important;
+  }
+  .intro-video-container{
+    a{
+      padding-bottom: 0.0625rem ;
+    }
+  }
+}
