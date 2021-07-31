@@ -27,6 +27,10 @@ export default {
     { src: '~/plugins/vue-handsontable', ssr: false }
   ],
 
+  env: {
+    BASE_URL: process.env.BASE_URL
+  },
+
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
