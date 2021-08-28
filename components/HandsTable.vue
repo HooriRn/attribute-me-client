@@ -22,7 +22,7 @@ import HotTable from '~/plugins/vue-handsontable'
     data: function() {
       return {
         settings: {
-          colHeaders: ['Date & Hour', 'Campaign Medium', 'Event Name', 'Event Category', 'Event Label', 'Event Count'],
+          colHeaders: ['Date & Hour', 'Campaign Medium', 'Event Name', 'Event Category', 'Event Label', 'Event Count', 'Event Value'],
           rowHeaders: true,
           licenseKey: 'non-commercial-and-evaluation',
           width: 'auto',

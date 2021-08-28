@@ -1,6 +1,5 @@
 <template>
-<div>
-  <div class="header"><h1>Attribute ME</h1></div>
+<div class="page">
   <EventSetting class="event-setting" :tableSetting="currentTableSetting" />
   <HandsTable v-if="!loading" class="hands-table" :tableData="handsTableData"></HandsTable>
   <div v-if="loading && !loadErr" class="loading-box">Loading data...</div>
@@ -17,8 +16,8 @@ export default {
     return{
       handsTableData: [],
       currentTableSetting: {
-            startDate: '7daysAgo',
-            endDate: 'today',
+            startDate: '2021081800',
+            endDate: '2021082800',
             campaignMedium: ''
       },
       loading: true,
@@ -43,6 +42,7 @@ export default {
       events = await fetch(url)
       events = await events.json()
       events = parseEventsData(events)
+      console.log(events)
       self.handsTableData = events
       self.loading = false
     }
@@ -73,10 +73,8 @@ export default {
 }
 </script>
 <style lang="scss">
-.header{
-  text-align: center;
-  font-family: 'Exo 2';
-  margin: 20px 0;
+.page{
+    background-color: #F3F3F3;
 }
 .hands-table{
   .handsontable{
