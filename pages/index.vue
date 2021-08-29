@@ -1,17 +1,28 @@
 <template>
 <div class="page">
-  <EventSetting class="event-setting" :tableSetting="currentTableSetting" />
-  <HandsTable v-if="!loading" class="hands-table" :tableData="handsTableData"></HandsTable>
-  <div v-if="loading && !loadErr" class="loading-box">Loading data...</div>
-  <div v-if="loadErr" class="loading-box">Unable to fetch data from server!</div>
+  <div class="page-layout">
+    <div class="side-menu-column">
+      <SideMenu />
+    </div>
+    <div class="hands-table-column">
+      <HandsTable v-if="!loading" class="hands-table" :tableData="handsTableData"></HandsTable>
+      <div v-if="loading && !loadErr" class="loading-box">Loading data...</div>
+      <div v-if="loadErr" class="loading-box">Unable to fetch data from server!</div>
+      <div v-if="!loading && !loadErr && handsTableData.length === 0" class="loading-box">No data in this date range</div>
+      
+    </div>
+  </div>
 </div>
 </template>
 
 <script>
 import {parseEventsData, isDifferentSetting } from '../utils'
 import { mapGetters } from 'vuex';
-
+import SideMenu from "../components/SideMenu"
 export default {
+  components:{
+    SideMenu
+  },
   data(){
     return{
       handsTableData: [],
@@ -75,6 +86,20 @@ export default {
 <style lang="scss">
 .page{
     background-color: #F3F3F3;
+    padding: 1.25rem;
+    .page-layout{
+      display: flex;
+      .side-menu-column{
+        min-width: 11.875rem;
+        max-width: 11.875rem;
+        max-height: calc(100vh - 7rem);
+        // overflow-y: scroll;
+        // overflow-x: unset;
+      }
+      .hands-table-column{
+        width: calc(100vw - 11.875rem);
+    }
+    }
 }
 .hands-table{
   .handsontable{

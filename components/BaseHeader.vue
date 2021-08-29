@@ -26,7 +26,8 @@ export default {
         display: flex;
         align-items: center;
         margin-left: 0.8rem;
-        font-family: 1rem;
+        // font-family: ProductSans;
+        font-size: 1rem;
         font-weight: bold ;
         color: #000B12;
         .menu-item{
