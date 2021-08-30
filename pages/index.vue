@@ -52,7 +52,6 @@ export default {
 
         var dateInputValue = getDateInputValue(startDate, endDate)
         this.$store.commit('sideMenuDateLabel', dateInputValue)
-        this.$store.commit('cool', true)
         this.$store.commit('handTableSetting', {
             startDate: startDate,
             endDate: endDate,

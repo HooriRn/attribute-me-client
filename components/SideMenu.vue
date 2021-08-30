@@ -16,14 +16,16 @@
       </div>
       <div class="present-filters-filed">
           <div class="field-title">Present filters</div>
-          <div class="side-menu-item" v-for="filter of filters" :key="filters.indexOf(filter)">
-               <b-button @click="activate(filter.name)"  :class="{'side-menu-button-active': activeItem == filter.name}" class="side-menu-button" v-b-toggle="filter.name">{{filter.name}}</b-button>
-                <b-collapse v-if="filter.childs" :id="filter.name" class="mt-2 childs-list">
-                    <div v-for="child of filter.childs" :key="filter.childs.indexOf(child)" class="side-menu-button">
-                        {{child.name}}
-                    </div>
-                </b-collapse>
+          <div class="filters-scroll">
+            <div class="side-menu-item" v-for="filter of filters" :key="filters.indexOf(filter)">
+                <b-button @click="activate(filter.name)"  :class="{'side-menu-button-active': activeItem == filter.name}" class="side-menu-button" v-b-toggle="filter.name">{{filter.name}}</b-button>
+                    <b-collapse v-if="filter.childs" :id="filter.name" class="mt-2 childs-list">
+                        <div v-for="child of filter.childs" :key="filter.childs.indexOf(child)" class="side-menu-button">
+                            {{child.name}}
+                        </div>
+                    </b-collapse>
 
+            </div>
           </div>
 
           <div>
@@ -116,7 +118,11 @@ export default {
 
 <style lang="scss">
 .side-menu{
-
+    .filters-scroll{
+        height: calc(100vh - 14.5rem);
+        overflow-y: scroll;
+        overflow-x: hidden;
+    }
 
 }
 .side-menu-item{
