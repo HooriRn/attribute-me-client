@@ -2,7 +2,7 @@
 <div class="page">
   <div class="page-layout">
     <div class="side-menu-column">
-      <SideMenu :dateInputValue="dateInputValue" />
+      <SideMenu />
     </div>
     <div class="hands-table-column">
       <HandsTable v-if="!loading" class="hands-table" :tableData="handsTableData"></HandsTable>
@@ -38,7 +38,6 @@ export default {
       },
       loading: true,
       loadErr: false,
-      dateInputValue: "..-..-.. to ..-..-..",
       loadingProgress: 0
     }
   },
@@ -51,7 +50,9 @@ export default {
         var startDate = getServerCustomDateString(lastWeek, "01")
         var endDate = getServerCustomDateString(today, "23")
 
-        this.dateInputValue = getDateInputValue(startDate, endDate)
+        var dateInputValue = getDateInputValue(startDate, endDate)
+        this.$store.commit('sideMenuDateLabel', dateInputValue)
+        this.$store.commit('cool', true)
         this.$store.commit('handTableSetting', {
             startDate: startDate,
             endDate: endDate,

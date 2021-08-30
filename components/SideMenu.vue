@@ -43,17 +43,17 @@
 
 <script>
 import {getServerCustomDateString, getDateInputValue} from '../utils'
+import { mapGetters } from 'vuex'
 export default {
-    props:{
-        dateInputValue:{
-            type: String,
-            default: "..-..-.. to ..-..-.."
-        }
+    computed: {
+        ...mapGetters(['sideMenuDateLabel']),
+
     },
     data(){
         return {
             showDatePicker: false,
             activeItem: null,
+            dateInputValue: "##-##-## to ##-##-##",
             filters: [
                 {name: "All data"},
                 {name: "THORChain.org"},
@@ -104,12 +104,12 @@ export default {
             this.showDatePicker = !this.showDatePicker
             console.log(this.showDatePicker)
         }
-
-        
-        
-
-        
-    }
+    },
+    watch: {
+        sideMenuDateLabel: function(val) {
+        this.dateInputValue = val
+      }
+    } 
 
 }
 </script>
