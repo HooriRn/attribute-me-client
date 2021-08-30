@@ -21,12 +21,13 @@ export default {
 
 <style lang="scss">
 .base-header{
+    background-color: #fff;
     .menu{
         height: 4.3125rem;
         display: flex;
         align-items: center;
         margin-left: 0.8rem;
-        // font-family: ProductSans;
+        font-family: ProductSans;
         font-size: 1rem;
         font-weight: bold ;
         color: #000B12;

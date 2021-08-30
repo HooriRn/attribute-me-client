@@ -2,11 +2,16 @@
 <div class="page">
   <div class="page-layout">
     <div class="side-menu-column">
-      <SideMenu />
+      <SideMenu :dateInputValue="dateInputValue" />
     </div>
     <div class="hands-table-column">
       <HandsTable v-if="!loading" class="hands-table" :tableData="handsTableData"></HandsTable>
-      <div v-if="loading && !loadErr" class="loading-box">Loading data...</div>
+      <div v-if="loading && !loadErr" class="loading-box">
+        <div>{{loadingProgress}}%</div>
+        <div>
+        Loading data...
+        </div>
+      </div>
       <div v-if="loadErr" class="loading-box">Unable to fetch data from server!</div>
       <div v-if="!loading && !loadErr && handsTableData.length === 0" class="loading-box">No data in this date range</div>
       
@@ -16,7 +21,7 @@
 </template>
 
 <script>
-import {parseEventsData, isDifferentSetting } from '../utils'
+import {parseEventsData, isDifferentSetting, getServerCustomDateString, getDateInputValue } from '../utils'
 import { mapGetters } from 'vuex';
 import SideMenu from "../components/SideMenu"
 export default {
@@ -32,13 +37,29 @@ export default {
             campaignMedium: ''
       },
       loading: true,
-      loadErr: false
+      loadErr: false,
+      dateInputValue: "..-..-.. to ..-..-..",
+      loadingProgress: 0
     }
   },
   mounted(){
-    console.log(process.env.BASE_URL)
-  },
+
+        var today = new Date()
+        var lastWeek = new Date()
+        lastWeek.setDate(today.getDate() - 7)
+
+        var startDate = getServerCustomDateString(lastWeek, "01")
+        var endDate = getServerCustomDateString(today, "23")
+
+        this.dateInputValue = getDateInputValue(startDate, endDate)
+        this.$store.commit('handTableSetting', {
+            startDate: startDate,
+            endDate: endDate,
+            campaignMedium: ''
+        })
+    },
   async fetch(){
+    return;
     this.loading = true
     this.loadErr = false
     var self = this
@@ -77,15 +98,53 @@ export default {
       if(isDifferent){
         console.log('newData')
         this.currentTableSetting = newSetting
-        this.$fetch()
+        this.getEvents()
       }
     } 
+},
+methods:{
+  async getEvents(){
+    console.log("get events called")
+
+    this.loading = true
+    this.loadingProgress = 0
+    this.loadErr = false
+    var self = this
+    var queryString = "startDate="+this.currentTableSetting.startDate
+    + "&endDate="+this.currentTableSetting.endDate
+    + "&campaignMedium=" + this.currentTableSetting.campaignMedium
+
+    try{
+
+      var url = process.env.BASE_URL + "/events?"+queryString
+      var res = await self.$axios.get(url, {
+        onDownloadProgress: progressEvent => {
+          const total = progressEvent.total
+          const current = progressEvent.loaded
+
+          self.loadingProgress = Math.floor(current / total * 100)
+        }
+      })
+      var events = res.data
+      events = parseEventsData(events)
+      self.handsTableData = events
+      self.loading = false
+
+    }
+    catch(err){
+      self.loadErr = true
+      console.error(err)
+    }
+  }
 }
 }
 </script>
 <style lang="scss">
+body{
+  background-color: #F3F3F3;
+  height: 100vh;
+}
 .page{
-    background-color: #F3F3F3;
     padding: 1.25rem;
     .page-layout{
       display: flex;
@@ -112,5 +171,6 @@ export default {
 }
 .loading-box{
   text-align: center;
+  margin-top: 4rem;
 }
 </style>

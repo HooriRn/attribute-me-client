@@ -42,11 +42,17 @@
 </template>
 
 <script>
+import {getServerCustomDateString, getDateInputValue} from '../utils'
 export default {
+    props:{
+        dateInputValue:{
+            type: String,
+            default: "..-..-.. to ..-..-.."
+        }
+    },
     data(){
         return {
-            showDatePicker: true,
-            dateInputValue: "21-08-12 to 21-08-02",
+            showDatePicker: false,
             activeItem: null,
             filters: [
                 {name: "All data"},
@@ -69,14 +75,15 @@ export default {
             ]
         }
     },
+    
     methods:{
         applyFilter(args){
             console.log(args)
             var from = new Date(args.from)
             var to = new Date(args.to)
-            var startDate = this.getServerCustomDateString(from, "01")
-            var endDate = this.getServerCustomDateString(to, "23")
-            this.setDateInputValue(startDate, endDate)
+            var startDate = getServerCustomDateString(from, "01")
+            var endDate = getServerCustomDateString(to, "23")
+            this.dateInputValue = getDateInputValue(startDate, endDate)
             this.$store.commit('handTableSetting', {
                 startDate: startDate,
                 endDate: endDate,
@@ -96,29 +103,12 @@ export default {
             console.log("toggle")
             this.showDatePicker = !this.showDatePicker
             console.log(this.showDatePicker)
-        },
+        }
 
         
-        getServerCustomDateString(date, hour){
-            var year = date.getFullYear()
-            var month = date.getMonth()
-            var day = date.getDate()
-            if((day+"").length === 1)
-                day = "0"+day
-            if((month+"").length === 1)
-                month = "0"+month
-            var customString = year+""+month+day + hour
-            return customString
-        },
+        
 
-        setDateInputValue(startDate, endDate){
-            var a = startDate
-            var from = a.substr(2,2) +"-"+ a.substr(4,2) +"-"+ a.substr(6,2)
-            a = endDate
-            var to = a.substr(2,2) +"-"+ a.substr(4,2) +"-"+ a.substr(6,2)
-
-            this.dateInputValue = from + " to "+ to
-        }
+        
     }
 
 }

@@ -21,3 +21,25 @@ export function isDifferentSetting(oldSetting, newSetting){
     }
     return {isDifferent, newSetting: newSettingOnlyOldKeys}
 }
+
+export function getServerCustomDateString(date, hour){
+    var year = date.getFullYear()
+    var month = date.getMonth()
+    var day = date.getDate()
+    if((day+"").length === 1)
+        day = "0"+day
+    if((month+"").length === 1)
+        month = "0"+month
+    var customString = year+""+month+day + hour
+    return customString
+}
+
+export function getDateInputValue(startDate, endDate){
+    var a = startDate
+    var from = a.substr(2,2) +"-"+ a.substr(4,2) +"-"+ a.substr(6,2)
+    a = endDate
+    var to = a.substr(2,2) +"-"+ a.substr(4,2) +"-"+ a.substr(6,2)
+
+    var dateInputValue = from + " to "+ to
+    return dateInputValue
+}
