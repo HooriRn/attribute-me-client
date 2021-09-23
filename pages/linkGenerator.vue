@@ -119,7 +119,7 @@ export default {
         }
       ],
       tableSettings: {
-        height: 'auto',
+        height: '100%',
         licenseKey: 'non-commercial-and-evaluation',
       }
     };
