@@ -34,7 +34,7 @@
 
 
             <!-- Elements to collapse -->
-            
+
             <b-collapse id="collapse-b" class="mt-2">
                 <b-card>I am collapsible content B!</b-card>
             </b-collapse>
@@ -59,7 +59,7 @@ export default {
             filters: [
                 {name: "All data"},
                 {name: "THORChain.org"},
-                {name: "SKIP.exchange", 
+                {name: "SKIP.exchange",
                     childs:[
                         {name: "All Events"},
                         {name: "Interface Loads"},
@@ -77,7 +77,7 @@ export default {
             ]
         }
     },
-    
+
     methods:{
         applyFilter(args){
             console.log(args)
@@ -92,7 +92,7 @@ export default {
                 campaignMedium: ''
             })
         },
-        
+
         activate(filterName){
             if(this.activeItem === filterName)
                 this.activeItem = null
@@ -111,13 +111,15 @@ export default {
         sideMenuDateLabel: function(val) {
         this.dateInputValue = val
       }
-    } 
+    }
 
 }
 </script>
 
 <style lang="scss">
 .side-menu{
+    padding-right: 20px;
+
     .filters-scroll{
         height: calc(100vh - 14.5rem);
         overflow-y: scroll;
@@ -198,7 +200,7 @@ export default {
             cursor: pointer;
         }
 
-        
+
     }
     .date-input-active{
             background-color: #DADCE0;
