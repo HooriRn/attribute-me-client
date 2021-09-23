@@ -21,7 +21,7 @@
         <hot-table class="hands-table" :data="linkGenerateData" :settings="tableSettings">
           <hot-column title="Category" read-only="true" data="category">
           </hot-column>
-          <hot-column data="topic" read-only="true">
+          <hot-column title="Topic" data="topic" read-only="true">
           </hot-column>
           <hot-column title="Landing Page Preview" read-only="true" data="preview" :renderer="showLink">
           </hot-column>
