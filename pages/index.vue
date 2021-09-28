@@ -5,11 +5,7 @@
         <SideMenu />
       </div>
       <div class="hands-table-column">
-        <hot-table
-          v-if="!loading"
-          class="hands-table"
-          :data="handsTableData"
-        ></hot-table>
+        <HandsTable v-if="!loading" class="hands-table" :tableData="handsTableData"></HandsTable>
         <div v-if="loading && !loadErr" class="loading-box">
           <div>{{ loadingProgress }}%</div>
           <div>Loading data...</div>
@@ -130,9 +126,7 @@ export default {
         "startDate=" +
         this.currentTableSetting.startDate +
         "&endDate=" +
-        this.currentTableSetting.endDate +
-        "&campaignMedium=" +
-        this.currentTableSetting.campaignMedium;
+        this.currentTableSetting.endDate
 
       try {
         var url = process.env.BASE_URL + "/events?" + queryString;
@@ -144,8 +138,10 @@ export default {
             self.loadingProgress = Math.floor((current / total) * 100);
           },
         });
-        var events = res.data;
+        var events = res.data.events;
+        var totals = res.data.totals;
         events = parseEventsData(events);
+        console.log(events)
         self.handsTableData = events;
         self.loading = false;
       } catch (err) {

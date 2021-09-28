@@ -1,11 +1,10 @@
 <template>
   <div>
-    <HotTable v-if="tableData.length > 0" :settings="settings" :data="tableData"></HotTable>
+    <hot-table v-if="tableData.length > 0" :settings="settings" :data="tableData"></hot-table>
   </div>
 </template>
 
 <script>   
-import HotTable from '~/plugins/vue-handsontable'
 
   export default {
     props: {
@@ -22,7 +21,19 @@ import HotTable from '~/plugins/vue-handsontable'
     data: function() {
       return {
         settings: {
-          colHeaders: ['Date & Hour', 'Campaign Medium', 'Event Name', 'Event Category', 'Event Label', 'Event Count', 'Event Value'],
+          colHeaders: [
+            'Date & Hour', 
+            'Campaign Medium',
+            'Campaign Name',
+            'Campaign Source',
+            'Event Name', 
+            'Event Category', 
+            'Event Label', 
+            'Event Count', 
+            'Event Value',
+            'Total Users',
+            'Events per User'
+          ],
           rowHeaders: true,
           licenseKey: 'non-commercial-and-evaluation',
           height: '85vh',
@@ -41,9 +52,6 @@ import HotTable from '~/plugins/vue-handsontable'
         // { rel: 'stylesheet', type: 'text/css', 
         //   href: '/assets/css/handsontable.full.min.css' },
       ]
-    },
-    components: {
-      HotTable    
     }
   }
 </script>
