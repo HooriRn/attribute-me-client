@@ -9,6 +9,7 @@
         <div v-if="loading && !loadErr" class="loading-box">
           <div>{{ loadingProgress }}%</div>
           <div>Loading data...</div>
+          <Loading />
         </div>
         <div v-if="loadErr" class="loading-box">
           Unable to fetch data from server!
@@ -33,16 +34,18 @@ import {
 } from "../utils";
 import { mapGetters } from "vuex";
 import SideMenu from "../components/SideMenu";
+import Loading from '../components/Loading'
 export default {
   components: {
     SideMenu,
+    Loading
   },
   data() {
     return {
       handsTableData: [],
       currentTableSetting: {
-        startDate: "2021081800",
-        endDate: "2021082800",
+        startDate: null,
+        endDate: null,
         campaignMedium: "",
       },
       loading: true,
@@ -60,7 +63,7 @@ export default {
 
     var dateInputValue = getDateInputValue(startDate, endDate);
     this.$store.commit("sideMenuDateLabel", dateInputValue);
-    this.$store.commit("handTableSetting", {
+    this.$store.commit("tableSetting", {
       startDate: startDate,
       endDate: endDate,
       campaignMedium: "",
@@ -95,11 +98,11 @@ export default {
   },
   fetchOnServer: false,
   computed: {
-    ...mapGetters(["handTableSetting"]),
+    ...mapGetters(["tableSetting"]),
     ...mapGetters(["cool"]),
   },
   watch: {
-    handTableSetting: function (val) {
+    tableSetting: function (val) {
       console.log("table setting changed");
       console.log(this.currentTableSetting);
       var { isDifferent, newSetting } = isDifferentSetting(
@@ -107,11 +110,11 @@ export default {
         val
       );
       console.log(newSetting);
-      if (isDifferent) {
+      // if (isDifferent) {
         console.log("newData");
         this.currentTableSetting = newSetting;
         this.getEvents();
-      }
+      // }
     },
   },
   methods: {

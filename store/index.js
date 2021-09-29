@@ -1,12 +1,12 @@
 export const state = () => ({
-    handTableSetting: null,
+    tableSetting: null,
     cool: true,
-    sideMenuDateLabel: null
+    sideMenuDateLabel: null,
 })
 
 export const mutations = {
-    handTableSetting(state, payload) {
-        state.handTableSetting = payload
+    tableSetting(state, payload) {
+        state.tableSetting = payload
     },
     sideMenuDateLabel(state, payload){
         state.sideMenuDateLabel = payload
@@ -17,13 +17,14 @@ export const mutations = {
 }
 
 export const getters = {
-    handTableSetting(state){
-        return state.handTableSetting
+    tableSetting(state){
+        return JSON.parse(JSON.stringify(state.tableSetting))
     },
     sideMenuDateLabel(state){
         return state.sideMenuDateLabel
     },
     cool(state){
         return state.cool
-    }
+    },
+
 }

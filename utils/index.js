@@ -7,6 +7,14 @@ export function parseEventsData(events){
                 event.time.substr(6,2) + " " + 
                 event.time.substr(8,2)+":00"
             }
+            if(event.date){
+                event.date = 
+                event.date.substr(0,4) + "-" +
+                event.date.substr(4,2) + "-"
+            }
+            if(event.event_count_per_user){
+                event.event_count_per_user = event.event_count_per_user.toFixed(2)
+            }
             delete event.id
         })
         return events

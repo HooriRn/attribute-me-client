@@ -6,7 +6,6 @@
                 <div  class="date-input-text">{{dateInputValue}}</div>
                 <img src="~/assets/img/triangle.svg">
           </div>
-          <!-- <v-md-date-range-picker></v-md-date-range-picker> -->
           <div :hidden="!showDatePicker" class="date-picker-holder">
             <date-range-picker
             width="18.75rem"
@@ -18,9 +17,18 @@
           <div class="field-title">Present filters</div>
           <div class="filters-scroll">
             <div class="side-menu-item" v-for="filter of filters" :key="filters.indexOf(filter)">
-                <b-button @click="activate(filter.name)"  :class="{'side-menu-button-active': activeItem == filter.name}" class="side-menu-button" v-b-toggle="filter.name">{{filter.name}}</b-button>
+                
+                <div @click="activate(filter.name)"  
+                class="side-menu-item"
+                :class="{'side-menu-button-active': activeItem == filter.name}" 
+                v-b-toggle="filter.name">{{filter.name}}
+                </div>
+
                     <b-collapse v-if="filter.childs" :id="filter.name" class="mt-2 childs-list">
-                        <div v-for="child of filter.childs" :key="filter.childs.indexOf(child)" class="side-menu-button">
+                        <div v-for="child of filter.childs" :key="filter.childs.indexOf(child)" 
+                        @click="filterBtnClicked(child.name)"  
+                        class="side-menu-button"
+                        :class="{'side-menu-button-active': activeBtn == filter.name + '&'+ child.name}">
                             {{child.name}}
                         </div>
                     </b-collapse>
@@ -49,12 +57,13 @@ import { mapGetters } from 'vuex'
 export default {
     computed: {
         ...mapGetters(['sideMenuDateLabel']),
-
+        ...mapGetters(['tableSetting'])
     },
     data(){
         return {
             showDatePicker: false,
             activeItem: null,
+            activeBtn: null,
             dateInputValue: "##-##-## to ##-##-##",
             filters: [
                 {name: "All data"},
@@ -86,7 +95,7 @@ export default {
             var startDate = getServerCustomDateString(from, "01")
             var endDate = getServerCustomDateString(to, "23")
             this.dateInputValue = getDateInputValue(startDate, endDate)
-            this.$store.commit('handTableSetting', {
+            this.$store.commit('tableSetting', {
                 startDate: startDate,
                 endDate: endDate,
                 campaignMedium: ''
@@ -100,6 +109,19 @@ export default {
                 this.activeItem = filterName
 
             console.log(this.activeItem)
+        },
+        filterBtnClicked(childBtnName){
+            var newBtn = this.activeItem + "&"+ childBtnName
+            var tableSetting = this.tableSetting
+            if(this.activeBtn === newBtn){
+                this.activeBtn = null
+                tableSetting['labelFilter'] = null
+            }
+            else{
+                this.activeBtn = newBtn
+                tableSetting['labelFilter'] = newBtn
+            }
+            this.$store.commit('tableSetting', tableSetting)
         },
         toggleDatePicker(){
             console.log("toggle")
@@ -118,7 +140,8 @@ export default {
 
 <style lang="scss">
 .side-menu{
-    padding-right: 20px;
+    padding: 0 10px;
+    
 
     .filters-scroll{
         height: calc(100vh - 14.5rem);
@@ -143,11 +166,12 @@ export default {
         min-width: 100%;
         text-align: left;
         padding: 0.3rem;
+        padding-left: 1rem;
+        cursor: pointer;
         &:hover{
-            background-color: #DADCE0;
-            border: none;
-            color: #000B12;
-            border-radius: 0;
+            color: #FD624F;
+            background-color: #dadce0;
+            border-radius: 0 6px 6px 0;
             border: none;
         }
         &:active{
@@ -159,11 +183,42 @@ export default {
         }
 }
 .side-menu-button-active{
-    background-color: #DADCE0;
-    border-radius: 0;
+    color: #FD624F;
+    background-color: #dadce0;
+    border-radius: 0 6px 6px 0;
     border: none;
-
 }
+
+.side-menu-item {
+  font-family: ProductSans;
+  font-size: 0.875rem;
+  line-height: 2.5rem;
+  color: #202124;
+  // height: 42px;
+  background-color: transparent;
+  border: none;
+  display: block;
+  min-width: 100%;
+  text-align: left;
+  padding: 0.3rem;
+  padding-left: 20px;
+  border-radius: 0 6px 6px 0;
+  cursor: pointer;
+
+  &:hover {
+    color: #FD624F;
+    background-color: #dadce0;
+    border-radius: 0 6px 6px 0;
+    border: none;
+  }
+}
+.side-menu-item.not-collapsed{
+    color: #FD624F;
+    background-color: #dadce0;
+    border-radius: 0 6px 6px 0;
+    border: none;
+}
+
 .childs-list{
     margin-left: 1rem;
 }

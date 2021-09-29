@@ -61,7 +61,7 @@ export default {
         inputValueChanged($event){
             console.log("input value changed")
             var self = this
-            this.$store.commit('handTableSetting', {
+            this.$store.commit('tableSetting', {
                 startDate: self.startDate,
                 endDate: self.endDate,
                 campaignMedium: self.campaignMedium
