@@ -9,7 +9,8 @@
           <div :hidden="!showDatePicker" class="date-picker-holder">
             <date-range-picker
             width="18.75rem"
-             :from="$route.query.from" :to="$route.query.to" :panel="$route.query.panel" @update="applyFilter"/>
+             :from="$route.query.from" :to="$route.query.to" :panel="$route.query.panel" @update="applyFilter"
+             :theme="datepickerTheme"/>
           </div>
 
       </div>
@@ -95,7 +96,19 @@ export default {
                     ]
                 },
 
-            ]
+            ],
+            datepickerTheme: {
+                primary: '#ff6640',
+                secondary: '#2D3E50',
+                ternary: '#93A0BD',
+                border: '#e6e6e6',
+                light: '#ffffff',
+                dark: '#000000',
+                hovers: {
+                    day: '#CCC',
+                    range: '#e6e6e6'
+                }
+            }
         }
     },
 
@@ -111,7 +124,7 @@ export default {
             var tableSetting = this.tableSetting
             tableSetting['startDate'] = startDate
             tableSetting['endDate'] = endDate
-
+            this.showDatePicker = false
             this.$store.commit('tableSetting', tableSetting)
         },
 

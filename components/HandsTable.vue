@@ -43,6 +43,9 @@
           dropdownMenu: true,
           filters: true,
           columnSorting: true,
+          mergeCells: [
+            { row: 0, col: 0, rowspan: 1, colspan: 7 }
+          ]
         },
           // style: 'width: 90vw; height: 90vh; overflow: hidden;'
       };

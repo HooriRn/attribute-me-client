@@ -115,6 +115,20 @@ export default {
         var totals = res.data.totals;
         events = parseEventsData(events);
         console.log(events)
+        if(events.length > 0){
+          var oneEvent = JSON.parse(JSON.stringify(events[0]))
+          
+          for(var key in oneEvent)
+            oneEvent[key] = null
+
+          oneEvent.time = "Totals"
+          oneEvent.event_count = totals.total_count
+          oneEvent.event_value = totals.total_value
+          oneEvent.total_users = totals.total_total_users
+          oneEvent.event_count_per_user = totals.total_event_count_per_user
+          events.unshift(oneEvent)
+        }
+          // events.unshift(["totals","","","","","","", totals.total_count, totals.total_value, totals.total_total_users, totals.total_event_count_per_user])
         self.handsTableData = events;
         self.loading = false;
       } catch (err) {
