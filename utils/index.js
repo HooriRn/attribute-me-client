@@ -33,7 +33,7 @@ export function isDifferentSetting(oldSetting, newSetting){
 
 export function getServerCustomDateString(date, hour){
     var year = date.getFullYear()
-    var month = date.getMonth()
+    var month = date.getMonth() + 1
     var day = date.getDate()
     if((day+"").length === 1)
         day = "0"+day
