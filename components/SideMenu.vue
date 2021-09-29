@@ -1,327 +1,335 @@
 <template>
   <div class="side-menu">
-      <div class="date-range-field">
-          <div class="field-title">Date range</div>
-          <div @click="toggleDatePicker" class="date-input" :class="{'date-input-active': showDatePicker}">
-                <div  class="date-input-text">{{dateInputValue}}</div>
-                <img src="~/assets/img/triangle.svg">
-          </div>
-          <div :hidden="!showDatePicker" class="date-picker-holder">
-            <date-range-picker
-            width="18.75rem"
-             :from="$route.query.from" :to="$route.query.to" :panel="$route.query.panel" @update="applyFilter"
-             :theme="datepickerTheme"/>
-          </div>
-
+    <div class="date-range-field">
+      <div class="field-title">Date range</div>
+      <div
+        @click="toggleDatePicker"
+        class="date-input"
+        :class="{ 'date-input-active': showDatePicker }"
+      >
+        <div class="date-input-text">{{ dateInputValue }}</div>
+        <img src="~/assets/img/triangle.svg" />
       </div>
-      <div class="present-filters-filed">
-          <div class="field-title">Present filters</div>
-          <div class="filters-scroll">
-            <div class="side-menu-item" v-for="filter of filters" :key="filters.indexOf(filter)">
-                
-                <b-button @click="activate(filter.name)"  
-                class="side-menu-item"
-                :class="{'side-menu-button-active': activeItem == filter.name}" 
-                v-b-toggle="filter.name">{{filter.name}}
-                </b-button>
-
-                    <b-collapse :ref="filter.name" v-if="filter.childs" :id="filter.name" class="mt-2 childs-list">
-                        <div v-for="child of filter.childs" :key="filter.childs.indexOf(child)" 
-                        @click="filterBtnClicked(filter.name, child.name)"  
-                        class="side-menu-button"
-                        :class="{'side-menu-button-active': activeBtn == filter.name + '&'+ child.name}">
-                            {{child.name}}
-                        </div>
-                    </b-collapse>
-
-            </div>
-          </div>
-
-          <div>
-
-            <!-- Via space separated string of IDs passed to directive value -->
-
-
-            <!-- Elements to collapse -->
-
-            <b-collapse id="collapse-b" class="mt-2">
-                <b-card>I am collapsible content B!</b-card>
-            </b-collapse>
-            </div>
+      <div :hidden="!showDatePicker" class="date-picker-holder">
+        <date-range-picker
+          width="18.75rem"
+          :from="$route.query.from"
+          :to="$route.query.to"
+          :panel="$route.query.panel"
+          @update="applyFilter"
+          :theme="datepickerTheme"
+        />
       </div>
+    </div>
+    <div class="present-filters-filed">
+      <div class="field-title">Present filters</div>
+      <div class="filters-scroll">
+        <div
+          class="side-menu-item"
+          v-for="filter of filters"
+          :key="filters.indexOf(filter)"
+        >
+          <b-button
+            @click="activate(filter.name)"
+            class="side-menu-item"
+            :class="{ 'side-menu-button-active': activeItem == filter.name }"
+            v-b-toggle="filter.name"
+            >{{ filter.name }}
+          </b-button>
+
+          <b-collapse
+            :ref="filter.name"
+            v-if="filter.childs"
+            :id="filter.name"
+            class="mt-2 childs-list"
+          >
+            <div
+              v-for="child of filter.childs"
+              :key="filter.childs.indexOf(child)"
+              @click="filterBtnClicked(filter.name, child.name)"
+              class="side-menu-button"
+              :class="{
+                'side-menu-button-active':
+                  activeBtn == filter.name + '&' + child.name,
+              }"
+            >
+              {{ child.name }}
+            </div>
+          </b-collapse>
+        </div>
+      </div>
+
+      <div>
+        <!-- Via space separated string of IDs passed to directive value -->
+
+        <!-- Elements to collapse -->
+
+        <b-collapse id="collapse-b" class="mt-2">
+          <b-card>I am collapsible content B!</b-card>
+        </b-collapse>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import {getServerCustomDateString, getDateInputValue} from '../utils'
-import { mapGetters } from 'vuex'
+import { getServerCustomDateString, getDateInputValue } from "../utils";
+import { mapGetters } from "vuex";
 export default {
-    computed: {
-        ...mapGetters(['sideMenuDateLabel']),
-        ...mapGetters(['tableSetting'])
-    },
-    data(){
-        return {
-            showDatePicker: false,
-            activeItem: null,
-            activeBtn: null,
-            dateInputValue: "##-##-## to ##-##-##",
-            filters: [
-                {name: "All data"},
-                {name: "THORChain.org",
-                    childs:[
-                        {name: 'All Events'},
-                        {name: 'Website Loads'},
-                        {name: 'Promotions'},
-                        {name: 'Social'},
-                        {name: 'Tool'},
-                        {name: 'Article'},
-                        {name: 'Video'},
-                        {name: 'Document'},
-                        {name: 'Paper'},
-                    ]
-                },
-                {name: "SKIP.exchange",
-                    childs:[
-                        {name: "All Events"},
-                        {name: "Interface Loads"},
-                        {name: "New Wallets"},
-                        {name: "Swap Preps"},
-                        {name: "Swaps"},
-                        {name: "RUNE Upgrade"},
-                        {name: "Deposits"},
-                        {name: "Withdrawal Preps"},
-                        {name: "Withdrawals"},
-                        {name: "Network Fees"},
-                    ]
-                },
+  computed: {
+    ...mapGetters(["sideMenuDateLabel"]),
+    ...mapGetters(["tableSetting"]),
+  },
+  data() {
+    return {
+      showDatePicker: false,
+      activeItem: null,
+      activeBtn: null,
+      dateInputValue: "##-##-## to ##-##-##",
+      filters: [
+        { name: "All data" },
+        {
+          name: "THORChain.org",
+          childs: [
+            { name: "All Events" },
+            { name: "Website Loads" },
+            { name: "Promotions" },
+            { name: "Social" },
+            { name: "Tool" },
+            { name: "Article" },
+            { name: "Video" },
+            { name: "Document" },
+            { name: "Paper" },
+          ],
+        },
+        {
+          name: "SKIP.exchange",
+          childs: [
+            { name: "All Events" },
+            { name: "Interface Loads" },
+            { name: "New Wallets" },
+            { name: "Swap Preps" },
+            { name: "Swaps" },
+            { name: "RUNE Upgrade" },
+            { name: "Deposits" },
+            { name: "Withdrawal Preps" },
+            { name: "Withdrawals" },
+            { name: "Network Fees" },
+          ],
+        },
+      ],
+      datepickerTheme: {
+        primary: "#ff6640",
+        secondary: "#2D3E50",
+        ternary: "#93A0BD",
+        border: "#e6e6e6",
+        light: "#ffffff",
+        dark: "#000000",
+        hovers: {
+          day: "#CCC",
+          range: "#e6e6e6",
+        },
+      },
+    };
+  },
 
-            ],
-            datepickerTheme: {
-                primary: '#ff6640',
-                secondary: '#2D3E50',
-                ternary: '#93A0BD',
-                border: '#e6e6e6',
-                light: '#ffffff',
-                dark: '#000000',
-                hovers: {
-                    day: '#CCC',
-                    range: '#e6e6e6'
-                }
-            }
+  methods: {
+    applyFilter(args) {
+      console.log(args);
+      var from = new Date(args.from);
+      var to = new Date(args.to);
+      var startDate = getServerCustomDateString(from, "01");
+      var endDate = getServerCustomDateString(to, "23");
+      this.dateInputValue = getDateInputValue(startDate, endDate);
+
+      var tableSetting = this.tableSetting;
+      tableSetting["startDate"] = startDate;
+      tableSetting["endDate"] = endDate;
+      this.showDatePicker = false;
+      this.$store.commit("tableSetting", tableSetting);
+    },
+
+    activate(filterName) {
+      if (this.activeItem === filterName) this.activeItem = null;
+      else this.activeItem = filterName;
+      if (filterName === "All data") {
+        this.activeBtn = null;
+        for (var key in this.$refs) {
+          var ref = this.$refs[key][0];
+          if (ref.show) ref.toggle();
         }
-    },
-
-    methods:{
-        applyFilter(args){
-            console.log(args)
-            var from = new Date(args.from)
-            var to = new Date(args.to)
-            var startDate = getServerCustomDateString(from, "01")
-            var endDate = getServerCustomDateString(to, "23")
-            this.dateInputValue = getDateInputValue(startDate, endDate)
-            
-            var tableSetting = this.tableSetting
-            tableSetting['startDate'] = startDate
-            tableSetting['endDate'] = endDate
-            this.showDatePicker = false
-            this.$store.commit('tableSetting', tableSetting)
-        },
-
-        activate(filterName){
-            if(this.activeItem === filterName)
-                this.activeItem = null
-            else
-                this.activeItem = filterName
-            if(filterName === "All data"){
-                this.activeBtn = null
-                for(var key in this.$refs){
-                    var ref = this.$refs[key][0]
-                    if(ref.show)
-                        ref.toggle()
-                }
-                var tableSetting = this.tableSetting
-                tableSetting['filter_website'] = ''
-                tableSetting['present_filter'] = ''
-                this.$store.commit('tableSetting', tableSetting)
-            }
-            console.log(this.activeItem)
-        },
-        filterBtnClicked(parentBtnName, childBtnName){
-            var newBtn = parentBtnName + "&"+ childBtnName
-            var tableSetting = this.tableSetting
-            if(this.activeBtn === newBtn){
-                this.activeBtn = null
-                // tableSetting['filter_website'] = ''
-                // tableSetting['present_filter'] = ''
-            }
-            else{
-                this.activeBtn = newBtn
-                tableSetting['filter_website'] = parentBtnName
-                tableSetting['present_filter'] = childBtnName
-                this.$store.commit('tableSetting', tableSetting)
-            }
-        },
-        toggleDatePicker(){
-            console.log("toggle")
-            this.showDatePicker = !this.showDatePicker
-            console.log(this.showDatePicker)
-        }
-    },
-    watch: {
-        sideMenuDateLabel: function(val) {
-        this.dateInputValue = val
+        var tableSetting = this.tableSetting;
+        tableSetting["filter_website"] = "";
+        tableSetting["present_filter"] = "";
+        this.$store.commit("tableSetting", tableSetting);
       }
-    }
-
-}
+      console.log(this.activeItem);
+    },
+    filterBtnClicked(parentBtnName, childBtnName) {
+      var newBtn = parentBtnName + "&" + childBtnName;
+      var tableSetting = this.tableSetting;
+      if (this.activeBtn === newBtn) {
+        this.activeBtn = null;
+        // tableSetting['filter_website'] = ''
+        // tableSetting['present_filter'] = ''
+      } else {
+        this.activeBtn = newBtn;
+        tableSetting["filter_website"] = parentBtnName;
+        tableSetting["present_filter"] = childBtnName;
+        this.$store.commit("tableSetting", tableSetting);
+      }
+    },
+    toggleDatePicker() {
+      console.log("toggle");
+      this.showDatePicker = !this.showDatePicker;
+      console.log(this.showDatePicker);
+    },
+  },
+  watch: {
+    sideMenuDateLabel: function (val) {
+      this.dateInputValue = val;
+    },
+  },
+};
 </script>
 
 <style lang="scss">
-.side-menu{
-    padding: 0 10px;
-    
+.side-menu {
+  padding: 0 10px;
 
-    .filters-scroll{
-        height: calc(100vh - 14.5rem);
-        overflow-y: scroll;
-        overflow-x: hidden;
-    }
-
+  .filters-scroll {
+    height: calc(100vh - 14.5rem);
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
 }
-.side-menu-item{
-
-.side-menu-button{
-        /* font-family: ProductSans; */
-        font-family: ProductSans;
-        font-size: 0.875rem;
-        line-height: 2.5rem;
-        color: #202124;
-
-        background-color: transparent;
-        border: none;
-        border-radius: 0;
-        display: block;
-        min-width: 100%;
-        text-align: left;
-        padding: 0.3rem;
-        padding-left: 1rem;
-        cursor: pointer;
-        &:hover{
-            color: #FD624F;
-            background-color: #dadce0;
-            border-radius: 0 6px 6px 0;
-            border: none;
-        }
-        &:active{
-            background-color: #DADCE0;
-            border: none;
-            color: #000B12;
-            border-radius: 0;
-            border: none;
-        }
-}
-.side-menu-button-active{
-    color: #FD624F;
-    background-color: #dadce0;
-    border-radius: 0 6px 6px 0;
-    border: none;
-}
-
 .side-menu-item {
-  font-family: ProductSans;
-  font-size: 0.875rem;
-  line-height: 2.5rem;
-  color: #202124;
-  // height: 42px;
-  background-color: transparent;
-  border: none;
-  display: block;
-  min-width: 100%;
-  text-align: left;
-  padding: 0.3rem;
-  padding-left: 20px;
-  border-radius: 0 6px 6px 0;
-  cursor: pointer;
+  .side-menu-button {
+    /* font-family: ProductSans; */
+    font-family: ProductSans;
+    font-size: 0.875rem;
+    line-height: 2.5rem;
+    color: #202124;
 
-  &:hover {
-    color: #FD624F;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    display: block;
+    min-width: 100%;
+    text-align: left;
+    padding: 0.3rem;
+    padding-left: 1rem;
+    cursor: pointer;
+    &:hover {
+      color: #fd624f;
+      background-color: #dadce0;
+      border-radius: 0 6px 6px 0;
+      border: none;
+    }
+    &:active {
+      background-color: #dadce0;
+      border: none;
+      color: #000b12;
+      border-radius: 0;
+      border: none;
+    }
+  }
+  .side-menu-button-active {
+    color: #fd624f;
     background-color: #dadce0;
     border-radius: 0 6px 6px 0;
     border: none;
   }
-}
-.side-menu-item.side-menu-button-active{
-    color: #FD624F;
-    background-color: #dadce0;
-    border-radius: 0 6px 6px 0;
-    border: none;
-}
-.side-menu-item.not-collapsed{
-    color: #FD624F;
-    background-color: #dadce0;
-    border-radius: 0 6px 6px 0;
-    border: none;
-}
 
-.childs-list{
+  .side-menu-item {
+    font-family: ProductSans;
+    font-size: 0.875rem;
+    line-height: 2.5rem;
+    color: #202124;
+    // height: 42px;
+    background-color: transparent;
+    border: none;
+    display: block;
+    min-width: 100%;
+    text-align: left;
+    padding: 0.3rem;
+    padding-left: 20px;
+    border-radius: 0 6px 6px 0;
+    cursor: pointer;
+
+    &:hover {
+      color: #fd624f;
+      background-color: #dadce0;
+      border-radius: 0 6px 6px 0;
+      border: none;
+    }
+  }
+  .side-menu-item.side-menu-button-active {
+    color: #fd624f;
+    background-color: #dadce0;
+    border-radius: 0 6px 6px 0;
+    border: none;
+  }
+  .side-menu-item.not-collapsed {
+    color: #fd624f;
+    background-color: #dadce0;
+    border-radius: 0 6px 6px 0;
+    border: none;
+  }
+
+  .childs-list {
     margin-left: 1rem;
+  }
 }
+.date-range-field {
+  position: relative;
+  .date-picker-holder {
+    z-index: 1000;
+    background-color: #fff;
+    position: absolute;
+    transform: scale(0.8);
+    transform-origin: left top;
+    left: 100%;
+    top: 0;
+  }
 
-
-}
-.date-range-field{
-    position: relative;
-    .date-picker-holder{
-        z-index: 1000;
-        background-color: #fff;
-        position: absolute;
-        transform: scale(0.8);
-        transform-origin: left top;
-        left: 100%;
-        top: 0;
+  .date-input {
+    display: flex;
+    justify-content: space-between;
+    font-family: ProductSans;
+    font-size: 0.875rem;
+    line-height: 2.5rem;
+    color: #202124;
+    padding: 0 0.3rem;
+    user-select: none;
+    &:hover {
+      background-color: #dadce0;
+      border: none;
+      color: #000b12;
+      border-radius: 0;
+      border: none;
+      cursor: pointer;
     }
-
-    .date-input{
-        display: flex;
-        justify-content: space-between;
-        font-family: ProductSans;
-        font-size:0.875rem;
-        line-height: 2.5rem;
-        color: #202124;
-        padding: 0 0.3rem;
-        user-select: none;
-        &:hover{
-            background-color: #DADCE0;
-            border: none;
-            color: #000B12;
-            border-radius: 0;
-            border: none;
-            cursor: pointer;
-        }
-
-
+  }
+  .date-input-active {
+    background-color: #dadce0;
+    border: none;
+    color: #000b12;
+    border-radius: 0;
+    border: none;
+    img {
+      transform: rotate(270deg);
     }
-    .date-input-active{
-            background-color: #DADCE0;
-            border: none;
-            color: #000B12;
-            border-radius: 0;
-            border: none;
-            img{
-                transform: rotate(270deg);
-            }
-        }
+  }
 }
 
 .mj-daterange-picker {
 }
 
-
-.field-title{
-    font-family: ProductSans;
-    font-size: 0.875rem;
-    line-height: 2.5rem;
-    color: #5F6368;
+.field-title {
+  font-family: ProductSans;
+  font-size: 0.875rem;
+  line-height: 2.5rem;
+  color: #5f6368;
 }
 </style>
