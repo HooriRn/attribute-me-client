@@ -20,6 +20,13 @@
           :theme="datepickerTheme"
         />
       </div>
+
+        <div>
+      <b-form-checkbox @change="dailySwitchChanged" class="hourly-checkbox" v-model="dailyChecked" name="check-button" switch>
+          <div v-if="dailyChecked">Daily data <span>(Switch to Hourly)</span></div>
+          <div v-else>Hourly data  <span>(Switch to Daily)</span></div>
+      </b-form-checkbox>
+        </div>
     </div>
     <div class="present-filters-filed">
       <div class="field-title">Present filters</div>
@@ -85,6 +92,7 @@ export default {
       showDatePicker: false,
       activeItem: null,
       activeBtn: null,
+      dailyChecked: true,
       dateInputValue: "##-##-## to ##-##-##",
       filters: [
         { name: "All data" },
@@ -184,6 +192,11 @@ export default {
       this.showDatePicker = !this.showDatePicker;
       console.log(this.showDatePicker);
     },
+    dailySwitchChanged(){
+        var tableSetting = this.tableSetting;
+        tableSetting["daily"] = this.dailyChecked;
+        this.$store.commit("tableSetting", tableSetting);
+    }
   },
   watch: {
     sideMenuDateLabel: function (val) {
@@ -202,6 +215,16 @@ export default {
     overflow-y: scroll;
     overflow-x: hidden;
   }
+}
+.hourly-checkbox{
+    margin: 0.2rem 0;
+    font-family: ProductSans;
+    font-size: 0.875rem;
+    line-height: 1.5rem;
+    color: #202124;
+    span{
+        font-size: 0.5rem;
+    }
 }
 .side-menu-item {
   .side-menu-button {
@@ -332,4 +355,6 @@ export default {
   line-height: 2.5rem;
   color: #5f6368;
 }
+
+
 </style>

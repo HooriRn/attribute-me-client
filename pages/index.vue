@@ -46,7 +46,7 @@ export default {
       currentTableSetting: {
         startDate: null,
         endDate: null,
-        campaignMedium: "",
+        daily: true,
       },
       loading: true,
       loadErr: false,
@@ -67,7 +67,8 @@ export default {
       startDate: startDate,
       endDate: endDate,
       filter_website: '',
-      present_filter: ''
+      present_filter: '',
+      daily: true
     });
   },
   computed: {
@@ -104,7 +105,9 @@ export default {
       if(this.currentTableSetting.filters && typeof this.currentTableSetting.filters === 'object'){
         queryString += "&filters=" + JSON.stringify(this.currentTableSetting.filters)
       }
-      
+      if(this.currentTableSetting.hasOwnProperty('daily')){
+        queryString += "&daily=" + this.currentTableSetting.daily
+      }
       try {
         var url = process.env.BASE_URL + "/events?" + queryString;
         var res = await self.$axios.get(url, {
@@ -117,6 +120,7 @@ export default {
         });
         var events = res.data.events;
         var totals = res.data.totals;
+       
         events = parseEventsData(events);
         console.log(events)
         if(events.length > 0){
@@ -124,8 +128,10 @@ export default {
           
           for(var key in oneEvent)
             oneEvent[key] = null
-
-          oneEvent.time = "Totals"
+          if(oneEvent.hasOwnProperty('time'))
+            oneEvent.time = "Totals"
+          if(oneEvent.hasOwnProperty('date'))
+            oneEvent.date = "Totals"
           oneEvent.event_count = totals.total_count
           oneEvent.event_value = totals.total_value
           oneEvent.total_users = totals.total_total_users

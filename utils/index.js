@@ -10,7 +10,8 @@ export function parseEventsData(events){
             if(event.date){
                 event.date = 
                 event.date.substr(0,4) + "-" +
-                event.date.substr(4,2) + "-"
+                event.date.substr(4,2) + "-" +
+                event.date.substr(6,2) + " " 
             }
             if(event.event_count_per_user){
                 event.event_count_per_user = event.event_count_per_user.toFixed(2)
