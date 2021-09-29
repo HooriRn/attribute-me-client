@@ -1,12 +1,17 @@
 <template>
   <div>
-    <hot-table v-if="tableData.length > 0" :settings="settings" :data="tableData"></hot-table>
+    <hot-table v-if="tableData.length > 0" :settings="settings" :data="tableData" ref="hotTable"></hot-table>
   </div>
 </template>
 
 <script>   
+import Handsontable from 'handsontable';
+import { mapGetters } from 'vuex'
 
   export default {
+    computed: {
+    ...mapGetters(['exportCSV'])
+    },
     props: {
       tableData: {
         type: Array,
@@ -56,6 +61,34 @@
         // { rel: 'stylesheet', type: 'text/css', 
         //   href: '/assets/css/handsontable.full.min.css' },
       ]
+    },
+
+    mounted(){
+      
+    },
+    methods:{
+      exportHotTableCSV(){
+        const hot = this.$refs['hotTable'].hotInstance
+        const exportPlugin = hot.getPlugin('exportFile');
+        exportPlugin.downloadFile('csv', {
+          bom: false,
+          columnDelimiter: ',',
+          columnHeaders: false,
+          exportHiddenColumns: true,
+          exportHiddenRows: true,
+          fileExtension: 'csv',
+          filename: 'Handsontable-CSV-file_[YYYY]-[MM]-[DD]',
+          mimeType: 'text/csv',
+          rowDelimiter: '\r\n',
+          rowHeaders: true
+        });
+      }
+    },
+    watch: {
+      exportCSV: function (val) {
+        console.log('export csv called')
+        this.exportHotTableCSV()
+      },
     }
   }
 </script>

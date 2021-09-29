@@ -2,6 +2,7 @@ export const state = () => ({
     tableSetting: null,
     cool: true,
     sideMenuDateLabel: null,
+    exportCSV: null
 })
 
 export const mutations = {
@@ -13,6 +14,9 @@ export const mutations = {
     },
     cool(state, payload){
         state.cool = payload
+    },
+    exportCSV(state, payload){
+        state.exportCSV =payload
     }
 }
 
@@ -26,5 +30,8 @@ export const getters = {
     cool(state){
         return state.cool
     },
+    exportCSV(state){
+        return state.exportCSV
+    }
 
 }

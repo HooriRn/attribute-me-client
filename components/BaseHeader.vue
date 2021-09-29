@@ -13,7 +13,7 @@
       <div class="menu-item">SKALD Marketers</div>
       <div class="last-fields">
         <input @change="quickFilterChanged" class="quick-filter-input" placeholder="Quick filter @yourTwitterHandle" type="text">
-        <button class="export-btn">Export .csv</button>
+        <button @click="exportCSVClicked" class="export-btn">Export .csv</button>
       </div>
     </div>
   </div>
@@ -35,6 +35,9 @@ export default {
         medium: filterValue
       }
       this.$store.commit('tableSetting', tableSetting)
+    },
+    exportCSVClicked(){
+      this.$store.commit('exportCSV', Math.random())
     }
   }
 };
