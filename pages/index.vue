@@ -66,37 +66,10 @@ export default {
     this.$store.commit("tableSetting", {
       startDate: startDate,
       endDate: endDate,
-      campaignMedium: "",
+      filter_website: '',
+      present_filter: ''
     });
   },
-  async fetch() {
-    return;
-    this.loading = true;
-    this.loadErr = false;
-    var self = this;
-    var queryString =
-      "startDate=" +
-      this.currentTableSetting.startDate +
-      "&endDate=" +
-      this.currentTableSetting.endDate +
-      "&campaignMedium=" +
-      this.currentTableSetting.campaignMedium;
-    var events;
-    try {
-      var url = process.env.BASE_URL + "/events?" + queryString;
-      console.log(url);
-      events = await fetch(url);
-      events = await events.json();
-      events = parseEventsData(events);
-      console.log(events);
-      self.handsTableData = events;
-      self.loading = false;
-    } catch (err) {
-      self.loadErr = true;
-      console.error(err);
-    }
-  },
-  fetchOnServer: false,
   computed: {
     ...mapGetters(["tableSetting"]),
     ...mapGetters(["cool"]),
@@ -104,16 +77,9 @@ export default {
   watch: {
     tableSetting: function (val) {
       console.log("table setting changed");
-      console.log(this.currentTableSetting);
-      var { isDifferent, newSetting } = isDifferentSetting(
-        this.currentTableSetting,
-        val
-      );
-      console.log(newSetting);
-      // if (isDifferent) {
-        console.log("newData");
-        this.currentTableSetting = newSetting;
-        this.getEvents();
+      this.currentTableSetting = val;
+      console.log('new table setting: ', this.currentTableSetting)
+      this.getEvents();
       // }
     },
   },
@@ -126,10 +92,14 @@ export default {
       this.loadErr = false;
       var self = this;
       var queryString =
-        "startDate=" +
-        this.currentTableSetting.startDate +
-        "&endDate=" +
-        this.currentTableSetting.endDate
+      "startDate=" +
+      this.currentTableSetting.startDate +
+      "&endDate=" +
+      this.currentTableSetting.endDate +
+      "&filter_website=" +
+      this.currentTableSetting.filter_website +
+      "&present_filter=" + 
+      this.currentTableSetting.present_filter
 
       try {
         var url = process.env.BASE_URL + "/events?" + queryString;

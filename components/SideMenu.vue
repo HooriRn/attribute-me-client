@@ -18,15 +18,15 @@
           <div class="filters-scroll">
             <div class="side-menu-item" v-for="filter of filters" :key="filters.indexOf(filter)">
                 
-                <div @click="activate(filter.name)"  
+                <b-button @click="activate(filter.name)"  
                 class="side-menu-item"
                 :class="{'side-menu-button-active': activeItem == filter.name}" 
                 v-b-toggle="filter.name">{{filter.name}}
-                </div>
+                </b-button>
 
-                    <b-collapse v-if="filter.childs" :id="filter.name" class="mt-2 childs-list">
+                    <b-collapse :ref="filter.name" v-if="filter.childs" :id="filter.name" class="mt-2 childs-list">
                         <div v-for="child of filter.childs" :key="filter.childs.indexOf(child)" 
-                        @click="filterBtnClicked(child.name)"  
+                        @click="filterBtnClicked(filter.name, child.name)"  
                         class="side-menu-button"
                         :class="{'side-menu-button-active': activeBtn == filter.name + '&'+ child.name}">
                             {{child.name}}
@@ -67,7 +67,19 @@ export default {
             dateInputValue: "##-##-## to ##-##-##",
             filters: [
                 {name: "All data"},
-                {name: "THORChain.org"},
+                {name: "THORChain.org",
+                    childs:[
+                        {name: 'All Events'},
+                        {name: 'Website Loads'},
+                        {name: 'Promotions'},
+                        {name: 'Social'},
+                        {name: 'Tool'},
+                        {name: 'Article'},
+                        {name: 'Video'},
+                        {name: 'Document'},
+                        {name: 'Paper'},
+                    ]
+                },
                 {name: "SKIP.exchange",
                     childs:[
                         {name: "All Events"},
@@ -95,11 +107,12 @@ export default {
             var startDate = getServerCustomDateString(from, "01")
             var endDate = getServerCustomDateString(to, "23")
             this.dateInputValue = getDateInputValue(startDate, endDate)
-            this.$store.commit('tableSetting', {
-                startDate: startDate,
-                endDate: endDate,
-                campaignMedium: ''
-            })
+            
+            var tableSetting = this.tableSetting
+            tableSetting['startDate'] = startDate
+            tableSetting['endDate'] = endDate
+
+            this.$store.commit('tableSetting', tableSetting)
         },
 
         activate(filterName){
@@ -107,21 +120,34 @@ export default {
                 this.activeItem = null
             else
                 this.activeItem = filterName
-
+            if(filterName === "All data"){
+                this.activeBtn = null
+                for(var key in this.$refs){
+                    var ref = this.$refs[key][0]
+                    if(ref.show)
+                        ref.toggle()
+                }
+                var tableSetting = this.tableSetting
+                tableSetting['filter_website'] = ''
+                tableSetting['present_filter'] = ''
+                this.$store.commit('tableSetting', tableSetting)
+            }
             console.log(this.activeItem)
         },
-        filterBtnClicked(childBtnName){
-            var newBtn = this.activeItem + "&"+ childBtnName
+        filterBtnClicked(parentBtnName, childBtnName){
+            var newBtn = parentBtnName + "&"+ childBtnName
             var tableSetting = this.tableSetting
             if(this.activeBtn === newBtn){
                 this.activeBtn = null
-                tableSetting['labelFilter'] = null
+                // tableSetting['filter_website'] = ''
+                // tableSetting['present_filter'] = ''
             }
             else{
                 this.activeBtn = newBtn
-                tableSetting['labelFilter'] = newBtn
+                tableSetting['filter_website'] = parentBtnName
+                tableSetting['present_filter'] = childBtnName
+                this.$store.commit('tableSetting', tableSetting)
             }
-            this.$store.commit('tableSetting', tableSetting)
         },
         toggleDatePicker(){
             console.log("toggle")
@@ -211,6 +237,12 @@ export default {
     border-radius: 0 6px 6px 0;
     border: none;
   }
+}
+.side-menu-item.side-menu-button-active{
+    color: #FD624F;
+    background-color: #dadce0;
+    border-radius: 0 6px 6px 0;
+    border: none;
 }
 .side-menu-item.not-collapsed{
     color: #FD624F;
