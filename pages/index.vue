@@ -101,6 +101,10 @@ export default {
       "&present_filter=" + 
       this.currentTableSetting.present_filter
 
+      if(this.currentTableSetting.filters && typeof this.currentTableSetting.filters === 'object'){
+        queryString += "&filters=" + JSON.stringify(this.currentTableSetting.filters)
+      }
+      
       try {
         var url = process.env.BASE_URL + "/events?" + queryString;
         var res = await self.$axios.get(url, {

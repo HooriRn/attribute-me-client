@@ -11,17 +11,39 @@
       >
       <div class="menu-item">Power-tweeters</div>
       <div class="menu-item">SKALD Marketers</div>
+      <div class="last-fields">
+        <input @change="quickFilterChanged" class="quick-filter-input" placeholder="Quick filter @yourTwitterHandle" type="text">
+        <button class="export-btn">Export .csv</button>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+import { mapGetters } from 'vuex'
+
+export default {
+   computed: {
+        ...mapGetters(['tableSetting'])
+    },
+  methods:{
+    quickFilterChanged($event){
+      console.log("quick filter changed", $event.target.value)
+      var filterValue = $event.target.value
+      var tableSetting = this.tableSetting
+      tableSetting['filters'] = {
+        medium: filterValue
+      }
+      this.$store.commit('tableSetting', tableSetting)
+    }
+  }
+};
 </script>
 
 <style lang="scss">
 .base-header {
   background-color: #fff;
+  border-bottom: 1px solid #dadce0;
   .menu {
     height: 4.3125rem;
     display: flex;
@@ -48,6 +70,28 @@ export default {};
       color: #fd624f;
     }
   }
-  border-bottom: 1px solid #dadce0;
+  .last-fields{
+    margin-left: auto;
+    padding: 1rem;
+    .quick-filter-input{
+      background: #F3F3F3;
+      border: none;
+      border-radius: 0.375rem;
+      width: 28.1875rem;
+      height: 3rem;
+      padding: 0.5rem;
+      &::placeholder{
+        color: #757575;
+      }
+    }
+    .export-btn{
+      background: #000B12;
+      color: #fff;
+      width: 7.6875rem;
+      height: 3rem;
+      border-radius: 0.375rem;
+      margin-left: 0.625rem;
+    }
+  }
 }
 </style>
