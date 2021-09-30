@@ -21,13 +21,14 @@
         />
       </div>
 
-        <div>
-      <b-form-checkbox @change="dailySwitchChanged" class="hourly-checkbox" v-model="dailyChecked" name="check-button" switch>
+      <div style="margin-left: 10px;">
+        <b-form-checkbox @change="dailySwitchChanged" class="hourly-checkbox" v-model="dailyChecked" name="check-button" switch>
           <div v-if="dailyChecked">Daily data <span>(Switch to Hourly)</span></div>
           <div v-else>Hourly data  <span>(Switch to Daily)</span></div>
-      </b-form-checkbox>
-        </div>
+        </b-form-checkbox>
+      </div>
     </div>
+    <hr class="divider" />
     <div class="present-filters-filed">
       <div class="field-title">Present filters</div>
       <div class="filters-scroll">
@@ -41,7 +42,11 @@
             class="side-menu-item"
             :class="{ 'side-menu-button-active': activeItem == filter.name }"
             v-b-toggle="filter.name"
-            >{{ filter.name }}
+          >
+            <div class="d-flex justify-content-between">
+              {{ filter.name }}
+              <img v-if="filter.childs" src="~/assets/img/triangle.svg" />
+            </div>
           </b-button>
 
           <b-collapse
@@ -75,6 +80,10 @@
           <b-card>I am collapsible content B!</b-card>
         </b-collapse>
       </div>
+    </div>
+    <hr class="divider" />
+    <div class="side-menu-item" >
+      <b-button class="side-menu-button" style="line-height: 0;">Documentation</b-button>
     </div>
   </div>
 </template>
@@ -207,13 +216,30 @@ export default {
 </script>
 
 <style lang="scss">
+.divider {
+  margin-left: 0.625rem;
+}
+
 .side-menu {
-  padding: 0 10px;
+  padding-right: 1.25rem;
 
   .filters-scroll {
-    height: calc(100vh - 14.5rem);
+    max-height: calc(100vh - 14.5rem);
     overflow-y: scroll;
     overflow-x: hidden;
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .field-title {
+    padding-left: 0.625rem;
   }
 }
 .hourly-checkbox{
@@ -233,35 +259,46 @@ export default {
     font-size: 0.875rem;
     line-height: 2.5rem;
     color: #202124;
-
+    border-radius: 0 0.375rem 0.375rem 0;
     background-color: transparent;
     border: none;
-    border-radius: 0;
     display: block;
     min-width: 100%;
     text-align: left;
-    padding: 0.3rem;
-    padding-left: 1rem;
+    padding-left: 1.25rem;
     cursor: pointer;
+    height: 2.625rem;
+
     &:hover {
       color: #fd624f;
       background-color: #dadce0;
-      border-radius: 0 6px 6px 0;
       border: none;
     }
     &:active {
       background-color: #dadce0;
       border: none;
       color: #000b12;
-      border-radius: 0;
       border: none;
+    }
+    &:focus, &:active {
+      box-shadow: none !important;
+    }
+  }
+  .childs-list {
+    margin: 0 !important;
+
+    .side-menu-button {
+      padding-left: 1.875rem;
     }
   }
   .side-menu-button-active {
     color: #fd624f;
     background-color: #dadce0;
-    border-radius: 0 6px 6px 0;
+    border-radius: 0 0.375rem 0.375rem 0;
     border: none;
+    &:focus {
+      box-shadow: none;
+    }
   }
 
   .side-menu-item {
@@ -276,27 +313,34 @@ export default {
     min-width: 100%;
     text-align: left;
     padding: 0.3rem;
-    padding-left: 20px;
-    border-radius: 0 6px 6px 0;
+    padding: 0 1.25rem;
+    border-radius: 0 0.375rem 0.375rem 0;
     cursor: pointer;
+    box-shadow: none !important;
+
+    &.not-collapsed {
+      img {
+        transform: rotate(180deg);
+      }
+    }
 
     &:hover {
       color: #fd624f;
       background-color: #dadce0;
-      border-radius: 0 6px 6px 0;
+      border-radius: 0 0.375rem 0.375rem 0;
       border: none;
     }
   }
   .side-menu-item.side-menu-button-active {
     color: #fd624f;
     background-color: #dadce0;
-    border-radius: 0 6px 6px 0;
+    border-radius: 0 0.375rem 0.375rem 0;
     border: none;
   }
   .side-menu-item.not-collapsed {
     color: #fd624f;
     background-color: #dadce0;
-    border-radius: 0 6px 6px 0;
+    border-radius: 0 0.375rem 0.375rem 0;
     border: none;
   }
 
@@ -320,16 +364,17 @@ export default {
     display: flex;
     justify-content: space-between;
     font-family: ProductSans;
-    font-size: 0.875rem;
+    font-size: 10.375rem;
     line-height: 2.5rem;
     color: #202124;
     padding: 0 0.3rem;
+    padding-left: 0.625rem;
     user-select: none;
     &:hover {
       background-color: #dadce0;
       border: none;
       color: #000b12;
-      border-radius: 0;
+      border-radius: 0 0.375rem 0.375rem 0;
       border: none;
       cursor: pointer;
     }

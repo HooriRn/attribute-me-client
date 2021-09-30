@@ -156,7 +156,7 @@ export default {
 <style lang="scss" scoped>
 //For now I put the side menu style here. It's needed to be global
 .field-title {
-  padding-left: 20px;
+  padding-left: 1.25rem;
 }
 
 .filters-scroll {
@@ -175,13 +175,12 @@ export default {
   font-size: 0.875rem;
   line-height: 2.5rem;
   color: #202124;
-  // height: 42px;
+  height: 2.625rem;
   background-color: transparent;
   border: none;
   display: block;
   min-width: 100%;
   text-align: left;
-  padding: 0.3rem;
   padding-left: 20px;
   border-radius: 0 6px 6px 0;
   cursor: pointer;

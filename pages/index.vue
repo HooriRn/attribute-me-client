@@ -100,7 +100,7 @@ export default {
       this.currentTableSetting.endDate +
       "&filter_website=" +
       this.currentTableSetting.filter_website +
-      "&present_filter=" + 
+      "&present_filter=" +
       this.currentTableSetting.present_filter
 
       if(this.currentTableSetting.filters && typeof this.currentTableSetting.filters === 'object'){
@@ -121,12 +121,12 @@ export default {
         });
         var events = res.data.events;
         var totals = res.data.totals;
-       
+
         events = parseEventsData(events);
         console.log(events)
         if(events.length > 0){
           var oneEvent = JSON.parse(JSON.stringify(events[0]))
-          
+
           for(var key in oneEvent)
             oneEvent[key] = null
           if(oneEvent.hasOwnProperty('time'))
@@ -162,14 +162,14 @@ body {
   .page-layout {
     display: flex;
     .side-menu-column {
-      min-width: 11.875rem;
-      max-width: 11.875rem;
+      min-width: 13.375rem;
+      max-width: 13.375rem;
       max-height: calc(100vh - 7rem);
       // overflow-y: scroll;
       // overflow-x: unset;
     }
     .hands-table-column {
-      width: calc(100vw - 11.875rem);
+      width: calc(100vw - 13.375rem);
     }
   }
 }
