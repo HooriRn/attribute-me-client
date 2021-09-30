@@ -364,7 +364,6 @@ export default {
     display: flex;
     justify-content: space-between;
     font-family: ProductSans;
-    font-size: 10.375rem;
     line-height: 2.5rem;
     color: #202124;
     padding: 0 0.3rem;
