@@ -5,7 +5,7 @@
         <SideMenu />
       </div>
       <div class="hands-table-column">
-        <HandsTable v-if="!loading" class="hands-table" :tableData="handsTableData"></HandsTable>
+        <HandsTable v-if="!loading" class="hands-table" :tableData="handsTableData" :totals="handsTableTotals"></HandsTable>
         <div v-if="loading && !loadErr" class="loading-box">
           <div>{{ loadingProgress }}%</div>
           <div>Loading data...</div>
@@ -43,6 +43,7 @@ export default {
   data() {
     return {
       handsTableData: [],
+      handsTableTotals: {},
       currentTableSetting: {
         startDate: null,
         endDate: null,
@@ -140,6 +141,7 @@ export default {
         }
           // events.unshift(["totals","","","","","","", totals.total_count, totals.total_value, totals.total_total_users, totals.total_event_count_per_user])
         self.handsTableData = events;
+        self.handsTableTotals = totals;
         self.loading = false;
       } catch (err) {
         self.loadErr = true;

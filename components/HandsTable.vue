@@ -21,6 +21,18 @@ import { mapGetters } from 'vuex'
             ["2016", 10, 11, 12, 13]
           ] 
         } 
+      },
+      totals: {
+        type: Object,
+        default(){
+          return {
+              total_count: 10,
+              total_value: 20,
+              total_total_users: 30,
+              total_event_count_per_user: 40
+            }
+          
+        } 
       }
     },
     data: function() {
@@ -51,8 +63,18 @@ import { mapGetters } from 'vuex'
           mergeCells: [
             { row: 0, col: 0, rowspan: 1, colspan: 7 }
           ],
-          fixedRowsTop: 1
+          fixedRowsTop: 1,
+          // renderer(instance, td, row, col, prop, value, cellProperties) {
+          //     const escaped = Handsontable.helper.stringify(value);
+          //     if(row == 0 && col == 0)
+          //       console.log(instance, td, row, col, prop, value, cellProperties)
+
+          //       Handsontable.renderers.TextRenderer.apply(this, arguments);
+
+          //     return td;
+          // }
         },
+        
           // style: 'width: 90vw; height: 90vh; overflow: hidden;'
       };
     },
@@ -64,9 +86,48 @@ import { mapGetters } from 'vuex'
     },
 
     mounted(){
+      var self = this
+      const hot = this.$refs['hotTable'].hotInstance
       
+      hot.addHook('afterColumnSort', (currentSortConfig, destinationSortConfigs)=>{
+        self.addTotalRow(hot)
+      })
+      
+      hot.addHook('beforeColumnSort', (currentSortConfig, destinationSortConfigs)=>{
+        self.removeTotalRow(hot)
+      }) 
+
+      hot.addHook('afterFilter', (currentSortConfig, destinationSortConfigs)=>{
+        self.addTotalRow(hot)
+      })
+      
+      hot.addHook('beforeFilter', (currentSortConfig, destinationSortConfigs)=>{
+        self.removeTotalRow(hot)
+      }) 
     },
     methods:{
+      addTotalRow(hotTable){
+        console.log('add total row')
+        hotTable.alter('insert_row', 0 , 1)
+        // var mergeCells = hotTable.getPlugin('mergeCells')
+
+        // hotTable.updateSettings({
+        //   fixedRowsTop: 10
+        // })
+        // hotTable.render();
+
+        // mergeCells.merge(0, 0, 0, 6)
+        hotTable.setDataAtCell(0, 0, 'Totals');
+        hotTable.setDataAtCell(0, 7, this.totals.total_count);
+        hotTable.setDataAtCell(0, 8, this.totals.total_value);
+        hotTable.setDataAtCell(0, 9, this.totals.total_total_users);
+        hotTable.setDataAtCell(0, 10, this.totals.total_event_count_per_user);
+
+      },
+      removeTotalRow(hotTable){
+        console.log('remove total row')
+        hotTable.alter('remove_row', 0 , 1)
+      },
       exportHotTableCSV(){
         const hot = this.$refs['hotTable'].hotInstance
         const exportPlugin = hot.getPlugin('exportFile');
