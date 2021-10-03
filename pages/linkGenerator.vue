@@ -137,7 +137,7 @@ export default {
         url.searchParams.append(`utm_source`, channel);
         url.searchParams.append(`utm_medium`, handle);
         url.searchParams.append(`utm_campaign`, campaign);
-        td.innerHTML = `<a href="${url.href}">${url.href}</a>`;
+        td.innerHTML = `<a href="${url.href}" target=”_blank”>${url.href}</a>`;
       }
     },
     showLink(instance, td, row, col, prop, value, cellProperties) {
@@ -146,7 +146,7 @@ export default {
       const preview = datum.preview ?? undefined;
       if (preview) {
         const url = new URL(preview);
-        td.innerHTML = `<a href="${url.href}">${url.href}</a>`;
+        td.innerHTML = `<a href="${url.href}" target=”_blank”>${url.href}</a>`;
       }
     }
   }
