@@ -1,6 +1,6 @@
 export function parseEventsData(events){
         events.map(event =>{
-            if(event.time){
+            if(event.time){ // Hourly data
                 var dateStr = event.time.substr(0,4) 
                 + "-" + event.time.substr(4,2)
                 + "-" + event.time.substr(6,2)
@@ -10,7 +10,7 @@ export function parseEventsData(events){
                 event.time = localeDateString
                 + " " + event.time.substr(8,2)+":00"
             }
-            if(event.date){
+            if(event.date){ // Daily data
                 var dateStr =  
                 event.date.substr(0,4) + "-" +
                 event.date.substr(4,2) + "-" +
@@ -21,6 +21,12 @@ export function parseEventsData(events){
             }
             if(event.event_count_per_user){
                 event.event_count_per_user = event.event_count_per_user.toFixed(2)
+                
+            }
+            for(var key of ['event_count', 'event_value', 'total_users', 'event_count_per_user']){
+                if(event[key]){
+                    event[key] = numberWithCommas(event[key])
+                }
             }
             delete event.id
         })
@@ -57,4 +63,8 @@ export function getDateInputValue(startDate, endDate){
 
     var dateInputValue = from + " to "+ to
     return dateInputValue
+}
+
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
