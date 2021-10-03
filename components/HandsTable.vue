@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<script>   
+<script>
 import Handsontable from 'handsontable';
 import { mapGetters } from 'vuex'
 
@@ -19,8 +19,8 @@ import { mapGetters } from 'vuex'
           return [
             ["", "Ford", "Volvo", "Toyota", "Honda"],
             ["2016", 10, 11, 12, 13]
-          ] 
-        } 
+          ]
+        }
       },
       totals: {
         type: Object,
@@ -31,22 +31,22 @@ import { mapGetters } from 'vuex'
               total_total_users: 30,
               total_event_count_per_user: 40
             }
-          
-        } 
+
+        }
       }
     },
     data: function() {
       return {
         settings: {
           colHeaders: [
-            'Date & Hour', 
+            'Date & Hour',
             'Campaign Medium',
             'Campaign Name',
             'Campaign Source',
-            'Event Name', 
-            'Event Category', 
-            'Event Label', 
-            'Event Count', 
+            'Event Name',
+            'Event Category',
+            'Event Label',
+            'Event Count',
             'Event Value',
             'Total Users',
             'Events per User'
@@ -75,13 +75,13 @@ import { mapGetters } from 'vuex'
           //     return td;
           // }
         },
-        
+
           // style: 'width: 90vw; height: 90vh; overflow: hidden;'
       };
     },
     head: {
       link: [
-        // { rel: 'stylesheet', type: 'text/css', 
+        // { rel: 'stylesheet', type: 'text/css',
         //   href: '/assets/css/handsontable.full.min.css' },
       ]
     },
@@ -92,14 +92,14 @@ import { mapGetters } from 'vuex'
       const hotTableEl = this.$refs['hotTable']
       if(!hotTableEl) return
       const hot = this.$refs['hotTable'].hotInstance
-      
+
       hot.addHook('afterColumnSort', (currentSortConfig, destinationSortConfigs)=>{
         self.addTotalRow(hot)
       })
-      
+
       hot.addHook('beforeColumnSort', (currentSortConfig, destinationSortConfigs)=>{
         self.removeTotalRow(hot)
-      }) 
+      })
 
       hot.addHook('afterFilter', (filterConidtions)=>{
         self.addTotalRow(hot)
@@ -107,7 +107,7 @@ import { mapGetters } from 'vuex'
         /* Save table filters */
         window.localStorage.ANALYTICS_FILTER_CONDITIONS = JSON.stringify(filterConidtions)
       })
-      
+
       hot.addHook('beforeFilter', ()=>{
         self.removeTotalRow(hot)
       })
@@ -139,10 +139,10 @@ import { mapGetters } from 'vuex'
         hotTable.alter('remove_row', 0 , 1)
       },
       exportHotTableCSV(){
-        
+
         const hotTableEl = this.$refs['hotTable']
         if(!hotTableEl) return
-      
+
         const hot = this.$refs['hotTable'].hotInstance
         const exportPlugin = hot.getPlugin('exportFile');
         exportPlugin.downloadFile('csv', {
@@ -159,14 +159,14 @@ import { mapGetters } from 'vuex'
         });
       },
       loadTableFilters(hotTable){
-        var filterConditions = window.localStorage.ANALYTICS_FILTER_CONDITIONS
+        var filterConditions = window.localStorage.ANALYTICS_FILTER_CONDITIONS ?? null
         filterConditions = JSON.parse(filterConditions)
         if(filterConditions){
           const filtersPlugin = hotTable.getPlugin('filters')
           for(var filterCond of filterConditions){
             console.log('filterCond', filterCond)
             if(filterCond.conditions){
-          
+
               for(var condition of filterCond.conditions){
                 filtersPlugin.addCondition(filterCond.column, condition.name, condition.args, filterCond.operation)
               }

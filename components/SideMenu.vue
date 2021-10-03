@@ -40,7 +40,10 @@
           <b-button
             @click="activate(filter.name)"
             class="side-menu-item"
-            :class="{ 'side-menu-button-active': activeItem == filter.name }"
+            :class="{
+              'side-menu-button-active': activeItem == filter.name,
+              'side-menu-single-active': activeItem == filter.name && !filter.childs
+            }"
             v-b-toggle="filter.name"
           >
             <div class="d-flex justify-content-between">
@@ -348,6 +351,11 @@ export default {
   }
   .side-menu-item.collapsed {
     color: #000b12;
+  }
+  .side-menu-single-active {
+    color: #fd624f !important;
+    border-radius: 0 0.375rem 0.375rem 0;
+    border: none;
   }
 
   .childs-list {

@@ -163,7 +163,7 @@ export default {
       return this.currentTableSetting
     }
   },
-  
+
 };
 </script>
 <style lang="scss">
