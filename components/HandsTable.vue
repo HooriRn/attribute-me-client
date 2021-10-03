@@ -139,6 +139,12 @@ import { mapGetters } from 'vuex'
         // hotTable.render();
 
         // mergeCells.merge(0, 0, 0, 6)
+
+        hotTable.updateSettings({
+          cell: [
+            {row: 0, col: 0, className: 'htRight'},
+          ],
+        })
         hotTable.setDataAtCell(0, 0, 'Totals');
         hotTable.setDataAtCell(0, 7, this.totals.total_count);
         hotTable.setDataAtCell(0, 8, this.totals.total_value);
