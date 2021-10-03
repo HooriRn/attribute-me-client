@@ -123,7 +123,6 @@ export default {
         var totals = res.data.totals;
 
         events = parseEventsData(events);
-        console.log(events)
         if(events.length > 0){
           var oneEvent = JSON.parse(JSON.stringify(events[0]))
 

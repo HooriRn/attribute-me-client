@@ -87,6 +87,8 @@ import { mapGetters } from 'vuex'
 
     mounted(){
       var self = this
+      const hotTableEl = this.$refs['hotTable']
+      if(!hotTableEl) return
       const hot = this.$refs['hotTable'].hotInstance
       
       hot.addHook('afterColumnSort', (currentSortConfig, destinationSortConfigs)=>{
@@ -129,6 +131,10 @@ import { mapGetters } from 'vuex'
         hotTable.alter('remove_row', 0 , 1)
       },
       exportHotTableCSV(){
+        
+        const hotTableEl = this.$refs['hotTable']
+        if(!hotTableEl) return
+      
         const hot = this.$refs['hotTable'].hotInstance
         const exportPlugin = hot.getPlugin('exportFile');
         exportPlugin.downloadFile('csv', {
