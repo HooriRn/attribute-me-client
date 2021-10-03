@@ -31,6 +31,7 @@ import {
   isDifferentSetting,
   getServerCustomDateString,
   getDateInputValue,
+  parseTotalsData,
 } from "../utils";
 import { mapGetters } from "vuex";
 import SideMenu from "../components/SideMenu";
@@ -126,6 +127,7 @@ export default {
 
         events = parseEventsData(events);
         if(events.length > 0){
+          totals = parseTotalsData(totals)
           var oneEvent = JSON.parse(JSON.stringify(events[0]))
 
           for(var key in oneEvent)

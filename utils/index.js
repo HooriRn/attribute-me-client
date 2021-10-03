@@ -32,6 +32,23 @@ export function parseEventsData(events){
         })
         return events
 }
+export function parseTotalsData(totals){
+    if(totals.total_event_count_per_user){
+        totals.total_event_count_per_user = totals.total_event_count_per_user.toFixed(2)   
+    }
+    for(var key of
+         [
+             "total_count",
+             "total_value",
+             "total_total_users",
+             "total_event_count_per_user"
+            ]
+        ){
+            totals[key] = numberWithCommas(totals[key])
+            
+        }
+    return totals
+}
 export function isDifferentSetting(oldSetting, newSetting){
     var newSettingOnlyOldKeys = {}
     var isDifferent = false
