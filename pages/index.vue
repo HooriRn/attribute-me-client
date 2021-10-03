@@ -168,7 +168,7 @@ export default {
 </script>
 <style lang="scss">
 body {
-  background-color: #f3f3f3;
+  background-color: #F8F9FA;
   height: 100vh;
 }
 .page {

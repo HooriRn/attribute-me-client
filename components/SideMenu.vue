@@ -30,7 +30,7 @@
     </div>
     <hr class="divider" />
     <div class="present-filters-filed">
-      <div class="field-title">Present filters</div>
+      <div class="field-title">Preset filters</div>
       <div class="filters-scroll">
         <div
           class="side-menu-item"
@@ -270,12 +270,12 @@ export default {
     height: 2.625rem;
 
     &:hover {
-      color: #fd624f;
-      background-color: #dadce0;
+      // color: #fd624f;
+      background-color: #F3f3f3;
       border: none;
     }
     &:active {
-      background-color: #dadce0;
+      background-color: #F3f3f3;
       border: none;
       color: #000b12;
       border: none;
@@ -293,11 +293,14 @@ export default {
   }
   .side-menu-button-active {
     color: #fd624f;
-    background-color: #dadce0;
+    // background-color: #F3f3f3;
     border-radius: 0 0.375rem 0.375rem 0;
     border: none;
     &:focus {
       box-shadow: none;
+    }
+    &.not-collapsed {
+      color: #000b12;
     }
   }
 
@@ -325,23 +328,26 @@ export default {
     }
 
     &:hover {
-      color: #fd624f;
-      background-color: #dadce0;
+      // color: #fd624f;
+      background-color: #F3f3f3;
       border-radius: 0 0.375rem 0.375rem 0;
       border: none;
     }
   }
   .side-menu-item.side-menu-button-active {
     color: #fd624f;
-    background-color: #dadce0;
+    // background-color: #F3f3f3;
     border-radius: 0 0.375rem 0.375rem 0;
     border: none;
   }
   .side-menu-item.not-collapsed {
-    color: #fd624f;
-    background-color: #dadce0;
+    color: #000b12;
+    background-color: #F3f3f3;
     border-radius: 0 0.375rem 0.375rem 0;
     border: none;
+  }
+  .side-menu-item.collapsed {
+    color: #000b12;
   }
 
   .childs-list {
@@ -370,7 +376,7 @@ export default {
     padding-left: 0.625rem;
     user-select: none;
     &:hover {
-      background-color: #dadce0;
+      background-color: #F3f3f3;
       border: none;
       color: #000b12;
       border-radius: 0 0.375rem 0.375rem 0;
@@ -379,7 +385,7 @@ export default {
     }
   }
   .date-input-active {
-    background-color: #dadce0;
+    background-color: #F3f3f3;
     border: none;
     color: #000b12;
     border-radius: 0;

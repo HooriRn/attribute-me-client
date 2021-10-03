@@ -4,7 +4,7 @@
       <div class="menu-item logo">
         <img src="~/assets/img/logo.svg" alt="Attribute me logo" />
       </div>
-      <div class="menu-item">Home</div>
+      <!-- <div class="menu-item">Home</div> -->
       <nuxt-link class="menu-item" to="/">Analytics</nuxt-link>
       <nuxt-link class="menu-item" to="/linkGenerator"
         >Link Generator</nuxt-link
@@ -75,6 +75,7 @@ export default {
     font-size: 1rem;
     font-weight: bold;
     color: #000b12;
+    min-width: 87.5rem;
     .menu-item {
       color: #000b12;
       text-decoration: none;
@@ -102,11 +103,13 @@ export default {
       width: 28.1875rem;
       height: 3rem;
       padding: 0.5rem;
+      padding-left: 0.625rem;
       &::placeholder{
         color: #757575;
       }
     }
     .export-btn{
+      border: none;
       background: #000B12;
       color: #fff;
       width: 7.6875rem;
