@@ -12,7 +12,7 @@
       <div class="menu-item">Power-tweeters</div>
       <div class="menu-item">SKALD Marketers</div>
       <div class="last-fields">
-        <input @change="quickFilterChanged" class="quick-filter-input" placeholder="Quick filter @yourTwitterHandle" type="text">
+        <input @change="quickFilterChanged" v-model="quickFilterValue" class="quick-filter-input" placeholder="Quick filter @yourTwitterHandle" type="text">
         <button @click="exportCSVClicked" class="export-btn">Export .csv</button>
       </div>
     </div>
@@ -26,6 +26,14 @@ export default {
    computed: {
         ...mapGetters(['tableSetting'])
     },
+    data(){
+      return {
+        quickFilterValue: ""
+      }
+    },
+    mounted(){
+      this.loadLocalQuickFilterValue()
+    },
   methods:{
     quickFilterChanged($event){
       console.log("quick filter changed", $event.target.value)
@@ -35,6 +43,17 @@ export default {
         medium: filterValue
       }
       this.$store.commit('tableSetting', tableSetting)
+    },
+    loadLocalQuickFilterValue(){
+      console.log("loadLocalQuickFilterValue")
+      var setting = window.localStorage.ANALYTICS_SETTING
+      if(setting){
+        setting = JSON.parse(setting)
+        console.log(setting)
+        if(setting.filters && setting.filters.medium){
+          this.quickFilterValue = setting.filters.medium
+        }
+      }
     },
     exportCSVClicked(){
       this.$store.commit('exportCSV', Math.random())

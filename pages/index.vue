@@ -55,22 +55,23 @@ export default {
     };
   },
   mounted() {
-    var today = new Date();
-    var lastWeek = new Date();
-    lastWeek.setDate(today.getDate() - 7);
+    var setting = this.loadSetting()
+    if(setting.startDate && setting.endDate){
+      var startDate = setting.startDate
+      var endDate = setting.endDate
+    } else{
+      var today = new Date();
+      var lastWeek = new Date();
+      lastWeek.setDate(today.getDate() - 7);
+      var startDate = getServerCustomDateString(lastWeek, "01");
+      var endDate = getServerCustomDateString(today, "23");
+      this.currentTableSetting.startDate = startDate
+      this.currentTableSetting.endDate = endDate
 
-    var startDate = getServerCustomDateString(lastWeek, "01");
-    var endDate = getServerCustomDateString(today, "23");
-
+    }
     var dateInputValue = getDateInputValue(startDate, endDate);
     this.$store.commit("sideMenuDateLabel", dateInputValue);
-    this.$store.commit("tableSetting", {
-      startDate: startDate,
-      endDate: endDate,
-      filter_website: '',
-      present_filter: '',
-      daily: true
-    });
+    this.$store.commit("tableSetting", this.currentTableSetting);
   },
   computed: {
     ...mapGetters(["tableSetting"]),
@@ -81,6 +82,7 @@ export default {
       console.log("table setting changed");
       this.currentTableSetting = val;
       console.log('new table setting: ', this.currentTableSetting)
+      this.saveSetting(this.currentTableSetting)
       this.getEvents();
       // }
     },
@@ -147,7 +149,19 @@ export default {
         console.error(err);
       }
     },
+    saveSetting(setting){
+      window.localStorage.ANALYTICS_SETTING = JSON.stringify(setting)
+    },
+    loadSetting(){
+      var setting = window.localStorage.ANALYTICS_SETTING
+      if(setting){
+        setting = JSON.parse(setting)
+        this.currentTableSetting = setting
+      }
+      return this.currentTableSetting
+    }
   },
+  
 };
 </script>
 <style lang="scss">

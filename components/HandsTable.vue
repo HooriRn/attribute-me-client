@@ -64,6 +64,7 @@ import { mapGetters } from 'vuex'
             { row: 0, col: 0, rowspan: 1, colspan: 7 }
           ],
           fixedRowsTop: 1,
+          persistentState: true
           // renderer(instance, td, row, col, prop, value, cellProperties) {
           //     const escaped = Handsontable.helper.stringify(value);
           //     if(row == 0 && col == 0)
@@ -86,6 +87,7 @@ import { mapGetters } from 'vuex'
     },
 
     mounted(){
+      console.log("Table mounted")
       var self = this
       const hotTableEl = this.$refs['hotTable']
       if(!hotTableEl) return
@@ -99,13 +101,19 @@ import { mapGetters } from 'vuex'
         self.removeTotalRow(hot)
       }) 
 
-      hot.addHook('afterFilter', (currentSortConfig, destinationSortConfigs)=>{
+      hot.addHook('afterFilter', (filterConidtions)=>{
         self.addTotalRow(hot)
+
+        /* Save table filters */
+        window.localStorage.ANALYTICS_FILTER_CONDITIONS = JSON.stringify(filterConidtions)
       })
       
-      hot.addHook('beforeFilter', (currentSortConfig, destinationSortConfigs)=>{
+      hot.addHook('beforeFilter', ()=>{
         self.removeTotalRow(hot)
-      }) 
+      })
+
+      /* Load table filters on mount */
+      this.loadTableFilters(hot)
     },
     methods:{
       addTotalRow(hotTable){
@@ -144,11 +152,28 @@ import { mapGetters } from 'vuex'
           exportHiddenColumns: true,
           exportHiddenRows: true,
           fileExtension: 'csv',
-          filename: 'Handsontable-CSV-file_[YYYY]-[MM]-[DD]',
+          filename: 'Attribute-CSV-file_[YYYY]-[MM]-[DD]',
           mimeType: 'text/csv',
           rowDelimiter: '\r\n',
           rowHeaders: true
         });
+      },
+      loadTableFilters(hotTable){
+        var filterConditions = window.localStorage.ANALYTICS_FILTER_CONDITIONS
+        filterConditions = JSON.parse(filterConditions)
+        if(filterConditions){
+          const filtersPlugin = hotTable.getPlugin('filters')
+          for(var filterCond of filterConditions){
+            console.log('filterCond', filterCond)
+            if(filterCond.conditions){
+          
+              for(var condition of filterCond.conditions){
+                filtersPlugin.addCondition(filterCond.column, condition.name, condition.args, filterCond.operation)
+              }
+            }
+          }
+          filtersPlugin.filter();
+        }
       }
     },
     watch: {
