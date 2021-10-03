@@ -25,7 +25,7 @@
           </hot-column>
           <hot-column title="Landing Page Preview" read-only="true" data="preview" :renderer="showLink">
           </hot-column>
-          <hot-column title="Your Distribution Channel" read-only="true" data="channel">
+          <hot-column title="Your Distribution Channel" data="channel" type="dropdown" :source="channel_source">
           </hot-column>
           <hot-column title="Your Campaign Name" data="campaign">
           </hot-column>
@@ -43,6 +43,23 @@
 export default {
   data() {
     return {
+      channel_source: [
+        "Bing",
+        "Discord",
+        "Facebook",
+        "Google",
+        "Instagram",
+        "Linkedin",
+        "Quora",
+        "Reddit",
+        "Snapchat",
+        "Telegram",
+        "TikTok",
+        "Twitch",
+        "Twitter",
+        "Vimeo",
+        "YouTube",
+      ],
       categories: [
         {
           name: "Security",
@@ -121,6 +138,8 @@ export default {
       tableSettings: {
         height: '100%',
         licenseKey: 'non-commercial-and-evaluation',
+        width: '100%',
+        stretchH: 'last'
       }
     };
   },
