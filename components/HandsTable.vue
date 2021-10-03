@@ -60,11 +60,23 @@ import { mapGetters } from 'vuex'
           dropdownMenu: true,
           filters: true,
           columnSorting: true,
+          cell: [
+            {row: 0, col: 0, className: 'htRight'},
+          ],
           mergeCells: [
-            { row: 0, col: 0, rowspan: 1, colspan: 7 }
+            { row: 0, col: 0, rowspan: 1, colspan: 7 },
           ],
           fixedRowsTop: 1,
-          persistentState: true
+          persistentState: true,
+          cells(row, col) {
+            const cellProperties = {};
+
+            if (col >= 7) {
+              cellProperties.className = 'htRight';
+            }
+
+             return cellProperties
+          }
           // renderer(instance, td, row, col, prop, value, cellProperties) {
           //     const escaped = Handsontable.helper.stringify(value);
           //     if(row == 0 && col == 0)
