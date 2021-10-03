@@ -1,7 +1,7 @@
 export function parseEventsData(events){
         events.map(event =>{
             if(event.time){ // Hourly data
-                var dateStr = event.time.substr(0,4) 
+                var dateStr = event.time.substr(0,4)
                 + "-" + event.time.substr(4,2)
                 + "-" + event.time.substr(6,2)
                 var date = new Date(dateStr)
@@ -11,17 +11,17 @@ export function parseEventsData(events){
                 + " " + event.time.substr(8,2)+":00"
             }
             if(event.date){ // Daily data
-                var dateStr =  
+                var dateStr =
                 event.date.substr(0,4) + "-" +
                 event.date.substr(4,2) + "-" +
-                event.date.substr(6,2) + " " 
+                event.date.substr(6,2) + " "
                 var date = new Date(dateStr)
                 var localeDateString = date.toLocaleDateString("en-US",{ year: 'numeric', month: 'short', day: 'numeric' })
                 event.date = localeDateString
             }
             if(event.event_count_per_user){
                 event.event_count_per_user = event.event_count_per_user.toFixed(2)
-                
+
             }
             for(var key of ['event_count', 'event_value', 'total_users', 'event_count_per_user']){
                 if(event[key]){
@@ -34,7 +34,7 @@ export function parseEventsData(events){
 }
 export function parseTotalsData(totals){
     if(totals.total_event_count_per_user){
-        totals.total_event_count_per_user = totals.total_event_count_per_user.toFixed(2)   
+        totals.total_event_count_per_user = totals.total_event_count_per_user.toFixed(2)
     }
     for(var key of
          [
@@ -45,7 +45,7 @@ export function parseTotalsData(totals){
             ]
         ){
             totals[key] = numberWithCommas(totals[key])
-            
+
         }
     return totals
 }
@@ -53,7 +53,7 @@ export function isDifferentSetting(oldSetting, newSetting){
     var newSettingOnlyOldKeys = {}
     var isDifferent = false
     for(var i in oldSetting){
-        newSettingOnlyOldKeys[i] = newSetting[i] 
+        newSettingOnlyOldKeys[i] = newSetting[i]
         if(oldSetting[i] != newSetting[i])
             isDifferent = true
     }
@@ -83,5 +83,6 @@ export function getDateInputValue(startDate, endDate){
 }
 
 function numberWithCommas(x) {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    // to fixed 2 decimals first
+    return parseFloat(x).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }

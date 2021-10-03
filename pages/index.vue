@@ -173,7 +173,7 @@ body {
 }
 .page {
   // padding: 1.25rem;
-  padding: 20px 20px 0 0;
+  padding: 1.25rem 1.25rem 0 0;
   .page-layout {
     display: flex;
     .side-menu-column {
@@ -194,7 +194,7 @@ body {
   }
 }
 .event-setting {
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
 }
 .loading-box {
   text-align: center;

@@ -53,7 +53,7 @@ import { mapGetters } from 'vuex'
           ],
           rowHeaders: true,
           licenseKey: 'non-commercial-and-evaluation',
-          height: '85vh',
+          height: 'calc( 100vh - 5.5625rem )',
           width: 'auto',
           overflow: 'hidden',
           readOnly: true,
