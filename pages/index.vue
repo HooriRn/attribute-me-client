@@ -173,7 +173,7 @@ body {
 }
 .page {
   // padding: 1.25rem;
-  padding: 1.25rem 1.25rem 0 0;
+  padding: 1.25rem 0 0 0;
   .page-layout {
     display: flex;
     .side-menu-column {
