@@ -7,7 +7,7 @@
         class="date-input"
         :class="{ 'date-input-active': showDatePicker }"
       >
-        <div class="date-input-text">{{ dateInputValue }}</div>
+        <div class="date-input-text" style="font-size: 0.875rem; color: #202124;">{{ dateInputValue }}</div>
         <img src="~/assets/img/triangle.svg" />
       </div>
       <div :hidden="!showDatePicker" class="date-picker-holder">
