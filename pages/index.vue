@@ -100,11 +100,16 @@ export default {
       "startDate=" +
       this.currentTableSetting.startDate +
       "&endDate=" +
-      this.currentTableSetting.endDate +
-      "&filter_website=" +
-      this.currentTableSetting.filter_website +
-      "&present_filter=" +
-      this.currentTableSetting.present_filter
+      this.currentTableSetting.endDate
+
+      if(this.currentTableSetting.filter_website){
+        queryString += "&filter_website=" +
+        this.currentTableSetting.filter_website
+      }
+      if(this.currentTableSetting.present_filter){
+        queryString += "&present_filter=" +
+        this.currentTableSetting.present_filter
+      }
 
       if(this.currentTableSetting.filters && typeof this.currentTableSetting.filters === 'object'){
         queryString += "&filters=" + JSON.stringify(this.currentTableSetting.filters)
