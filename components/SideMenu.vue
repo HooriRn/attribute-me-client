@@ -22,9 +22,8 @@
       </div>
 
       <div style="margin-left: 10px;">
-        <b-form-checkbox @change="dailySwitchChanged" class="hourly-checkbox" v-model="dailyChecked" name="check-button" switch>
-          <div v-if="dailyChecked">Daily data <span>(Switch to Hourly)</span></div>
-          <div v-else>Hourly data  <span>(Switch to Daily)</span></div>
+        <b-form-checkbox @change="dailySwitchChanged" class="hourly-checkbox" v-model="hourlyChecked" name="check-button" switch>
+          <div>Hourly data</div>
         </b-form-checkbox>
       </div>
     </div>
@@ -104,7 +103,7 @@ export default {
       showDatePicker: false,
       activeItem: null,
       activeBtn: null,
-      dailyChecked: true,
+      hourlyChecked: false,
       dateInputValue: "##-##-## to ##-##-##",
       filters: [
         { name: "All data" },
@@ -206,7 +205,7 @@ export default {
     },
     dailySwitchChanged(){
         var tableSetting = this.tableSetting;
-        tableSetting["daily"] = this.dailyChecked;
+        tableSetting["daily"] = !this.hourlyChecked;
         this.$store.commit("tableSetting", tableSetting);
     }
   },
@@ -219,6 +218,12 @@ export default {
 </script>
 
 <style lang="scss">
+/* This needs to be global */
+.mj-daterange-picker .preset-ranges .preset {
+  font-size: 0.875rem;
+}
+
+
 .divider {
   margin-left: 0.625rem;
 }

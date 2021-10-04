@@ -68,7 +68,6 @@ import { mapGetters } from 'vuex'
           ],
           fixedRowsTop: 1,
           persistentState: true,
-          
           cells: function(row, col, prop) {
             const cellProperties = {};
 
@@ -77,6 +76,12 @@ import { mapGetters } from 'vuex'
             }
 
              return cellProperties
+          },
+          afterGetColHeader: function(col, th) {
+            th.className = 'htLeft'
+            if (col >= 7) {
+              th.className = 'htRight';
+            }
           }
           // renderer(instance, td, row, col, prop, value, cellProperties) {
           //     const escaped = Handsontable.helper.stringify(value);

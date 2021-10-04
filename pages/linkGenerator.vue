@@ -139,7 +139,10 @@ export default {
         height: '100%',
         licenseKey: 'non-commercial-and-evaluation',
         width: 'auto',
-        stretchH: 'last'
+        stretchH: 'last',
+        afterGetColHeader: function(col, th) {
+          th.className = 'htLeft'
+        }
       }
     };
   },
