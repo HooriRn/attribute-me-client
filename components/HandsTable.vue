@@ -68,7 +68,8 @@ import { mapGetters } from 'vuex'
           ],
           fixedRowsTop: 1,
           persistentState: true,
-          cells(row, col) {
+          
+          cells: function(row, col, prop) {
             const cellProperties = {};
 
             if (col >= 7) {
@@ -87,14 +88,10 @@ import { mapGetters } from 'vuex'
           //     return td;
           // }
         },
-
-          // style: 'width: 90vw; height: 90vh; overflow: hidden;'
       };
     },
     head: {
       link: [
-        // { rel: 'stylesheet', type: 'text/css',
-        //   href: '/assets/css/handsontable.full.min.css' },
       ]
     },
 
@@ -125,7 +122,7 @@ import { mapGetters } from 'vuex'
       })
 
       /* Load table filters on mount */
-      this.loadTableFilters(hot)
+      // this.loadTableFilters(hot)
     },
     methods:{
       addTotalRow(hotTable){
