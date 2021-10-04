@@ -138,7 +138,7 @@ export default {
       tableSettings: {
         height: '100%',
         licenseKey: 'non-commercial-and-evaluation',
-        width: '100%',
+        width: 'auto',
         stretchH: 'last'
       }
     };
@@ -148,7 +148,7 @@ export default {
       const data = instance.getSourceData()
       const datum = data[row]
       const preview = datum.preview ?? '';
-      const channel = datum.channel ?? '';
+      const channel = datum.channel.toLowerCase() ?? '';
       const campaign = datum.campaign ?? '';
       const handle = datum.handle ?? '';
       if (preview) {
@@ -214,6 +214,7 @@ export default {
 .hands-table-column {
   background: #fff;
   border: 1px solid #ccc;
+  height: auto;
 }
 
 </style>

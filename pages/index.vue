@@ -194,6 +194,7 @@ body {
   }
 }
 .hands-table {
+  font-size: 0.8125rem;
   .handsontable {
     margin: 0 auto;
   }
