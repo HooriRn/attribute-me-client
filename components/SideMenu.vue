@@ -56,6 +56,7 @@
             v-if="filter.childs"
             :id="filter.name"
             class="mt-2 childs-list"
+            accordion="side-menu-accordion"
           >
             <div
               v-for="child of filter.childs"
