@@ -216,8 +216,6 @@ export default {
 
 .hands-table-column {
   background: #fff;
-  border: 1px solid #ccc;
-  height: auto;
 }
 
 </style>
