@@ -385,7 +385,7 @@ export default {
     font-family: ProductSans;
     line-height: 2.5rem;
     color: #202124;
-    padding: 0 0.3rem;
+    padding: 0 1.25rem;
     padding-left: 0.625rem;
     user-select: none;
     &:hover {
