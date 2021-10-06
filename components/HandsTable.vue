@@ -54,7 +54,8 @@ import { mapGetters } from 'vuex'
           rowHeaders: true,
           licenseKey: 'non-commercial-and-evaluation',
           height: 'calc( 100vh - 5.5625rem )',
-          width: 'auto',
+          width: '100%',
+          stretchH: 'all',
           overflow: 'hidden',
           readOnly: true,
           dropdownMenu: true,
@@ -204,4 +205,3 @@ import { mapGetters } from 'vuex'
     }
   }
 </script>
-  

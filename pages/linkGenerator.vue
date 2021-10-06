@@ -147,8 +147,9 @@ export default {
       tableSettings: {
         height: 'calc( 100vh - 5.5625rem )',
         licenseKey: 'non-commercial-and-evaluation',
-        width: 'auto',
-        stretchH: 'last',
+        width: '100%',
+        stretchH: 'all',
+        rowHeaders: true,
         afterGetColHeader: function(col, th) {
           th.className = 'htLeft'
         }
@@ -220,6 +221,20 @@ export default {
     background-color: #F3f3f3;
     color: #000b12;
     border-radius: 0 6px 6px 0;
+  }
+}
+
+.page {
+  padding: 1.25rem 0 0 0;
+  .page-layout {
+    display: flex;
+    .side-menu-column {
+      flex: 0 0 13.375rem;
+    }
+    .hands-table-column {
+      width: 100%;
+      flex: 1 0;
+    }
   }
 }
 </style>

@@ -181,15 +181,17 @@ body {
   padding: 1.25rem 0 0 0;
   .page-layout {
     display: flex;
+
     .side-menu-column {
-      min-width: 13.375rem;
-      max-width: 13.375rem;
-      max-height: calc(100vh - 7rem);
+      flex: 0 0 13.375rem;
+      // max-height: calc(100vh - 7rem);
       // overflow-y: scroll;
       // overflow-x: unset;
     }
     .hands-table-column {
-      width: calc(100vw - 13.375rem);
+      width: 100%;
+      flex: 1 0;
+      // width: calc(100vw - 13.375rem);
     }
   }
 }
