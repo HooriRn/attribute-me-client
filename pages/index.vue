@@ -9,7 +9,8 @@
         <div v-if="loading && !loadErr" class="loading-box">
           <div>{{ loadingProgress }}%</div>
           <div>Loading data...</div>
-          <Loading />
+          <img src="~/assets/img/loading.gif" alt="loading" />
+          <!-- <Loading /> -->
         </div>
         <div v-if="loadErr" class="loading-box">
           Unable to fetch data from server!
@@ -179,8 +180,11 @@ body {
 .page {
   // padding: 1.25rem;
   padding: 1.25rem 0 0 0;
+  height:  calc( 100vh - 4.3125rem);
+
   .page-layout {
     display: flex;
+    height: 100%;
 
     .side-menu-column {
       flex: 0 0 13.375rem;
@@ -189,6 +193,9 @@ body {
     .hands-table-column {
       width: 100%;
       flex: 1 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
 }
@@ -202,7 +209,7 @@ body {
   margin-bottom: 1.25rem;
 }
 .loading-box {
+  margin: auto;
   text-align: center;
-  margin-top: 4rem;
 }
 </style>

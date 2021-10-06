@@ -22,7 +22,7 @@
       </div>
 
       <div style="margin-left: 1.25rem;">
-        <b-form-checkbox @change="dailySwitchChanged" class="hourly-checkbox" v-model="hourlyChecked" name="check-button" switch>
+        <b-form-checkbox @change="dailySwitchChanged" class="hourly-checkbox" v-model="hourlyChecked" name="check-button" button-variant="danger" switch>
           <div>Hourly data</div>
         </b-form-checkbox>
       </div>
@@ -222,6 +222,19 @@ export default {
 /* This needs to be global */
 .mj-daterange-picker .preset-ranges .preset {
   font-size: 0.875rem;
+}
+.custom-control-input:checked ~ .custom-control-label::before {
+  border-color: #fd624f;
+  background-color: #fd624f;
+  box-shadow: none;
+}
+
+.custom-control-input:focus ~ .custom-control-label::before {
+  box-shadow: 0 0 0 0.2rem rgba(253, 98, 79, 0.25);
+}
+
+.custom-control-input:focus:not(:checked) ~ .custom-control-label::before {
+  border-color: rgba(253, 98, 79, 0.25);
 }
 
 
