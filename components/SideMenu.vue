@@ -105,7 +105,7 @@ export default {
       activeItem: null,
       activeBtn: null,
       hourlyChecked: false,
-      dateInputValue: "##-##-## to ##-##-##",
+      dateInputValue: "Filter a date range",
       filters: [
         { name: "All Data" },
         {

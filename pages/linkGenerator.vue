@@ -29,9 +29,11 @@
           </hot-column>
           <hot-column title="Your Campaign Name" data="campaign">
           </hot-column>
-          <hot-column title="Your Handle" data="handle">
+          <hot-column title="Your THOR.RUNE Address" data="handle">
           </hot-column>
           <hot-column title="Your Campaign URL" read-only="true" data="url" :renderer="makeLink">
+          </hot-column>
+          <hot-column title="Important Notes" read-only="true" data="note">
           </hot-column>
         </hot-table>
       </div>
@@ -84,7 +86,8 @@ export default {
           channel: 'Twitter',
           campaign: '',
           handle: '',
-          url: ''
+          url: '',
+          note: ''
         },
         { category: 'Swapping',
           topic: 'How to swap cross-chain?',
@@ -92,7 +95,8 @@ export default {
           channel: 'Twitter',
           campaign: '',
           handle: '',
-          url: ''
+          url: '',
+          note: ''
         },
         { category: 'Pooling',
           topic: '',
@@ -100,7 +104,8 @@ export default {
           channel: 'Twitter',
           campaign: '',
           handle: '',
-          url: ''
+          url: '',
+          note: ''
         },
         { category: 'Ecosystem',
           topic: '',
@@ -108,7 +113,8 @@ export default {
           channel: 'Twitter',
           campaign: '',
           handle: '',
-          url: ''
+          url: '',
+          note: ''
         },
         { category: 'Security',
           topic: '',
@@ -116,7 +122,8 @@ export default {
           channel: 'Twitter',
           campaign: '',
           handle: '',
-          url: ''
+          url: '',
+          note: ''
         },
         { category: 'Decentralization',
           topic: '',
@@ -124,7 +131,8 @@ export default {
           channel: 'Twitter',
           campaign: '',
           handle: '',
-          url: ''
+          url: '',
+          note: ''
         },
         { category: 'Nodes',
           topic: '',
@@ -132,11 +140,12 @@ export default {
           channel: 'Twitter',
           campaign: '',
           handle: '',
-          url: ''
+          url: '',
+          note: ''
         }
       ],
       tableSettings: {
-        height: '100%',
+        height: 'calc( 100vh - 5.5625rem )',
         licenseKey: 'non-commercial-and-evaluation',
         width: 'auto',
         stretchH: 'last',
@@ -208,14 +217,9 @@ export default {
   cursor: pointer;
 
   &:hover {
-    color: #FD624F;
-    background-color: #dadce0;
+    background-color: #F3f3f3;
+    color: #000b12;
     border-radius: 0 6px 6px 0;
   }
 }
-
-.hands-table-column {
-  background: #fff;
-}
-
 </style>

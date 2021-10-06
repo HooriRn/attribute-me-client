@@ -12,7 +12,7 @@
       <div class="menu-item">Power-tweeters</div>
       <div class="menu-item">SKALD Marketers</div>
       <div class="last-fields">
-        <input @change="quickFilterChanged" v-model="quickFilterValue" class="quick-filter-input" placeholder="Quick filter @yourTwitterHandle" type="text">
+        <input @change="quickFilterChanged" v-model="quickFilterValue" class="quick-filter-input" placeholder="Filter by Campaign Medium" type="text">
         <button @click="exportCSVClicked" class="export-btn">Export .csv</button>
       </div>
     </div>
