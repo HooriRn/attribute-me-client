@@ -107,7 +107,7 @@ export default {
       hourlyChecked: false,
       dateInputValue: "##-##-## to ##-##-##",
       filters: [
-        { name: "All data" },
+        { name: "All Data" },
         {
           name: "THORChain.org",
           childs: [

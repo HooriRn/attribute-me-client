@@ -204,3 +204,4 @@ import { mapGetters } from 'vuex'
     }
   }
 </script>
+  
