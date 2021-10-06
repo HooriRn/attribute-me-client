@@ -212,7 +212,7 @@ export default {
   display: block;
   min-width: 100%;
   text-align: left;
-  padding-left: 20px;
+  padding-left: 1.25rem;
   border-radius: 0 6px 6px 0;
   cursor: pointer;
 

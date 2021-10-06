@@ -21,7 +21,7 @@
         />
       </div>
 
-      <div style="margin-left: 10px;">
+      <div style="margin-left: 1.25rem;">
         <b-form-checkbox @change="dailySwitchChanged" class="hourly-checkbox" v-model="hourlyChecked" name="check-button" switch>
           <div>Hourly data</div>
         </b-form-checkbox>
@@ -248,7 +248,7 @@ export default {
   }
 
   .field-title {
-    padding-left: 0.625rem;
+    padding-left: 1.25rem;
   }
 }
 .hourly-checkbox{
@@ -324,7 +324,6 @@ export default {
     display: block;
     min-width: 100%;
     text-align: left;
-    padding: 0.3rem;
     padding: 0 1.25rem;
     border-radius: 0 0.375rem 0.375rem 0;
     cursor: pointer;
@@ -387,7 +386,6 @@ export default {
     line-height: 2.5rem;
     color: #202124;
     padding: 0 1.25rem;
-    padding-left: 0.625rem;
     user-select: none;
     &:hover {
       background-color: #F3f3f3;
