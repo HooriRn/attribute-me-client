@@ -95,7 +95,7 @@ export default {
   }
   .last-fields{
     margin-left: auto;
-    padding: 1rem;
+    padding-right: 1rem;
     .quick-filter-input{
       background: #F3F3F3;
       border: none;
@@ -116,6 +116,7 @@ export default {
       height: 3rem;
       border-radius: 0.375rem;
       margin-left: 0.625rem;
+      margin-bottom: 1px;
     }
   }
 }
