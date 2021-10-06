@@ -230,6 +230,7 @@ export default {
     display: flex;
     .side-menu-column {
       flex: 0 0 13.375rem;
+      margin-top: -0.8125rem;
     }
     .hands-table-column {
       width: 100%;

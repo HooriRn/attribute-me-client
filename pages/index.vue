@@ -184,14 +184,11 @@ body {
 
     .side-menu-column {
       flex: 0 0 13.375rem;
-      // max-height: calc(100vh - 7rem);
-      // overflow-y: scroll;
-      // overflow-x: unset;
+      margin-top: -0.8125rem;
     }
     .hands-table-column {
       width: 100%;
       flex: 1 0;
-      // width: calc(100vw - 13.375rem);
     }
   }
 }
