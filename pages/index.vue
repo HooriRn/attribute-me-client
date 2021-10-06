@@ -4,8 +4,10 @@
       <div class="side-menu-column">
         <SideMenu />
       </div>
-      <div class="hands-table-column">
+      <div v-if="!loading && !loadErr && handsTableData.length !== 0" class="hands-table-column">
         <HandsTable v-if="!loading" class="hands-table" :tableData="handsTableData" :totals="handsTableTotals"></HandsTable>
+      </div>
+      <div v-else class="loading-container">
         <div v-if="loading && !loadErr" class="loading-box">
           <div>{{ loadingProgress }}%</div>
           <div>Loading data...</div>
@@ -191,6 +193,10 @@ body {
       margin-top: -0.8125rem;
     }
     .hands-table-column {
+      width: 100%;
+      flex: 1 0;
+    }
+    .loading-container {
       width: 100%;
       flex: 1 0;
       display: flex;
