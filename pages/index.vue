@@ -4,16 +4,26 @@
       <div class="side-menu-column">
         <SideMenu />
       </div>
-      <div v-if="false" class="hands-table-column">
+      <div v-if="!loading && !loadErr && handsTableData.length !== 0" class="hands-table-column">
         <HandsTable v-if="!loading" class="hands-table" :tableData="handsTableData" :totals="handsTableTotals"></HandsTable>
       </div>
       <div v-else class="loading-container">
-        <div class="loading-box">
+        <div v-if="loading && !loadErr" class="loading-box">
           <div class="loading-text">
             <div>{{ loadingProgress }}%</div>
             <div>Loading data...</div>
           </div>
           <img src="~/assets/img/loading.gif" alt="loading" />
+          <!-- <Loading /> -->
+        </div>
+        <div v-if="loadErr" class="loading-box">
+          Unable to fetch data from server!
+        </div>
+        <div
+          v-if="!loading && !loadErr && handsTableData.length === 0"
+          class="loading-box"
+        >
+          No data in this date range
         </div>
       </div>
     </div>
