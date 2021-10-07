@@ -16,12 +16,12 @@
           <img src="~/assets/img/loading.gif" alt="loading" />
           <!-- <Loading /> -->
         </div>
-        <div v-if="loadErr" class="loading-box">
+        <div v-if="loadErr" class="loading-box loading-text">
           Unable to fetch data from server!
         </div>
         <div
           v-if="!loading && !loadErr && handsTableData.length === 0"
-          class="loading-box"
+          class="loading-box loading-text"
         >
           No data in this date range
         </div>
