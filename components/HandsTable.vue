@@ -77,6 +77,14 @@ import { mapGetters } from 'vuex'
               cellProperties.className = 'htRight';
             }
 
+            if (col == 0 || row == 0) {
+              cellProperties.renderer = function (instance, td, row, col, prop, value, cellProperties) {
+                Handsontable.renderers.TextRenderer.apply(this, arguments);
+                td.style.color = '#222222';
+                td.style.background = '#F0F0F0';
+              }
+            }
+
              return cellProperties
           },
           afterGetColHeader: function(col, th) {
