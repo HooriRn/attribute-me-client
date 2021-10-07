@@ -62,12 +62,13 @@ import { mapGetters } from 'vuex'
           filters: true,
           columnSorting: true,
           cell: [
-            {row: 0, col: 0, className: 'htRight'},
+            {row: 0, col: 1, className: 'htRight'},
           ],
           mergeCells: [
-            { row: 0, col: 0, rowspan: 1, colspan: 7 },
+            { row: 0, col: 1, rowspan: 1, colspan: 6 },
           ],
           fixedRowsTop: 1,
+          fixedColumnsLeft: 1,
           persistentState: true,
           cells: function(row, col, prop) {
             const cellProperties = {};
@@ -145,10 +146,10 @@ import { mapGetters } from 'vuex'
 
         hotTable.updateSettings({
           cell: [
-            {row: 0, col: 0, className: 'htRight'},
+            {row: 0, col: 1, className: 'htRight'},
           ],
         })
-        hotTable.setDataAtCell(0, 0, 'Totals');
+        hotTable.setDataAtCell(0, 1, 'Totals');
         hotTable.setDataAtCell(0, 7, this.totals.total_count);
         hotTable.setDataAtCell(0, 8, this.totals.total_value);
         hotTable.setDataAtCell(0, 9, this.totals.total_total_users);

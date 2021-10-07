@@ -142,10 +142,8 @@ export default {
 
           for(var key in oneEvent)
             oneEvent[key] = null
-          if(oneEvent.hasOwnProperty('time'))
-            oneEvent.time = "Totals"
-          if(oneEvent.hasOwnProperty('date'))
-            oneEvent.date = "Totals"
+          if(oneEvent.hasOwnProperty('medium'))
+            oneEvent.medium = "Totals"
           oneEvent.event_count = totals.total_count
           oneEvent.event_value = totals.total_value
           oneEvent.total_users = totals.total_total_users
