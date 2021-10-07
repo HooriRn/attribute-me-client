@@ -239,7 +239,7 @@ export default {
 
 
 .divider {
-  margin-left: 0.625rem;
+  margin-left: 1.25rem;
 }
 
 .side-menu {
