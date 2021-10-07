@@ -222,7 +222,7 @@ body {
 }
 .loading-box {
   position: relative;
-  bottom: 24px; // calculated: ((loading-box height)/2 - (icon height)/2)
+  bottom: 34px; // calculated: ((loading-box height)/2 - (icon height)/2) + 10px
   text-align: center;
 }
 </style>
