@@ -19,7 +19,8 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     '@/assets/css/handsontable.full.min.css',
-    '@/assets/styles/main.scss'
+    '@/assets/styles/main.scss',
+    '@/assets/styles/attribute-style.scss'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins

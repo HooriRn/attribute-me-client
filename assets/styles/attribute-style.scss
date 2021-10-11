@@ -1,0 +1,62 @@
+body {
+  background-color: #f8f9fa;
+  height: 100vh;
+}
+.page {
+  // padding: 1.25rem;
+  padding: 1.25rem 0 0 0;
+  height: calc(100vh - 4.3125rem);
+
+  .page-layout {
+    display: flex;
+    height: 100%;
+
+    .side-menu-column {
+      flex: 0 0 13.375rem;
+      margin-top: -0.8125rem;
+    }
+    .hands-table-column {
+      width: 100%;
+      flex: 1 0;
+    }
+    .loading-container {
+      width: 100%;
+      flex: 1 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .loading-text {
+        font-weight: bold;
+      }
+    }
+  }
+}
+.hands-table {
+  font-size: 0.8125rem;
+  .handsontable {
+    margin: 0 auto;
+  }
+}
+
+
+/* This needs to be global */
+.mj-daterange-picker .preset-ranges .preset {
+  font-size: 0.875rem;
+}
+.custom-control-input:checked ~ .custom-control-label::before {
+  border-color: #fd624f;
+  background-color: #fd624f;
+  box-shadow: none;
+}
+
+.custom-control-input:focus ~ .custom-control-label::before {
+  box-shadow: 0 0 0 0.2rem rgba(253, 98, 79, 0.25);
+}
+
+.custom-control-input:focus:not(:checked) ~ .custom-control-label::before {
+  border-color: rgba(253, 98, 79, 0.25);
+}
+/* ----------------- Until HERE ----------------- */
+
+@import 'side-menu'
