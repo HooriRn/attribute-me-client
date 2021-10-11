@@ -5,8 +5,8 @@
         <img src="~/assets/img/logo.svg" alt="Attribute me logo" />
       </div>
       <!-- <div class="menu-item">Home</div> -->
-      <nuxt-link class="menu-item" to="/">Analytics</nuxt-link>
-      <nuxt-link class="menu-item" to="/linkGenerator"
+      <nuxt-link class="menu-item" to="/analytics">Analytics</nuxt-link>
+      <nuxt-link class="menu-item" to="/link-generator"
         >Link Generator</nuxt-link
       >
       <div class="menu-item">Power-tweeters</div>
@@ -62,7 +62,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .base-header {
   background-color: #fff;
   border-bottom: 1px solid #dadce0;

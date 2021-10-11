@@ -2,20 +2,7 @@
   <div class="page">
     <div class="page-layout">
       <div class="side-menu-column">
-        <div class="side-menu">
-          <div class="present-filters-filed">
-            <div class="field-title">Funnel categories</div>
-            <div class="filters-scroll">
-              <div
-                class="side-menu-item"
-                v-for="category of categories"
-                :key="categories.indexOf(category)"
-              >
-                <span>{{ category.name }}</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <side-menu />
       </div>
       <div class="hands-table-column">
         <hot-table class="hands-table" :data="linkGenerateData" :settings="tableSettings">
@@ -42,7 +29,9 @@
 </template>
 
 <script>
+import SideMenu from './side-menu.vue';
 export default {
+  components: { SideMenu },
   data() {
     return {
       channel_source: [
@@ -61,23 +50,6 @@ export default {
         "Twitter",
         "Vimeo",
         "YouTube",
-      ],
-      categories: [
-        {
-          name: "Security",
-        },
-        {
-          name: "Decentralization",
-        },
-        {
-          name: "Swapping",
-        },
-        {
-          name: "Pooling",
-        },
-        {
-          name: "Ecosystem",
-        },
       ],
       linkGenerateData: [
         { category: 'Tokenomics',
