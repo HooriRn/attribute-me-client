@@ -68,7 +68,7 @@ import { mapGetters } from 'vuex'
             {row: 0, col: 1, className: 'htRight'},
           ],
           mergeCells: [
-            { row: 0, col: 1, rowspan: 1, colspan: 6 },
+            { row: 0, col: 1, rowspan: 1, colspan: 11 },
           ],
           fixedRowsTop: 1,
           fixedColumnsLeft: 1,
@@ -76,7 +76,7 @@ import { mapGetters } from 'vuex'
           cells: function(row, col, prop) {
             const cellProperties = {};
 
-            if (col >= 7) {
+            if (col >= 10) {
               cellProperties.className = 'htRight';
             }
 
@@ -92,7 +92,7 @@ import { mapGetters } from 'vuex'
           },
           afterGetColHeader: function(col, th) {
             th.className = 'htLeft'
-            if (col >= 7) {
+            if (col >= 10) {
               th.className = 'htRight';
             }
           }
@@ -163,9 +163,8 @@ import { mapGetters } from 'vuex'
         hotTable.setDataAtCell(0, 1, 'Totals');
         hotTable.setDataAtCell(0, 7, this.totals.total_count);
         hotTable.setDataAtCell(0, 8, this.totals.total_value);
-        hotTable.setDataAtCell(0, 9, this.totals.total_total_users);
-        hotTable.setDataAtCell(0, 10, this.totals.total_event_count_per_user);
-
+        // hotTable.setDataAtCell(0, 9, this.totals.total_total_users);
+        // hotTable.setDataAtCell(0, 10, this.totals.total_event_count_per_user);
       },
       removeTotalRow(hotTable){
         console.log('remove total row')

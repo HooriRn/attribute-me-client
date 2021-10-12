@@ -140,15 +140,14 @@ export default {
 
           for(var key in oneEvent)
             oneEvent[key] = null
-          if(oneEvent.hasOwnProperty('medium'))
-            oneEvent.medium = "Totals"
+          if(oneEvent.hasOwnProperty('country'))
+            oneEvent.country = "Totals"
           oneEvent.event_count = totals.total_count
           oneEvent.event_value = totals.total_value
-          oneEvent.total_users = totals.total_total_users
-          oneEvent.event_count_per_user = totals.total_event_count_per_user
+          // oneEvent.total_users = totals.total_total_users
+          // oneEvent.event_count_per_user = totals.total_event_count_per_user
           events.unshift(oneEvent)
         }
-          // events.unshift(["totals","","","","","","", totals.total_count, totals.total_value, totals.total_total_users, totals.total_event_count_per_user])
         self.handsTableData = events;
         self.handsTableTotals = totals;
         self.loading = false;

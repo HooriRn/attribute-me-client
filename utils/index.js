@@ -21,7 +21,6 @@ export function parseEventsData(events){
             }
             if(event.event_count_per_user){
                 event.event_count_per_user = event.event_count_per_user.toFixed(2)
-
             }
             for(var key of ['event_count', 'event_value', 'total_users', 'event_count_per_user']){
                 if(event[key]){
@@ -40,8 +39,8 @@ export function parseTotalsData(totals){
          [
              "total_count",
              "total_value",
-             "total_total_users",
-             "total_event_count_per_user"
+            //  "total_total_users",
+            //  "total_event_count_per_user"
             ]
         ){
             totals[key] = numberWithCommas(totals[key])
