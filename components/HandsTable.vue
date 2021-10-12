@@ -40,6 +40,11 @@ import { mapGetters } from 'vuex'
         settings: {
           colHeaders: [
             'Date & Hour',
+            'Country',
+            'Device Category',
+            'Host Name',
+            'Page Path',
+            'Page Referrer',
             'Campaign Medium',
             'Campaign Name',
             'Campaign Source',
@@ -47,9 +52,7 @@ import { mapGetters } from 'vuex'
             'Event Category',
             'Event Label',
             'Event Count',
-            'Event Value',
-            'Total Users',
-            'Events per User'
+            'Event Value'
           ],
           rowHeaders: true,
           licenseKey: 'non-commercial-and-evaluation',
