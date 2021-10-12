@@ -6,9 +6,13 @@
       </div>
       <div class="hands-table-column">
         <hot-table class="hands-table" :data="linkGenerateData" :settings="tableSettings">
+          <hot-column title="Device" read-only="true" data="device">
+          </hot-column>
+          <hot-column title="Funnel Mode" read-only="true" data="funnel">
+          </hot-column>
           <hot-column title="Category" read-only="true" data="category">
           </hot-column>
-          <hot-column title="Topic" data="topic" read-only="true">
+          <hot-column title="Topic" read-only="true" data="topic">
           </hot-column>
           <hot-column title="Landing Page Preview" read-only="true" data="preview" :renderer="showLink">
           </hot-column>
@@ -30,6 +34,7 @@
 
 <script>
 import SideMenu from './side-menu.vue';
+import linkGenerateData from './link-generator.json'
 export default {
   components: { SideMenu },
   data() {
@@ -51,71 +56,7 @@ export default {
         "Vimeo",
         "YouTube",
       ],
-      linkGenerateData: [
-        { category: 'Tokenomics',
-          topic: 'Forecast the value of RUNE',
-          preview: 'https://www.thorchain.org/rune',
-          channel: 'Twitter',
-          campaign: '',
-          handle: '',
-          url: '',
-          note: ''
-        },
-        { category: 'Swapping',
-          topic: 'How to swap cross-chain?',
-          preview: '',
-          channel: 'Twitter',
-          campaign: '',
-          handle: '',
-          url: '',
-          note: ''
-        },
-        { category: 'Pooling',
-          topic: '',
-          preview: '',
-          channel: 'Twitter',
-          campaign: '',
-          handle: '',
-          url: '',
-          note: ''
-        },
-        { category: 'Ecosystem',
-          topic: '',
-          preview: '',
-          channel: 'Twitter',
-          campaign: '',
-          handle: '',
-          url: '',
-          note: ''
-        },
-        { category: 'Security',
-          topic: '',
-          preview: '',
-          channel: 'Twitter',
-          campaign: '',
-          handle: '',
-          url: '',
-          note: ''
-        },
-        { category: 'Decentralization',
-          topic: '',
-          preview: '',
-          channel: 'Twitter',
-          campaign: '',
-          handle: '',
-          url: '',
-          note: ''
-        },
-        { category: 'Nodes',
-          topic: '',
-          preview: '',
-          channel: 'Twitter',
-          campaign: '',
-          handle: '',
-          url: '',
-          note: ''
-        }
-      ],
+      linkGenerateData: linkGenerateData,
       tableSettings: {
         height: 'calc( 100vh - 5.5625rem )',
         licenseKey: 'non-commercial-and-evaluation',
@@ -123,8 +64,13 @@ export default {
         stretchH: 'all',
         rowHeaders: true,
         afterGetColHeader: function(col, th) {
-          th.className = 'htLeft'
-        }
+          th.className = ['htLeft']
+        },
+        afterGetRowHeader: function(col, th) {
+          th.className = 'htMiddle'
+        },
+        className: 'htMiddle',
+        rowHeights: 43,
       }
     };
   },
@@ -143,6 +89,7 @@ export default {
         url.searchParams.append(`utm_campaign`, campaign);
         td.innerHTML = `<a href="${url.href}" target=”_blank”>${url.href}</a>`;
       }
+      td.className = 'htMiddle'
     },
     showLink(instance, td, row, col, prop, value, cellProperties) {
       const data = instance.getSourceData()
@@ -152,6 +99,7 @@ export default {
         const url = new URL(preview);
         td.innerHTML = `<a href="${url.href}" target=”_blank”>${url.href}</a>`;
       }
+      td.className = 'htMiddle'
     }
   }
 };
