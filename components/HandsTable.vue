@@ -76,7 +76,7 @@ import { mapGetters } from 'vuex'
           cells: function(row, col, prop) {
             const cellProperties = {};
 
-            if (col >= 10) {
+            if (col >= 12) {
               cellProperties.className = 'htRight';
             }
 
@@ -92,7 +92,7 @@ import { mapGetters } from 'vuex'
           },
           afterGetColHeader: function(col, th) {
             th.className = 'htLeft'
-            if (col >= 10) {
+            if (col >= 12) {
               th.className = 'htRight';
             }
           }
