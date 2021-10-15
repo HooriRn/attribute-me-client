@@ -1,6 +1,7 @@
 export function parseEventsData(events){
         events.map(event =>{
             if(event.time){ // Hourly data
+                event.time += '' // convert into string
                 var dateStr = event.time.substr(0,4)
                 + "-" + event.time.substr(4,2)
                 + "-" + event.time.substr(6,2)
@@ -11,6 +12,7 @@ export function parseEventsData(events){
                 + " " + event.time.substr(8,2)+":00"
             }
             if(event.date){ // Daily data
+                event.date += '' // convert into string
                 var dateStr =
                 event.date.substr(0,4) + "-" +
                 event.date.substr(4,2) + "-" +
