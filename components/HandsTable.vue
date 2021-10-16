@@ -40,7 +40,6 @@ import { mapGetters } from 'vuex'
         settings: {
           colHeaders: [
             'Date & Hour',
-            'Country',
             'Device Category',
             'Host Name',
             'Page Path',
