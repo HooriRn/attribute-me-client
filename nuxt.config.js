@@ -13,6 +13,12 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+    ],
+    script: [
+      {
+        src: "https://cdn.jsdelivr.net/npm/handsontable/dist/handsontable.full.min.js",
+        type: "text/javascript"
+      },
     ]
   },
 
