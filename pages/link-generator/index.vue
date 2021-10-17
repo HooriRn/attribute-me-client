@@ -76,6 +76,7 @@ export default {
   },
   methods: {
     makeLink(instance, td, row, col, prop, value, cellProperties) {
+      Handsontable.renderers.BaseRenderer.apply(this, arguments);
       const data = instance.getSourceData()
       const datum = data[row]
       const preview = datum.preview ?? '';
@@ -87,11 +88,21 @@ export default {
         url.searchParams.append(`utm_source`, channel);
         url.searchParams.append(`utm_medium`, handle);
         url.searchParams.append(`utm_campaign`, campaign);
-        td.innerHTML = `<a href="${url.href}" target=”_blank”>${url.href}</a>`;
+
+        let a = document.createElement('a');
+        a.href = url.href;
+        a.innerText = url.href
+        a.target = '_blank'
+
+        Handsontable.dom.empty(td)
+        td.appendChild(a)
       }
       td.className = 'htMiddle'
+      const plugin = instance.getPlugin('autoColumnSize');
+      // console.log(plugin.calculateColumnsWidth(col, col, true))
     },
     showLink(instance, td, row, col, prop, value, cellProperties) {
+      Handsontable.renderers.BaseRenderer.apply(this, arguments);
       const data = instance.getSourceData()
       const datum = data[row]
       const preview = datum.preview ?? undefined;

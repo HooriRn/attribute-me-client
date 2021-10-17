@@ -96,8 +96,7 @@ import { getServerCustomDateString, getDateInputValue } from "../../utils";
 import { mapGetters } from "vuex";
 export default {
   computed: {
-    ...mapGetters(["sideMenuDateLabel"]),
-    ...mapGetters(["tableSetting"]),
+    ...mapGetters(["sideMenuDateLabel", "tableSetting"]),
   },
   data() {
     return {
@@ -214,6 +213,9 @@ export default {
     sideMenuDateLabel: function (val) {
       this.dateInputValue = val;
     },
+    tableSetting: function (val) {
+      this.hourlyChecked = !val["daily"]
+    }
   },
 };
 </script>

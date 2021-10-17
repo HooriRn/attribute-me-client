@@ -5,7 +5,7 @@
         <side-menu />
       </div>
       <div v-if="!loading && !loadErr && handsTableData.length !== 0" class="hands-table-column">
-        <HandsTable v-if="!loading" class="hands-table" :tableData="handsTableData" :totals="handsTableTotals"></HandsTable>
+        <hands-table v-if="!loading" class="hands-table" :tableData="handsTableData" :totals="handsTableTotals"></hands-table>
       </div>
       <div v-else class="loading-container">
         <div v-if="loading && !loadErr" class="loading-box">
@@ -39,10 +39,12 @@ import {
 } from "../../utils";
 import { mapGetters } from "vuex";
 import SideMenu from "./side-menu.vue";
+import HandsTable from './hands-table.vue';
 
 export default {
   components: {
-    SideMenu
+    SideMenu,
+    HandsTable
   },
   data() {
     return {
@@ -140,14 +142,15 @@ export default {
 
           for(var key in oneEvent)
             oneEvent[key] = null
-          if(oneEvent.hasOwnProperty('country'))
-            oneEvent.country = "Totals"
+          if(oneEvent.hasOwnProperty('device_category'))
+            oneEvent.device_category = "Totals"
           oneEvent.event_count = totals.total_count
           oneEvent.event_value = totals.total_value
           // oneEvent.total_users = totals.total_total_users
           // oneEvent.event_count_per_user = totals.total_event_count_per_user
           events.unshift(oneEvent)
         }
+        console.log(events)
         self.handsTableData = events;
         self.handsTableTotals = totals;
         self.loading = false;
