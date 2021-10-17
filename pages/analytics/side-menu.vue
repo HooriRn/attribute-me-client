@@ -166,7 +166,7 @@ export default {
     activate(filterName) {
       if (this.activeItem === filterName) this.activeItem = null;
       else this.activeItem = filterName;
-      if (filterName === "All data") {
+      if (filterName === "All Data") {
         this.activeBtn = null;
         for (var key in this.$refs) {
           var ref = this.$refs[key][0];
@@ -175,6 +175,7 @@ export default {
         var tableSetting = this.tableSetting;
         tableSetting["filter_website"] = "";
         tableSetting["present_filter"] = "";
+        console.log(tableSetting)
         this.$store.commit("tableSetting", tableSetting);
       }
       console.log(this.activeItem);
@@ -208,8 +209,24 @@ export default {
     sideMenuDateLabel: function (val) {
       this.dateInputValue = val;
     },
-    tableSetting: function (val) {
-      this.hourlyChecked = !val["daily"]
+    tableSetting: function (tableSetting){
+      if(tableSetting.hasOwnProperty('daily')){
+        this.hourlyChecked = !tableSetting.daily
+        console.log(this.hourlyChecked)
+      }
+      if(tableSetting.hasOwnProperty("filter_website") &&
+        tableSetting.hasOwnProperty("present_filter") ){
+          this.activeBtn = tableSetting.filter_website + "&" + tableSetting.present_filter  
+          
+          for (var key in this.$refs) {
+            var ref = this.$refs[key][0];
+            if (ref.show) ref.toggle();
+            if(key === tableSetting.filter_website){
+              ref.toggle()
+            }
+          }
+      }
+      console.log("SideMenu: new setting", tableSetting)
     }
   },
 };
