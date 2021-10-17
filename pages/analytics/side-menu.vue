@@ -112,13 +112,8 @@ export default {
           childs: [
             { name: "All Events" },
             { name: "Website Loads" },
-            { name: "Promotions" },
-            { name: "Social" },
-            { name: "Tool" },
-            { name: "Article" },
-            { name: "Video" },
-            { name: "Document" },
-            { name: "Paper" },
+            { name: "Internal Links" },
+            { name: "External Links" }
           ],
         },
         {
