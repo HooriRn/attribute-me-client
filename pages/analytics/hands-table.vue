@@ -1,9 +1,5 @@
 <template>
-  <div>
-    <hot-table v-if="tableData.length > 0" :settings="settings" :data="tableData" ref="hotTable">
-
-    </hot-table>
-  </div>
+  <hot-table v-if="tableData.length > 0" :settings="settings" :data="tableData" ref="hotTable"></hot-table>
 </template>
 
 <script>
@@ -56,7 +52,7 @@ export default {
         ],
         rowHeaders: true,
         licenseKey: 'non-commercial-and-evaluation',
-        height: 'calc( 100vh - 5.5625rem )',
+        height: this.$device.isDesktop? 'calc( 100vh - 5.5625rem )' : '100%',
         width: '100%',
         stretchH: 'all',
         overflow: 'hidden',

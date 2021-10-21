@@ -1,19 +1,23 @@
 <template>
-  <div class="base-header">
+  <div class="base-header" :class="{ 'mobile-layout': !$device.isDesktop }">
     <div class="menu">
       <div class="menu-item logo">
         <img src="~/assets/img/logo.svg" alt="Attribute me logo" />
       </div>
-      <!-- <div class="menu-item">Home</div> -->
-      <nuxt-link class="menu-item" to="/analytics">Analytics</nuxt-link>
-      <nuxt-link class="menu-item" to="/link-generator"
-        >Link Generator</nuxt-link
-      >
-      <div class="menu-item">Power-tweeters</div>
-      <div class="menu-item">SKALD Marketers</div>
+      <div class="menu-wrapper" v-if="$device.isDesktop">
+        <!-- <div class="menu-item">Home</div> -->
+        <nuxt-link class="menu-item" to="/analytics">Analytics</nuxt-link>
+        <nuxt-link class="menu-item" to="/link-generator">Link Generator</nuxt-link>
+        <a class="menu-item">Power-tweeters</a>
+        <a class="menu-item">SKALD Marketers</a>
+      </div>
       <div class="last-fields">
-        <input @change="quickFilterChanged" v-model="quickFilterValue" class="quick-filter-input" placeholder="Filter by Campaign Medium" type="text">
-        <button @click="exportCSVClicked" class="export-btn">Export .csv</button>
+        <input @change="quickFilterChanged" v-model="quickFilterValue" class="quick-filter-input" placeholder="Quick Filter" type="text">
+        <button @click="exportCSVClicked" class="export-btn">Export</button>
+      </div>
+      <div class="active-link" v-if="!$device.isDesktop">
+        <div class="menu-item menu-item-active" v-if="$route.name == 'analytics'">Analytics</div>
+        <div class="menu-item menu-item-active" v-if="$route.name == 'link-generator'">Generator</div>
       </div>
     </div>
   </div>
@@ -26,13 +30,13 @@ export default {
    computed: {
         ...mapGetters(['tableSetting'])
     },
-    data(){
+    data() {
       return {
         quickFilterValue: ""
       }
     },
     mounted(){
-      this.loadLocalQuickFilterValue()
+      this.loadLocalQuickFilterValue();
     },
   methods:{
     quickFilterChanged($event){
@@ -57,6 +61,15 @@ export default {
     },
     exportCSVClicked(){
       this.$store.commit('exportCSV', Math.random())
+    },
+    mobile() {
+      const width = window.innerWidth;
+      if (width < 900) {
+        return 'sm'
+      }
+      else {
+        return 'bg'
+      }
     }
   }
 };
@@ -118,6 +131,47 @@ export default {
       margin-left: 0.625rem;
       margin-bottom: 1px;
     }
+  }
+}
+
+.mobile-layout {
+  .menu {
+    min-width: initial;
+    height: 54px;
+    margin-right: 10px;
+  }
+
+  .menu-item {
+    font-size: 14px;
+    margin-right: initial !important;
+
+    img {
+    width: 82px;
+    }
+  }
+
+  .last-fields {
+    display: flex;
+    align-items: center;
+    padding-right: 0;
+    margin: 0;
+
+    .quick-filter-input {
+      width: 120px;
+      height: 34px;
+      font-size: 14px;
+    }
+
+    .export-btn {
+      height: 34px;
+      width: 60px;
+      font-size: 14px;
+    }
+  }
+
+  .active-link {
+    flex: 1;
+    text-align: center;
   }
 }
 </style>
