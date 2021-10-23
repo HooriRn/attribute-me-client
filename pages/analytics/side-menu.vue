@@ -10,17 +10,18 @@
         <div class="date-input-text" style="font-size: 0.875rem; color: #202124;">{{ dateInputValue }}</div>
         <img src="~/assets/img/triangle.svg" />
       </div>
-      <div :hidden="!showDatePicker" class="date-picker-holder">
-        <date-range-picker
-          width="18.75rem"
-          :from="$route.query.from"
-          :to="$route.query.to"
-          :panel="$route.query.panel"
-          @update="applyFilter"
-          :theme="datepickerTheme"
-        />
-      </div>
-
+      <transition name="fade">
+        <div v-show="showDatePicker" class="date-picker-holder">
+          <date-range-picker
+            width="18.75rem"
+            :from="$route.query.from"
+            :to="$route.query.to"
+            :panel="$route.query.panel"
+            @update="applyFilter"
+            :theme="datepickerTheme"
+          />
+        </div>
+      </transition>
       <div style="margin-left: 1.25rem;">
         <b-form-checkbox @change="dailySwitchChanged" class="hourly-checkbox" v-model="hourlyChecked" name="check-button" button-variant="danger" switch>
           <div>Hourly data</div>
@@ -81,7 +82,7 @@
   </div>
   <div class="filter-options" v-else>
     <div class="filter-option date-picker">
-      <div class="filter-name">Date range</div>
+      <div class="filter-name">Date range:</div>
       <div
         @click="toggleDatePicker"
         class="date-input"
@@ -93,32 +94,40 @@
         </div>
       </div>
     </div>
-    <div :hidden="!showDatePicker" class="date-picker-holder">
-        <date-range-picker
-          width="18.75rem"
-          :from="$route.query.from"
-          :to="$route.query.to"
-          :panel="$route.query.panel"
-          @update="applyFilter"
-          :theme="datepickerTheme"
-        />
-    </div>
+    <transition name="fade">
+      <div v-show="showDatePicker" class="date-picker-holder">
+          <date-range-picker
+            width="18.75rem"
+            :from="$route.query.from"
+            :to="$route.query.to"
+            :panel="$route.query.panel"
+            @update="applyFilter"
+            :theme="datepickerTheme"
+          />
+      </div>
+    </transition>
+    <b-form-checkbox @change="dailySwitchChanged" class="hourly-checkbox" v-model="hourlyChecked" name="check-button" button-variant="danger" switch>
+      <div>Hourly data</div>
+    </b-form-checkbox>
     <div class="filter-option">
-      <div class="filter-name">
+      <div class="filter-name" style="padding-top: 2px;">
         Preset Filters:
       </div>
       <b-dropdown id="preset-filters" variant="outline" text="Dropdown with header" class="drop-down-custom" no-caret>
         <template #button-content>
-          All data
+          {{tableSetting && tableSetting["filter_website"]? tableSetting["filter_website"]:"All data"}}
           <div class="arrow-down"></div>
         </template>
         <div
-          v-for="filter of filters"
+          v-for="(filter, index) of filters"
           :key="filter.name"
         >
           <b-dropdown-header
             @click="activate(filter.name)"
-            :class="{ 'active': filter.childs? false:true }"
+            :class="{
+              'active': filter.childs? false : true,
+              'side-menu-button-active': activeItem == filter.name
+            }"
           >
             {{filter.name}}
           </b-dropdown-header>
@@ -128,10 +137,16 @@
           >
             <b-dropdown-item-button
               @click="filterBtnClicked(filter.name, child.name)"
-              aria-describedby="preset-filters-label">
+              :class="{
+                'side-menu-button-active':
+                  activeBtn == filter.name + '&' + child.name,
+              }"
+              aria-describedby="preset-filters-label"
+            >
               {{child.name}}
             </b-dropdown-item-button>
           </div>
+          <b-dropdown-divider v-if="index != filters.length - 1"></b-dropdown-divider>
         </div>
       </b-dropdown>
     </div>
@@ -263,12 +278,13 @@ export default {
       }
       if(tableSetting.hasOwnProperty("filter_website") &&
         tableSetting.hasOwnProperty("present_filter") ){
+          console.log(tableSetting)
           this.activeBtn = tableSetting.filter_website + "&" + tableSetting.present_filter
 
           for (var key in this.$refs) {
             var ref = this.$refs[key][0];
             if (ref && ref.show) ref.toggle();
-            if(key === tableSetting.filter_website){
+            if(ref && key === tableSetting.filter_website){
               ref.toggle()
             }
           }
