@@ -134,6 +134,9 @@ export default {
   }
 }
 
+.mobile-layout.base-header {
+  max-width: 100vw;
+}
 .mobile-layout {
   .menu {
     min-width: initial;
@@ -155,9 +158,11 @@ export default {
     align-items: center;
     padding-right: 0;
     margin: 0;
+    flex: 1;
 
     .quick-filter-input {
-      width: 120px;
+      width: calc(100%);
+      min-width: 120px;
       height: 34px;
       font-size: 14px;
     }
@@ -170,8 +175,8 @@ export default {
   }
 
   .active-link {
-    flex: 1;
     text-align: center;
+    padding: 0 10px;
   }
 }
 </style>

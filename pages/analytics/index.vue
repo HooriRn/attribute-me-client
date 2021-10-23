@@ -1,7 +1,7 @@
 <template>
   <div class="page" :class="{ 'mobile-layout': !$device.isDesktop }">
     <div class="page-layout">
-      <div class="side-menu-column" v-if="$device.isDesktop">
+      <div class="side-menu-column">
         <side-menu />
       </div>
       <div v-if="!loading && !loadErr && handsTableData.length !== 0" class="hands-table-column">

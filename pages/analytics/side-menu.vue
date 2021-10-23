@@ -1,5 +1,5 @@
 <template>
-  <div class="side-menu">
+  <div class="side-menu" v-if="$device.isDesktop">
     <div class="date-range-field">
       <div class="field-title">Date range</div>
       <div
@@ -73,20 +73,67 @@
           </b-collapse>
         </div>
       </div>
-
-      <div>
-        <!-- Via space separated string of IDs passed to directive value -->
-
-        <!-- Elements to collapse -->
-
-        <b-collapse id="collapse-b" class="mt-2">
-          <b-card>I am collapsible content B!</b-card>
-        </b-collapse>
-      </div>
     </div>
     <hr class="divider" />
     <div class="side-menu-item" >
       <b-button class="side-menu-button" style="line-height: 0;">Documentation</b-button>
+    </div>
+  </div>
+  <div class="filter-options" v-else>
+    <div class="filter-option date-picker">
+      <div class="filter-name">Date range</div>
+      <div
+        @click="toggleDatePicker"
+        class="date-input"
+        :class="{ 'date-input-active': showDatePicker }"
+      >
+        <div class="date-input-text" style="font-size: 0.875rem; color: #202124;">
+          {{ dateInputValue }}
+          <div class="arrow-down"></div>
+        </div>
+      </div>
+    </div>
+    <div :hidden="!showDatePicker" class="date-picker-holder">
+        <date-range-picker
+          width="18.75rem"
+          :from="$route.query.from"
+          :to="$route.query.to"
+          :panel="$route.query.panel"
+          @update="applyFilter"
+          :theme="datepickerTheme"
+        />
+    </div>
+    <div class="filter-option">
+      <div class="filter-name">
+        Preset Filters:
+      </div>
+      <b-dropdown id="preset-filters" variant="outline" text="Dropdown with header" class="drop-down-custom" no-caret>
+        <template #button-content>
+          All data
+          <div class="arrow-down"></div>
+        </template>
+        <div
+          v-for="filter of filters"
+          :key="filter.name"
+        >
+          <b-dropdown-header
+            @click="activate(filter.name)"
+            :class="{ 'active': filter.childs? false:true }"
+          >
+            {{filter.name}}
+          </b-dropdown-header>
+          <div
+            v-for="child of filter.childs"
+            :key="filter.childs.indexOf(child)"
+          >
+            <b-dropdown-item-button
+              @click="filterBtnClicked(filter.name, child.name)"
+              aria-describedby="preset-filters-label">
+              {{child.name}}
+            </b-dropdown-item-button>
+          </div>
+        </div>
+      </b-dropdown>
     </div>
   </div>
 </template>
@@ -170,7 +217,7 @@ export default {
         this.activeBtn = null;
         for (var key in this.$refs) {
           var ref = this.$refs[key][0];
-          if (ref.show) ref.toggle();
+          if (ref && ref.show) ref.toggle();
         }
         var tableSetting = this.tableSetting;
         tableSetting["filter_website"] = "";
@@ -216,11 +263,11 @@ export default {
       }
       if(tableSetting.hasOwnProperty("filter_website") &&
         tableSetting.hasOwnProperty("present_filter") ){
-          this.activeBtn = tableSetting.filter_website + "&" + tableSetting.present_filter  
-          
+          this.activeBtn = tableSetting.filter_website + "&" + tableSetting.present_filter
+
           for (var key in this.$refs) {
             var ref = this.$refs[key][0];
-            if (ref.show) ref.toggle();
+            if (ref && ref.show) ref.toggle();
             if(key === tableSetting.filter_website){
               ref.toggle()
             }

@@ -45,6 +45,7 @@ export default {
   align-items: center;
   padding: 0 10px;
   height: 55px;
+  min-height: 55px;
   border-top: 1px solid #DADCE0;
 
   .footer-item {

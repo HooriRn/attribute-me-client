@@ -34,10 +34,94 @@ body {
   }
 }
 
-.mobile-layout.page {
-  padding: 1.25rem 0;
-  height: initial;
+.mobile-layout {
+  .page {
+    padding-top: 0.625rem;
+    padding-bottom: 0.9375rem;
+    height: initial;
 
+    .page-layout {
+      flex-direction: column;
+
+      .side-menu-column {
+        flex: initial;
+        margin-top: initial;
+
+        .date-input-text {
+          display: flex;
+          align-items: center;
+        }
+
+        .date-picker-holder {
+          padding: 10px 0;
+        }
+
+        #preset-filters .active header {
+          cursor: pointer;
+          font-size: 1rem;
+          font-weight: 400;
+          color: #212529;
+
+          &:hover, &:focus {
+            color: #16181b;
+            text-decoration: none;
+            background-color: #e9ecef;
+          }
+
+          &:active {
+            color: #fff;
+            text-decoration: none;
+            background-color: #007bff;
+          }
+        }
+
+      }
+    }
+  }
+
+}
+
+.filter-options {
+  padding-left: 10px;
+  padding-bottom: 10px;
+
+  .filter-option {
+    font-weight: 700;
+    display: flex;
+    font-size: 14px;
+    line-height: 20px;
+    color: #5F6368;
+  }
+
+  .filter-name {
+    padding-right: 10px;
+  }
+}
+
+
+.drop-down-custom {
+  .btn {
+    display: flex;
+    align-items: center;
+    font-weight: 700;
+    box-shadow: none;
+    padding: 0;
+    font-size: 14px;
+    line-height: 20px;
+    color: #202124;
+  }
+}
+
+.arrow-down {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+
+  border-top: 4px solid black;
+  margin-top: 4px;
+  margin-left: 3px;
 }
 
 .hands-table {
