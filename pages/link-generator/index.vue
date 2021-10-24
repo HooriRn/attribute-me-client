@@ -1,7 +1,7 @@
 <template>
-  <div class="page">
+  <div class="page" :class="{ 'mobile-layout': !$device.isDesktop }">
     <div class="page-layout">
-      <div class="side-menu-column">
+      <div class="side-menu-column" v-if="$device.isDesktop">
         <side-menu />
       </div>
       <div class="hands-table-column">
@@ -58,7 +58,7 @@ export default {
       ],
       linkGenerateData: linkGenerateData,
       tableSettings: {
-        height: 'calc( 100vh - 5.5625rem )',
+        height: this.$device.isDesktop? 'calc( 100vh - 5.5625rem )' : '100%',
         licenseKey: 'non-commercial-and-evaluation',
         width: '100%',
         stretchH: 'all',
@@ -111,62 +111,10 @@ export default {
         td.innerHTML = `<a href="${url.href}" target=”_blank”>${url.href}</a>`;
       }
       td.className = 'htMiddle'
-    }
+    },
   }
 };
 </script>
 
 <style lang="scss" scoped>
-//For now I put the side menu style here. It's needed to be global
-.field-title {
-  padding-left: 1.25rem;
-}
-
-.filters-scroll {
-  /* Hide scrollbar for IE, Edge and Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-
-  /* Hide scrollbar for Chrome, Safari and Opera */
-  &::-webkit-scrollbar {
-    display: none;
-  }
-}
-
-.side-menu-item {
-  font-family: ProductSans;
-  font-size: 0.875rem;
-  line-height: 2.5rem;
-  color: #202124;
-  height: 2.625rem;
-  background-color: transparent;
-  border: none;
-  display: block;
-  min-width: 100%;
-  text-align: left;
-  padding-left: 1.25rem;
-  border-radius: 0 6px 6px 0;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #F3f3f3;
-    color: #000b12;
-    border-radius: 0 6px 6px 0;
-  }
-}
-
-.page {
-  padding: 1.25rem 0 0 0;
-  .page-layout {
-    display: flex;
-    .side-menu-column {
-      flex: 0 0 13.375rem;
-      margin-top: -0.8125rem;
-    }
-    .hands-table-column {
-      width: 100%;
-      flex: 1 0;
-    }
-  }
-}
 </style>

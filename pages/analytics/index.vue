@@ -1,5 +1,5 @@
 <template>
-  <div class="page">
+  <div class="page" :class="{ 'mobile-layout': !$device.isDesktop }">
     <div class="page-layout">
       <div class="side-menu-column">
         <side-menu />
