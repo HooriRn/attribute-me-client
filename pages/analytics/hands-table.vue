@@ -4,6 +4,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { HyperFormula } from 'hyperformula';
 
 export default {
   computed: {
@@ -64,7 +65,7 @@ export default {
           {row: 0, col: 1, className: 'htRight'},
         ],
         mergeCells: [
-          { row: 0, col: 1, rowspan: 1, colspan: 11 },
+          { row: 0, col: 1, rowspan: 1, colspan: 10 },
         ],
         fixedRowsTop: 1,
         fixedColumnsLeft: 1,
@@ -140,6 +141,8 @@ export default {
   },
   methods:{
     addTotalRow(hotTable){
+      let event_count = hotTable.getData().reduce((a, b) => a+parseFloat(b[11]??0), 0)
+      let event_total_value = hotTable.getData().reduce((a, b) => a+parseFloat(b[12]??0), 0)
       console.log('add total row')
       hotTable.alter('insert_row', 0 , 1)
       // var mergeCells = hotTable.getPlugin('mergeCells')
@@ -155,10 +158,12 @@ export default {
         cell: [
           {row: 0, col: 1, className: 'htRight'},
         ],
+        fixedRowsTop: 1
       })
+      console.log(hotTable.countRows(), hotTable.getData())
       hotTable.setDataAtCell(0, 1, 'Totals');
-      hotTable.setDataAtCell(0, 7, this.totals.total_count);
-      hotTable.setDataAtCell(0, 8, this.totals.total_value);
+      hotTable.setDataAtCell(0, 11, event_count);
+      hotTable.setDataAtCell(0, 12, event_total_value);
       // hotTable.setDataAtCell(0, 9, this.totals.total_total_users);
       // hotTable.setDataAtCell(0, 10, this.totals.total_event_count_per_user);
     },
