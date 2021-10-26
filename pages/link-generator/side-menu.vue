@@ -8,7 +8,7 @@
           v-for="category of categories"
           :key="categories.indexOf(category)"
         >
-          <div class="side-menu-button">{{ category.name }}</div>
+          <div class="side-menu-button" :class="{'disabled': category.disabled}">{{ category.name }}</div>
         </div>
       </div>
     </div>
@@ -21,19 +21,12 @@ export default {
     return {
       categories: [
         {
-          name: "Security",
+          name: "THORChain.org",
+          disabled: false
         },
         {
-          name: "Decentralization",
-        },
-        {
-          name: "Swapping",
-        },
-        {
-          name: "Pooling",
-        },
-        {
-          name: "Ecosystem",
+          name: "SKIP.exchange",
+          disabled: true
         },
       ],
     }
