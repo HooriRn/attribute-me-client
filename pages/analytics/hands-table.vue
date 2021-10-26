@@ -73,7 +73,7 @@ export default {
         cells: function(row, col, prop) {
           const cellProperties = {};
 
-          if (col >= 12) {
+          if (col >= 11) {
             cellProperties.className = 'htRight';
           }
 
@@ -141,8 +141,8 @@ export default {
   },
   methods:{
     addTotalRow(hotTable){
-      let event_count = hotTable.getData().reduce((a, b) => a+parseFloat(b[11]??0), 0)
-      let event_total_value = hotTable.getData().reduce((a, b) => a+parseFloat(b[12]??0), 0)
+      let event_count = hotTable.getData().reduce((a, b) => a+parseFloat((b[11]??'0').toString().replace(/\,/g, '')), 0).toFixed(2)
+      let event_total_value = hotTable.getData().reduce((a, b) => a+parseFloat((b[12]??'0').toString().replace(/\,/g, '')), 0).toFixed(2)
       console.log('add total row')
       hotTable.alter('insert_row', 0 , 1)
       // var mergeCells = hotTable.getPlugin('mergeCells')
