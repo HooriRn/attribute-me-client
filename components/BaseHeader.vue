@@ -8,8 +8,8 @@
         <!-- <div class="menu-item">Home</div> -->
         <nuxt-link class="menu-item" to="/analytics">Analytics</nuxt-link>
         <nuxt-link class="menu-item" to="/link-generator">Link Generator</nuxt-link>
-        <a class="menu-item">Power-tweeters</a>
-        <a class="menu-item">SKALD Marketers</a>
+        <a class="menu-item" :class="{'disabled': true}">Power-tweeters</a>
+        <a class="menu-item" :class="{'disabled': true}">SKALD Marketers</a>
       </div>
       <div class="last-fields">
         <input @change="quickFilterChanged" v-model="quickFilterValue" class="quick-filter-input" placeholder="Quick Filter" type="text">
@@ -100,6 +100,10 @@ export default {
       &:hover {
         color: #fd624f;
       }
+    }
+    .menu-item.disabled {
+      color: #757575;
+      cursor: default;
     }
     .menu-item-active,
     .nuxt-link-exact-active {

@@ -77,7 +77,7 @@
     </div>
     <hr class="divider" />
     <div class="side-menu-item" >
-      <b-button class="side-menu-button" style="line-height: 0;">Documentation</b-button>
+      <b-button class="side-menu-button" :class="{'disabled': true}" style="line-height: 0;">Documentation</b-button>
     </div>
   </div>
   <div class="filter-options" v-else>
