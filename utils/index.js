@@ -1,8 +1,8 @@
 var moment = require('moment');
 export function parseEventsData(events){
         events.map(event =>{
-            if(event.time){ // Hourly data
-              event.time = moment(event.time.toString(), 'YYYYMMDDhh').format('DD MMM YYYY, hh:mm')
+            if(event.time){ // Hourly date
+              event.time = moment(event.time.toString(), 'YYYYMMDDHH').format('DD MMM YYYY, hh:mm A')
             }
             if(event.date){ // Daily data
               event.date = moment(event.date.toString()).format('DD MMM YYYY')

@@ -2,7 +2,7 @@
   <hot-table v-if="tableData.length > 0" :settings="settings" :data="tableData" ref="hotTable">
       <hot-column  v-if="tableData[0].date !== undefined" title="Date" read-only="true" data="date" :settings="{type: 'date', dateFormat: 'DD MMM YYYY'}">
       </hot-column>
-      <hot-column v-if="tableData[0].time !== undefined" title="Date & Hour" read-only="true" data="time" :settings="{type: 'date', dateFormat: 'DD MMM YYYY, hh:mm'}">
+      <hot-column v-if="tableData[0].time !== undefined" title="Date & Hour" read-only="true" data="time" :settings="{type: 'date', dateFormat: 'DD MMM YYYY, hh:mm A'}">
       </hot-column>
       <hot-column title="Device" read-only="true" data="device_category">
       </hot-column>
