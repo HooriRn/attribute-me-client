@@ -136,20 +136,20 @@ export default {
         var totals = res.data.totals;
 
         events = parseEventsData(events);
-        if(events.length > 0){
-          totals = parseTotalsData(totals)
-          var oneEvent = JSON.parse(JSON.stringify(events[0]))
+        // if(events.length > 0){
+        //   totals = parseTotalsData(totals)
+        //   var oneEvent = JSON.parse(JSON.stringify(events[0]))
 
-          for(var key in oneEvent)
-            oneEvent[key] = null
-          if(oneEvent.hasOwnProperty('device_category'))
-            oneEvent.device_category = "Totals"
-          oneEvent.event_count = totals.total_count
-          oneEvent.event_value = totals.total_value
-          // oneEvent.total_users = totals.total_total_users
-          // oneEvent.event_count_per_user = totals.total_event_count_per_user
-          events.unshift(oneEvent)
-        }
+        //   for(var key in oneEvent)
+        //     oneEvent[key] = null
+        //   if(oneEvent.hasOwnProperty('device_category'))
+        //     oneEvent.device_category = "Totals"
+        //   oneEvent.event_count = totals.total_count
+        //   oneEvent.event_value = totals.total_value
+        //   // oneEvent.total_users = totals.total_total_users
+        //   // oneEvent.event_count_per_user = totals.total_event_count_per_user
+        //   events.unshift(oneEvent)
+        // }
         console.log(events)
         self.handsTableData = events;
         self.handsTableTotals = totals;

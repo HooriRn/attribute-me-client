@@ -1,5 +1,34 @@
 <template>
-  <hot-table v-if="tableData.length > 0" :settings="settings" :data="tableData" ref="hotTable"></hot-table>
+  <hot-table v-if="tableData.length > 0" :settings="settings" :data="tableData" ref="hotTable">
+      <hot-column  v-if="tableData[0].date !== undefined" title="Date" read-only="true" data="date" :settings="{type: 'date', dateFormat: 'DD MMM YYYY'}">
+      </hot-column>
+      <hot-column v-if="tableData[0].time !== undefined" title="Date & Hour" read-only="true" data="time" :settings="{type: 'date', dateFormat: 'DD MMM YYYY, hh:mm'}">
+      </hot-column>
+      <hot-column title="Device" read-only="true" data="device_category">
+      </hot-column>
+      <hot-column title="Host Name" read-only="true" data="host_name">
+      </hot-column>
+      <hot-column title="Page Path" read-only="true" data="page_path">
+      </hot-column>
+      <hot-column title="Page Referrer" read-only="true" data="page_referrer">
+      </hot-column>
+      <hot-column title="Campaign Medium" read-only="true" data="medium">
+      </hot-column>
+      <hot-column title="Campaign Name" read-only="true" data="campaign_name">
+      </hot-column>
+      <hot-column title="Campaign Source" read-only="true" data="source">
+      </hot-column>
+      <hot-column title="Event Name" read-only="true" data="event_name">
+      </hot-column>
+      <hot-column title="Event Category" read-only="true" data="event_category">
+      </hot-column>
+      <hot-column title="Event label" read-only="true" data="event_label">
+      </hot-column>
+      <hot-column title="Event Count" read-only="true" data="event_count">
+      </hot-column>
+      <hot-column title="Event Value" read-only="true" data="event_value">
+      </hot-column>
+  </hot-table>
 </template>
 
 <script>
@@ -60,7 +89,13 @@ export default {
         readOnly: true,
         dropdownMenu: true,
         filters: true,
-        columnSorting: true,
+        columnSorting: {
+          sortEmptyCells: false,
+          initialConfig: {
+            column: 0,
+            sortOrder: 'desc'
+          }
+        },
         cell: [
           {row: 0, col: 1, className: 'htRight'},
         ],
@@ -109,13 +144,14 @@ export default {
     link: [
     ]
   },
-
   mounted(){
     console.log("Table mounted")
     var self = this
     const hotTableEl = this.$refs['hotTable']
     if(!hotTableEl) return
     const hot = this.$refs['hotTable'].hotInstance
+
+    self.addTotalRow(hot)
 
     hot.addHook('afterColumnSort', (currentSortConfig, destinationSortConfigs)=>{
       self.addTotalRow(hot)
