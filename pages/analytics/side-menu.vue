@@ -193,6 +193,7 @@ export default {
             { name: "Withdrawal Preps" },
             { name: "Withdrawals" },
             { name: "Network Fees" },
+            { name: "Slips"}
           ],
         },
       ],
