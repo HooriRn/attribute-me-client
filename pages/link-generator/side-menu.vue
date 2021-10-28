@@ -1,6 +1,6 @@
 <template>
   <div class="side-menu">
-    <div class="present-filters-filed">
+    <div class="present-filters-filed" v-if="$device.isDesktop">
       <div class="field-title">Funnel categories</div>
       <div class="filters-scroll">
         <div
@@ -10,6 +10,30 @@
         >
           <div class="side-menu-button" :class="{'disabled': category.disabled}">{{ category.name }}</div>
         </div>
+      </div>
+    </div>
+    <div class="filter-options" v-else>
+      <div class="filter-option date-picker">
+        <div class="filter-name">Funnel categories:</div>
+        <b-dropdown id="preset-filters" variant="outline" text="Dropdown with header" class="drop-down-custom" no-caret>
+          <template #button-content>
+            {{"THORChain.org"}}
+            <div class="arrow-down"></div>
+          </template>
+          <div>
+            <b-dropdown-item-button
+              aria-describedby="funnel-categories-label"
+            >
+              THORChain.org
+            </b-dropdown-item-button>
+            <b-dropdown-item-button
+              aria-describedby="funnel-categories-label"
+              disabled
+            >
+              SKIP.exchange
+            </b-dropdown-item-button>
+          </div>
+        </b-dropdown>
       </div>
     </div>
   </div>

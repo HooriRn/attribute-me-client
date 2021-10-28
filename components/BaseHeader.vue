@@ -11,7 +11,7 @@
         <a class="menu-item" :class="{'disabled': true}">Power-tweeters</a>
         <a class="menu-item" :class="{'disabled': true}">SKALD Marketers</a>
       </div>
-      <div class="last-fields">
+      <div class="last-fields" v-if="$route.name == 'analytics'">
         <input @change="quickFilterChanged" v-model="quickFilterValue" class="quick-filter-input" placeholder="Quick Filter" type="text">
         <button @click="exportCSVClicked" class="export-btn">Export</button>
       </div>
@@ -146,6 +146,7 @@ export default {
     min-width: initial;
     height: 54px;
     margin-right: 10px;
+    justify-content: space-between;
   }
 
   .menu-item {

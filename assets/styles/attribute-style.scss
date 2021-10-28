@@ -37,7 +37,7 @@ body {
 .mobile-layout {
   .page {
     padding-top: 0.625rem;
-    padding-bottom: 0.9375rem;
+    padding-bottom: 0;
     height: initial;
 
     .page-layout {
@@ -57,8 +57,10 @@ body {
           position: fixed;
           z-index: 1000;
           background-color: #fff;
-          transform: scale(0.8);
+          transform: scale(0.75);
           transform-origin: left top;
+          max-height: 100%;
+          overflow: auto;
         }
 
         #preset-filters .active header {
@@ -106,6 +108,11 @@ body {
     font-size: 14px;
     line-height: 20px;
     color: #5F6368;
+
+    .dropdown-menu {
+      max-height: 90vh;
+      overflow: auto;
+    }
   }
 
   .filter-name {

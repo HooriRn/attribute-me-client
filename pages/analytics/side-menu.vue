@@ -5,13 +5,14 @@
       <div
         @click="toggleDatePicker"
         class="date-input"
+        id="date-input"
         :class="{ 'date-input-active': showDatePicker }"
       >
         <div class="date-input-text" style="font-size: 0.875rem; color: #202124;">{{ dateInputValue }}</div>
         <img src="~/assets/img/triangle.svg" />
       </div>
       <transition name="fade">
-        <div v-show="showDatePicker" class="date-picker-holder">
+        <div v-show="showDatePicker" id="date-picker-holder" class="date-picker-holder">
           <date-range-picker
             width="18.75rem"
             :from="$route.query.from"
@@ -86,6 +87,7 @@
       <div
         @click="toggleDatePicker"
         class="date-input"
+        id="date-input"
         :class="{ 'date-input-active': showDatePicker }"
       >
         <div class="date-input-text" style="font-size: 0.875rem; color: #202124;">
@@ -95,7 +97,7 @@
       </div>
     </div>
     <transition name="fade">
-      <div v-show="showDatePicker" class="date-picker-holder">
+      <div v-show="showDatePicker" id="date-picker-holder" class="date-picker-holder">
           <date-range-picker
             width="18.75rem"
             :from="$route.query.from"
@@ -208,7 +210,14 @@ export default {
       },
     };
   },
-
+  mounted() {
+    window.addEventListener('click', (e) => {
+      if (!document.getElementById('date-picker-holder').contains(e.target) && !document.getElementById('date-input').contains(e.target)){
+        this.showDatePicker = false;
+        console.log(this.showDatePicker)
+      }
+    });
+  },
   methods: {
     applyFilter(args) {
       console.log(args);

@@ -10,11 +10,11 @@
     </div>
     <div class="footer-item">
       <img class="footer-img" :src="getSVGIcon('power-tweeters', 'twitter', true)" alt="power tweeters">
-      <a class="footer-link" >Power-Tweeters</a>
+      <a class="footer-link" :class="{'disabled': true}">Power-Tweeters</a>
     </div>
     <div class="footer-item">
       <img class="footer-img" :src="getSVGIcon('skald-marketers', 'skalds', true)" alt="skalds marketers">
-      <a class="footer-link" >SKALDs</a>
+      <a class="footer-link" :class="{'disabled': true}">SKALDs</a>
     </div>
   </div>
 </template>
@@ -64,6 +64,10 @@ export default {
     font-size: 10px;
     color: #5f6368;
     text-decoration: none;
+
+    &.disabled {
+      color: #DFE0E1
+    }
   }
 
   a.nuxt-link-active {
