@@ -174,7 +174,7 @@ export default {
         {
           name: "THORChain.org",
           childs: [
-            { name: "All Events" },
+            { name: "All Data" },
             { name: "Website Loads" },
             { name: "Internal Links" },
             { name: "External Links" }
@@ -183,7 +183,7 @@ export default {
         {
           name: "SKIP.exchange",
           childs: [
-            { name: "All Events" },
+            { name: "All Data" },
             { name: "Interface Loads" },
             { name: "New Wallets" },
             { name: "Swap Preps" },
