@@ -4,13 +4,15 @@
       </hot-column>
       <hot-column v-if="tableData[0].time !== undefined" title="Date & Hour" read-only="true" data="time" :settings="{type: 'date', dateFormat: 'DD MMM YYYY, hh:mm A'}">
       </hot-column>
-      <hot-column title="Device" read-only="true" data="device_category">
+      <hot-column title="Event Value" read-only="true" data="event_value" :settings="{type: 'numeric', numericFormat: {pattern: '0,0.00'}}">
       </hot-column>
-      <hot-column title="Host Name" read-only="true" data="host_name">
+      <hot-column title="Event Count" read-only="true" data="event_count" :settings="{type: 'numeric', numericFormat: {pattern: '0,0'}}">
       </hot-column>
-      <hot-column title="Page Path" read-only="true" data="page_path">
+      <hot-column title="Event label" read-only="true" data="event_label">
       </hot-column>
-      <hot-column title="Page Referrer" read-only="true" data="page_referrer">
+      <hot-column title="Event Category" read-only="true" data="event_category">
+      </hot-column>
+      <hot-column title="Event Name" read-only="true" data="event_name">
       </hot-column>
       <hot-column title="Campaign Medium" read-only="true" data="medium">
       </hot-column>
@@ -18,15 +20,11 @@
       </hot-column>
       <hot-column title="Campaign Source" read-only="true" data="source">
       </hot-column>
-      <hot-column title="Event Name" read-only="true" data="event_name">
+      <hot-column title="Device" read-only="true" data="device_category">
       </hot-column>
-      <hot-column title="Event Category" read-only="true" data="event_category">
+      <hot-column title="Page Path" read-only="true" data="page_path">
       </hot-column>
-      <hot-column title="Event label" read-only="true" data="event_label">
-      </hot-column>
-      <hot-column title="Event Count" read-only="true" data="event_count" :settings="{type: 'numeric', numericFormat: {pattern: '0,0'}}">
-      </hot-column>
-      <hot-column title="Event Value" read-only="true" data="event_value" :settings="{type: 'numeric', numericFormat: {pattern: '0,0.00'}}">
+      <hot-column title="Page Referrer" read-only="true" data="page_referrer">
       </hot-column>
   </hot-table>
 </template>
@@ -66,10 +64,11 @@ export default {
       settings: {
         colHeaders: [
           'Date & Hour',
-          'Device Category',
+          'Event Value',
           'Host Name',
           'Page Path',
           'Page Referrer',
+          'Device Category',
           'Campaign Medium',
           'Campaign Name',
           'Campaign Source',
@@ -77,7 +76,6 @@ export default {
           'Event Category',
           'Event Label',
           'Event Count',
-          'Event Value'
         ],
         rowHeaders: true,
         licenseKey: 'non-commercial-and-evaluation',
