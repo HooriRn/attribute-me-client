@@ -96,9 +96,9 @@ export default {
         cell: [
           {row: 0, col: 1, className: 'htRight'},
         ],
-        mergeCells: [
-          { row: 0, col: 1, rowspan: 1, colspan: 10 },
-        ],
+        // mergeCells: [
+        //   { row: 0, col: 1, rowspan: 1, colspan: 10 },
+        // ],
         fixedColumnsLeft: 1,
         persistentState: true,
         cells: function(row, col, prop) {
@@ -174,8 +174,8 @@ export default {
   methods:{
     addTotalRow(hotTable){
       console.log('add total row')
-      let event_count = hotTable.getData().reduce((a, b) => a+parseFloat((b[11]??'0').toString().replace(/\,/g, '')), 0).toFixed(2)
-      let event_total_value = hotTable.getData().reduce((a, b) => a+parseFloat((b[12]??'0').toString().replace(/\,/g, '')), 0).toFixed(2)
+      let event_total_value = hotTable.getData().reduce((a, b) => a+parseFloat((b[1]??'0').toString().replace(/\,/g, '')), 0).toFixed(2)
+      let event_count = hotTable.getData().reduce((a, b) => a+parseFloat((b[2]??'0').toString().replace(/\,/g, '')), 0).toFixed(2)
       hotTable.alter('insert_row', 0 , 1)
       // var mergeCells = hotTable.getPlugin('mergeCells')
 
@@ -185,9 +185,9 @@ export default {
       // hotTable.render();
 
       // mergeCells.merge(0, 0, 0, 6)
-      hotTable.setDataAtCell(0, 1, 'Totals');
-      hotTable.setDataAtCell(0, 11, event_count);
-      hotTable.setDataAtCell(0, 12, event_total_value);
+      hotTable.setDataAtCell(0, 0, 'Totals');
+      hotTable.setDataAtCell(0, 1, event_total_value);
+      hotTable.setDataAtCell(0, 2, event_count);
       hotTable.updateSettings({
         cell: [
           {row: 0, col: 1, className: 'htRight'},
