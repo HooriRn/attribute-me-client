@@ -24,16 +24,15 @@
       </hot-column>
       <hot-column title="Event label" read-only="true" data="event_label">
       </hot-column>
-      <hot-column title="Event Count" read-only="true" data="event_count">
+      <hot-column title="Event Count" read-only="true" data="event_count" :settings="{type: 'numeric', numericFormat: {pattern: '0,0'}}">
       </hot-column>
-      <hot-column title="Event Value" read-only="true" data="event_value">
+      <hot-column title="Event Value" read-only="true" data="event_value" :settings="{type: 'numeric', numericFormat: {pattern: '0,0.00'}}">
       </hot-column>
   </hot-table>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import { HyperFormula } from 'hyperformula';
 
 export default {
   computed: {
@@ -102,7 +101,6 @@ export default {
         mergeCells: [
           { row: 0, col: 1, rowspan: 1, colspan: 10 },
         ],
-        fixedRowsTop: 1,
         fixedColumnsLeft: 1,
         persistentState: true,
         cells: function(row, col, prop) {
@@ -112,7 +110,7 @@ export default {
             cellProperties.className = 'htRight';
           }
 
-          if (col == 0 || row == 0) {
+          if (col == 0) {
             cellProperties.renderer = function (instance, td, row, col, prop, value, cellProperties) {
               Handsontable.renderers.TextRenderer.apply(this, arguments);
               td.style.color = '#222222';
@@ -120,11 +118,11 @@ export default {
             }
           }
 
-            return cellProperties
+          return cellProperties
         },
         afterGetColHeader: function(col, th) {
           th.className = 'htLeft'
-          if (col >= 12) {
+          if (col >= 11) {
             th.className = 'htRight';
           }
         }
@@ -177,9 +175,9 @@ export default {
   },
   methods:{
     addTotalRow(hotTable){
+      console.log('add total row')
       let event_count = hotTable.getData().reduce((a, b) => a+parseFloat((b[11]??'0').toString().replace(/\,/g, '')), 0).toFixed(2)
       let event_total_value = hotTable.getData().reduce((a, b) => a+parseFloat((b[12]??'0').toString().replace(/\,/g, '')), 0).toFixed(2)
-      console.log('add total row')
       hotTable.alter('insert_row', 0 , 1)
       // var mergeCells = hotTable.getPlugin('mergeCells')
 
@@ -189,17 +187,16 @@ export default {
       // hotTable.render();
 
       // mergeCells.merge(0, 0, 0, 6)
-
+      hotTable.setDataAtCell(0, 1, 'Totals');
+      hotTable.setDataAtCell(0, 11, event_count);
+      hotTable.setDataAtCell(0, 12, event_total_value);
       hotTable.updateSettings({
         cell: [
           {row: 0, col: 1, className: 'htRight'},
         ],
         fixedRowsTop: 1
-      })
-      console.log(hotTable.countRows(), hotTable.getData())
-      hotTable.setDataAtCell(0, 1, 'Totals');
-      hotTable.setDataAtCell(0, 11, event_count);
-      hotTable.setDataAtCell(0, 12, event_total_value);
+      });
+
       // hotTable.setDataAtCell(0, 9, this.totals.total_total_users);
       // hotTable.setDataAtCell(0, 10, this.totals.total_event_count_per_user);
     },

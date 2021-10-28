@@ -71,5 +71,5 @@ export function getDateInputValue(startDate, endDate){
 
 function numberWithCommas(x) {
     // to fixed 2 decimals first
-    return parseFloat(x).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return parseFloat(x);
 }
