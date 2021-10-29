@@ -143,10 +143,7 @@ export default {
 
     if (this.tableSetting &&
     (
-      this.tableSetting['present_filter'] == 'Website Loads' ||
-      this.tableSetting['present_filter'] == 'Internal Links' ||
-      this.tableSetting['present_filter'] == 'External Links' ||
-      this.tableSetting['present_filter'] == 'Interface Loads' ||
+      this.tableSetting['filter_website'] == 'THORChain.org' ||
       this.tableSetting['present_filter'] == 'New Wallets'
     )) {
       hot.updateSettings({
