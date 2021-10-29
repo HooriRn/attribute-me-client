@@ -4,11 +4,11 @@
       </hot-column>
       <hot-column v-if="tableData[0].time !== undefined" title="Date & Hour" read-only="true" data="time" :settings="{type: 'date', dateFormat: 'DD MMM YYYY, hh:mm A'}">
       </hot-column>
-      <hot-column title="Event Value" read-only="true" data="event_value" :settings="{type: 'numeric', numericFormat: {pattern: '0,0.00'}}">
+      <hot-column title="Event Value" read-only="true" data="event_value" :settings="{type: 'numeric', numericFormat: {pattern: '0,0'}}">
       </hot-column>
       <hot-column title="Event Count" read-only="true" data="event_count" :settings="{type: 'numeric', numericFormat: {pattern: '0,0'}}">
       </hot-column>
-      <hot-column title="Event label" read-only="true" data="event_label">
+      <hot-column title="Event Label" read-only="true" data="event_label">
       </hot-column>
       <hot-column title="Event Category" read-only="true" data="event_category">
       </hot-column>

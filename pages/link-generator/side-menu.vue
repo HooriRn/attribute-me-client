@@ -5,10 +5,10 @@
       <div class="filters-scroll">
         <div
           class="side-menu-item"
-          v-for="category of categories"
+          v-for="(category, index) of categories"
           :key="categories.indexOf(category)"
         >
-          <div class="side-menu-button" :class="{'disabled': category.disabled}">{{ category.name }}</div>
+          <div class="side-menu-button" :class="{'disabled': category.disabled, 'side-menu-button-active': active === index}">{{ category.name }}</div>
         </div>
       </div>
     </div>
@@ -53,6 +53,7 @@ export default {
           disabled: true
         },
       ],
+      active: 0
     }
   }
 }
