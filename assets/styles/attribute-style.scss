@@ -171,6 +171,10 @@ body {
 .custom-control-input:focus:not(:checked) ~ .custom-control-label::before {
   border-color: rgba(253, 98, 79, 0.25);
 }
+
+.handsontable td.htInvalid.notInvalid {
+  background-color: rgb(240, 240, 240) !important;
+}
 /* ----------------- Until HERE ----------------- */
 
 @import 'side-menu'

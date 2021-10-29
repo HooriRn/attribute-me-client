@@ -1,12 +1,12 @@
 <template>
   <hot-table v-if="tableData.length > 0" :settings="settings" :data="tableData" ref="hotTable">
-      <hot-column  v-if="tableData[0].date !== undefined" title="Date" read-only="true" data="date" :settings="{type: 'date', dateFormat: 'DD MMM YYYY'}">
+      <hot-column  v-if="tableData[0].date !== undefined" title="Date" read-only="true" data="date" :settings="{className: 'notInvalid', type: 'date', dateFormat: 'DD MMM YYYY'}">
       </hot-column>
-      <hot-column v-if="tableData[0].time !== undefined" title="Date & Hour" read-only="true" data="time" :settings="{type: 'date', dateFormat: 'DD MMM YYYY, hh:mm A'}">
+      <hot-column v-if="tableData[0].time !== undefined" title="Date & Hour" read-only="true" data="time" :settings="{className: 'notInvalid', type: 'date', dateFormat: 'DD MMM YYYY, hh:mm A'}">
       </hot-column>
-      <hot-column title="Event Value" read-only="true" data="event_value" :settings="{type: 'numeric', numericFormat: {pattern: '0,0'}}">
+      <hot-column title="Event Value" read-only="true" data="event_value" :settings="{className: 'htLeft', type: 'numeric', numericFormat: {pattern: '0,0'}}">
       </hot-column>
-      <hot-column title="Event Count" read-only="true" data="event_count" :settings="{type: 'numeric', numericFormat: {pattern: '0,0'}}">
+      <hot-column title="Event Count" read-only="true" data="event_count" :settings="{className: 'htLeft', type: 'numeric', numericFormat: {pattern: '0,0'}}">
       </hot-column>
       <hot-column title="Event Label" read-only="true" data="event_label">
       </hot-column>
@@ -93,9 +93,6 @@ export default {
             sortOrder: 'desc'
           }
         },
-        cell: [
-          {row: 0, col: 1, className: 'htRight'},
-        ],
         // mergeCells: [
         //   { row: 0, col: 1, rowspan: 1, colspan: 10 },
         // ],
@@ -103,10 +100,6 @@ export default {
         persistentState: true,
         cells: function(row, col, prop) {
           const cellProperties = {};
-
-          if (col >= 11) {
-            cellProperties.className = 'htRight';
-          }
 
           if (col == 0) {
             cellProperties.renderer = function (instance, td, row, col, prop, value, cellProperties) {
@@ -120,9 +113,6 @@ export default {
         },
         afterGetColHeader: function(col, th) {
           th.className = 'htLeft'
-          if (col >= 11) {
-            th.className = 'htRight';
-          }
         }
         // renderer(instance, td, row, col, prop, value, cellProperties) {
         //     const escaped = Handsontable.helper.stringify(value);
@@ -177,26 +167,14 @@ export default {
       let event_total_value = hotTable.getData().reduce((a, b) => a+parseFloat((b[1]??'0').toString().replace(/\,/g, '')), 0).toFixed(2)
       let event_count = hotTable.getData().reduce((a, b) => a+parseFloat((b[2]??'0').toString().replace(/\,/g, '')), 0).toFixed(2)
       hotTable.alter('insert_row', 0 , 1)
-      // var mergeCells = hotTable.getPlugin('mergeCells')
 
-      // hotTable.updateSettings({
-      //   fixedRowsTop: 10
-      // })
-      // hotTable.render();
-
-      // mergeCells.merge(0, 0, 0, 6)
       hotTable.setDataAtCell(0, 0, 'Totals');
       hotTable.setDataAtCell(0, 1, event_total_value);
       hotTable.setDataAtCell(0, 2, event_count);
       hotTable.updateSettings({
-        cell: [
-          {row: 0, col: 1, className: 'htRight'},
-        ],
         fixedRowsTop: 1
       });
 
-      // hotTable.setDataAtCell(0, 9, this.totals.total_total_users);
-      // hotTable.setDataAtCell(0, 10, this.totals.total_event_count_per_user);
     },
     removeTotalRow(hotTable){
       console.log('remove total row')
