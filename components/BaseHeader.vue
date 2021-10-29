@@ -174,7 +174,7 @@ export default {
 
     .export-btn {
       height: 34px;
-      width: 60px;
+      width: initial;
       font-size: 14px;
     }
   }
