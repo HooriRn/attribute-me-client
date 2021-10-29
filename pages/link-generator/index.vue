@@ -63,6 +63,7 @@ export default {
         width: '100%',
         stretchH: 'all',
         rowHeaders: true,
+        autoColumnSize: true,
         afterGetColHeader: function(col, th) {
           th.className = ['htLeft']
         },

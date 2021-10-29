@@ -34,7 +34,8 @@ import { mapGetters } from 'vuex'
 
 export default {
   computed: {
-  ...mapGetters(['exportCSV'])
+    ...mapGetters(['exportCSV']),
+    ...mapGetters(["tableSetting"])
   },
   props: {
     tableData: {
@@ -93,6 +94,9 @@ export default {
             sortOrder: 'desc'
           }
         },
+        autoColumnSize: {
+          samplingRatio: 200,
+        },
         // mergeCells: [
         //   { row: 0, col: 1, rowspan: 1, colspan: 10 },
         // ],
@@ -136,6 +140,21 @@ export default {
     const hotTableEl = this.$refs['hotTable']
     if(!hotTableEl) return
     const hot = this.$refs['hotTable'].hotInstance
+
+    if (this.tableSetting &&
+    (
+      this.tableSetting['present_filter'] == 'Website Loads' ||
+      this.tableSetting['present_filter'] == 'Internal Links' ||
+      this.tableSetting['present_filter'] == 'External Links' ||
+      this.tableSetting['present_filter'] == 'Interface Loads' ||
+      this.tableSetting['present_filter'] == 'New Wallets'
+    )) {
+      hot.updateSettings({
+        hiddenColumns: {
+          columns: [1],
+        }
+      })
+    }
 
     self.addTotalRow(hot)
 
