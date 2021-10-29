@@ -236,8 +236,8 @@ export default {
     },
 
     activate(filterName) {
-      if (this.activeItem === filterName) this.activeItem = null;
-      else this.activeItem = filterName;
+      console.log('activate', filterName  )
+      this.activeItem = filterName;
       if (filterName === "All Data") {
         this.activeBtn = null;
         for (var key in this.$refs) {
@@ -255,16 +255,10 @@ export default {
     filterBtnClicked(parentBtnName, childBtnName) {
       var newBtn = parentBtnName + "&" + childBtnName;
       var tableSetting = this.tableSetting;
-      if (this.activeBtn === newBtn) {
-        this.activeBtn = null;
-        // tableSetting['filter_website'] = ''
-        // tableSetting['present_filter'] = ''
-      } else {
         this.activeBtn = newBtn;
         tableSetting["filter_website"] = parentBtnName;
         tableSetting["present_filter"] = childBtnName;
         this.$store.commit("tableSetting", tableSetting);
-      }
     },
     toggleDatePicker() {
       console.log("toggle");
@@ -289,7 +283,11 @@ export default {
       if(tableSetting.hasOwnProperty("filter_website") &&
         tableSetting.hasOwnProperty("present_filter") ){
           console.log(tableSetting)
-          this.activeBtn = tableSetting.filter_website + "&" + tableSetting.present_filter
+          if(tableSetting.filter_website === ""){
+            this.activeItem = "All Data"  
+          } else {
+            this.activeBtn = tableSetting.filter_website + "&" + tableSetting.present_filter
+          }
 
           for (var key in this.$refs) {
             var ref = this.$refs[key][0];
