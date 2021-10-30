@@ -94,9 +94,7 @@ export default {
             sortOrder: 'desc'
           }
         },
-        autoColumnSize: {
-          samplingRatio: 200,
-        },
+        autoColumnSize: true,
         // mergeCells: [
         //   { row: 0, col: 1, rowspan: 1, colspan: 10 },
         // ],
@@ -144,7 +142,8 @@ export default {
     if (this.tableSetting &&
     (
       this.tableSetting['filter_website'] == 'THORChain.org' ||
-      this.tableSetting['present_filter'] == 'New Wallets'
+      this.tableSetting['present_filter'] == 'New Wallets' ||
+      this.tableSetting['present_filter'] == 'Interface Loads'
     )) {
       hot.updateSettings({
         hiddenColumns: {
