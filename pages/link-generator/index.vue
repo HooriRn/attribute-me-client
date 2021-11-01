@@ -34,7 +34,7 @@
 
 <script>
 import SideMenu from './side-menu.vue';
-import linkGenerateData from './link-generator.json'
+import linkGenerateData from './link-generator.js'
 export default {
   components: { SideMenu },
   data() {
@@ -73,6 +73,9 @@ export default {
         rowHeights: 43,
       }
     };
+  },
+  mounted() {
+    console.log(this.linkGenerateData);
   },
   methods: {
     makeLink(instance, td, row, col, prop, value, cellProperties) {

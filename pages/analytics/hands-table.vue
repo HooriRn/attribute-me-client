@@ -35,21 +35,6 @@ export default {
   data: function() {
     return {
       settings: {
-        colHeaders: [
-          'Date & Hour',
-          'Device Category',
-          'Host Name',
-          'Page Path',
-          'Page Referrer',
-          'Campaign Medium',
-          'Campaign Name',
-          'Campaign Source',
-          'Event Name',
-          'Event Category',
-          'Event Label',
-          'Event Count',
-          'Event Value'
-        ],
         rowHeaders: true,
         licenseKey: 'non-commercial-and-evaluation',
         height: this.$device.isDesktop? 'calc( 100vh - 5.5625rem )' : '100%',

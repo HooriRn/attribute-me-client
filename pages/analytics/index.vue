@@ -32,10 +32,8 @@
 <script>
 import {
   parseEventsData,
-  isDifferentSetting,
   getServerCustomDateString,
   getDateInputValue,
-  parseTotalsData,
 } from "../../utils";
 import { mapGetters } from "vuex";
 import SideMenu from "./side-menu.vue";
