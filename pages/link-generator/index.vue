@@ -34,8 +34,9 @@
 
 <script>
 import SideMenu from './side-menu.vue';
+import { HotTable, HotColumn } from '@handsontable/vue';
 export default {
-  components: { SideMenu },
+  components: { SideMenu, HotTable, HotColumn },
   data() {
     return {
       channel_source: [
