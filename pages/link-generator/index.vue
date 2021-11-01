@@ -34,7 +34,6 @@
 
 <script>
 import SideMenu from './side-menu.vue';
-import linkGenerateData from './link-generator.js'
 export default {
   components: { SideMenu },
   data() {
@@ -56,7 +55,32 @@ export default {
         "Vimeo",
         "YouTube",
       ],
-      linkGenerateData: linkGenerateData,
+      linkGenerateData: [
+        {
+          "device": "Mobile",
+          "funnel": "Main Website",
+          "category": "Homepage",
+          "topic": "Root",
+          "preview": "https://m.thorchain.org",
+          "channel": "Twitter",
+          "campaign": "",
+          "handle": "",
+          "url": "",
+          "note": ""
+        },
+        {
+          "device": "Mobile",
+          "funnel": "Main Website",
+          "category": "Getting Started",
+          "topic": "Technology",
+          "preview": "https://m.thorchain.org/technology",
+          "channel": "Twitter",
+          "campaign": "",
+          "handle": "",
+          "url": "",
+          "note": ""
+        },
+      ],
       tableSettings: {
         height: this.$device.isDesktop? 'calc( 100vh - 5.5625rem )' : '100%',
         licenseKey: 'non-commercial-and-evaluation',
