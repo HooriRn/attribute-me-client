@@ -224,7 +224,7 @@ export default {
       console.log(args);
       var from = new Date(args.from);
       var to = new Date(args.to);
-      var startDate = getServerCustomDateString(from, "01");
+      var startDate = getServerCustomDateString(from, "00");
       var endDate = getServerCustomDateString(to, "23");
       this.dateInputValue = getDateInputValue(startDate, endDate);
 

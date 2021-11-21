@@ -70,7 +70,7 @@ export default {
       var today = new Date();
       // var lastWeek = new Date();
       // lastWeek.setDate(today.getDate() - 7);
-      var startDate = getServerCustomDateString(today, "01");
+      var startDate = getServerCustomDateString(today, "00");
       var endDate = getServerCustomDateString(today, "23");
       this.currentTableSetting.startDate = startDate
       this.currentTableSetting.endDate = endDate
