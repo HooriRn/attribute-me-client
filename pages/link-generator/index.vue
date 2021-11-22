@@ -15,7 +15,7 @@
 import SideMenu from './side-menu.vue';
 
 export default {
-  components: { SideMenu, HotTable, HotColumn },
+  components: { SideMenu },
   data() {
     return {
       channel_source: [
