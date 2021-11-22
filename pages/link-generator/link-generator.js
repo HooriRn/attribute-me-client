@@ -1,4 +1,4 @@
-[
+export default [
   {
     "device": "Mobile",
     "funnel": "Main Website",

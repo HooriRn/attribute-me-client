@@ -5,7 +5,7 @@
         <side-menu />
       </div>
       <div class="hands-table-column">
-        <hot-table class="hands-table" :data="linkGenerateData" :settings="tableSettings">
+        <hot-table :settings="tableSettings">
           <hot-column title="Device" read-only="true" data="device">
           </hot-column>
           <hot-column title="Funnel Mode" read-only="true" data="funnel">
@@ -34,7 +34,8 @@
 
 <script>
 import SideMenu from './side-menu.vue';
-import linkGenerateData from './link-generator.json'
+import data from './link-generator';
+
 export default {
   components: { SideMenu },
   data() {
@@ -56,8 +57,8 @@ export default {
         "Vimeo",
         "YouTube",
       ],
-      linkGenerateData: linkGenerateData,
       tableSettings: {
+        data,
         height: this.$device.isDesktop? 'calc( 100vh - 5.5625rem )' : '100%',
         licenseKey: 'non-commercial-and-evaluation',
         width: '100%',
@@ -74,6 +75,9 @@ export default {
         rowHeights: 43,
       }
     };
+  },
+  mounted() {
+    console.log(this.linkGenerateData);
   },
   methods: {
     makeLink(instance, td, row, col, prop, value, cellProperties) {
