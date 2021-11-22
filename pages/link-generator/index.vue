@@ -5,7 +5,28 @@
         <side-menu />
       </div>
       <div class="hands-table-column">
-        <hot-table :settings="tableSettings"></hot-table>
+        <hot-table :settings="tableSettings">
+          <hot-column title="Device" read-only="true" data="device">
+          </hot-column>
+          <hot-column title="Funnel Mode" read-only="true" data="funnel">
+          </hot-column>
+          <hot-column title="Category" read-only="true" data="category">
+          </hot-column>
+          <hot-column title="Topic" read-only="true" data="topic">
+          </hot-column>
+          <hot-column title="Landing Page Preview" read-only="true" data="preview" :renderer="showLink">
+          </hot-column>
+          <hot-column title="Your Distribution Channel" data="channel" type="dropdown" :source="channel_source">
+          </hot-column>
+          <hot-column title="Your Campaign Name" data="campaign">
+          </hot-column>
+          <hot-column title="Your THOR.RUNE Address" data="handle">
+          </hot-column>
+          <hot-column title="Your Campaign URL" read-only="true" data="url" :renderer="makeLink">
+          </hot-column>
+          <hot-column title="Important Notes" read-only="true" data="note">
+          </hot-column>
+        </hot-table>
       </div>
     </div>
   </div>
