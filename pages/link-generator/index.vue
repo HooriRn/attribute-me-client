@@ -5,7 +5,7 @@
         <side-menu />
       </div>
       <div class="hands-table-column">
-        <hot-table :settings="hotSettings"></hot-table>
+        <hot-table :settings="tableSettings"></hot-table>
       </div>
     </div>
   </div>
@@ -13,6 +13,7 @@
 
 <script>
 import SideMenu from './side-menu.vue';
+import data from './link-generator';
 
 export default {
   components: { SideMenu },
@@ -35,14 +36,8 @@ export default {
         "Vimeo",
         "YouTube",
       ],
-      linkGenerateData: linkGenerateData,
-      hotSettings: {
-        data: [['data1', 'data2'], ['data1', 'data2']],
-        colHeaders: true,
-        height: 'auto',
-        licenseKey: 'non-commercial-and-evaluation'
-      },
       tableSettings: {
+        data,
         height: this.$device.isDesktop? 'calc( 100vh - 5.5625rem )' : '100%',
         licenseKey: 'non-commercial-and-evaluation',
         width: '100%',
