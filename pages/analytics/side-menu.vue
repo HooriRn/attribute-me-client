@@ -43,7 +43,7 @@
             class="side-menu-item"
             :class="{
               'side-menu-button-active': activeItem == filter.name,
-              'side-menu-single-active': activeItem == filter.name && !filter.childs
+              'side-menu-single-active': (activeItem == filter.name && !filter.childs) || (filter.name == 'All Data' && activeBtn == null)
             }"
             v-b-toggle="filter.name"
           >
@@ -236,7 +236,7 @@ export default {
     },
 
     activate(filterName) {
-      console.log('activate', filterName  )
+      console.log('activate', filterName)
       this.activeItem = filterName;
       if (filterName === "All Data") {
         this.activeBtn = null;
@@ -278,13 +278,11 @@ export default {
     tableSetting: function (tableSetting){
       if(tableSetting.hasOwnProperty('daily')){
         this.hourlyChecked = !tableSetting.daily
-        console.log(this.hourlyChecked)
       }
       if(tableSetting.hasOwnProperty("filter_website") &&
         tableSetting.hasOwnProperty("present_filter") ){
-          console.log(tableSetting)
           if(tableSetting.filter_website === ""){
-            this.activeItem = "All Data"  
+            this.activeItem = "All Data"
           } else {
             this.activeBtn = tableSetting.filter_website + "&" + tableSetting.present_filter
           }
@@ -296,6 +294,8 @@ export default {
               ref.toggle()
             }
           }
+      } else {
+        this.activeItem = "All Data"
       }
       console.log("SideMenu: new setting", tableSetting)
     }
