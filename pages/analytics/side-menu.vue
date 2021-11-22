@@ -5,13 +5,14 @@
       <div
         @click="toggleDatePicker"
         class="date-input"
+        id="date-input"
         :class="{ 'date-input-active': showDatePicker }"
       >
         <div class="date-input-text" style="font-size: 0.875rem; color: #202124;">{{ dateInputValue }}</div>
         <img src="~/assets/img/triangle.svg" />
       </div>
       <transition name="fade">
-        <div v-show="showDatePicker" class="date-picker-holder">
+        <div v-show="showDatePicker" id="date-picker-holder" class="date-picker-holder">
           <date-range-picker
             width="18.75rem"
             :from="$route.query.from"
@@ -77,7 +78,7 @@
     </div>
     <hr class="divider" />
     <div class="side-menu-item" >
-      <b-button class="side-menu-button" style="line-height: 0;">Documentation</b-button>
+      <b-button class="side-menu-button" :class="{'disabled': true}" style="line-height: 0;">Documentation</b-button>
     </div>
   </div>
   <div class="filter-options" v-else>
@@ -86,6 +87,7 @@
       <div
         @click="toggleDatePicker"
         class="date-input"
+        id="date-input"
         :class="{ 'date-input-active': showDatePicker }"
       >
         <div class="date-input-text" style="font-size: 0.875rem; color: #202124;">
@@ -95,7 +97,7 @@
       </div>
     </div>
     <transition name="fade">
-      <div v-show="showDatePicker" class="date-picker-holder">
+      <div v-show="showDatePicker" id="date-picker-holder" class="date-picker-holder">
           <date-range-picker
             width="18.75rem"
             :from="$route.query.from"
@@ -172,7 +174,7 @@ export default {
         {
           name: "THORChain.org",
           childs: [
-            { name: "All Events" },
+            { name: "All Data" },
             { name: "Website Loads" },
             { name: "Internal Links" },
             { name: "External Links" }
@@ -181,7 +183,7 @@ export default {
         {
           name: "SKIP.exchange",
           childs: [
-            { name: "All Events" },
+            { name: "All Data" },
             { name: "Interface Loads" },
             { name: "New Wallets" },
             { name: "Swap Preps" },
@@ -191,6 +193,7 @@ export default {
             { name: "Withdrawal Preps" },
             { name: "Withdrawals" },
             { name: "Network Fees" },
+            { name: "Slips"}
           ],
         },
       ],
@@ -208,7 +211,14 @@ export default {
       },
     };
   },
-
+  mounted() {
+    window.addEventListener('click', (e) => {
+      if (!document.getElementById('date-picker-holder').contains(e.target) && !document.getElementById('date-input').contains(e.target)){
+        this.showDatePicker = false;
+        console.log(this.showDatePicker)
+      }
+    });
+  },
   methods: {
     applyFilter(args) {
       console.log(args);
@@ -226,8 +236,8 @@ export default {
     },
 
     activate(filterName) {
-      if (this.activeItem === filterName) this.activeItem = null;
-      else this.activeItem = filterName;
+      console.log('activate', filterName  )
+      this.activeItem = filterName;
       if (filterName === "All Data") {
         this.activeBtn = null;
         for (var key in this.$refs) {
@@ -245,16 +255,10 @@ export default {
     filterBtnClicked(parentBtnName, childBtnName) {
       var newBtn = parentBtnName + "&" + childBtnName;
       var tableSetting = this.tableSetting;
-      if (this.activeBtn === newBtn) {
-        this.activeBtn = null;
-        // tableSetting['filter_website'] = ''
-        // tableSetting['present_filter'] = ''
-      } else {
         this.activeBtn = newBtn;
         tableSetting["filter_website"] = parentBtnName;
         tableSetting["present_filter"] = childBtnName;
         this.$store.commit("tableSetting", tableSetting);
-      }
     },
     toggleDatePicker() {
       console.log("toggle");
@@ -279,7 +283,11 @@ export default {
       if(tableSetting.hasOwnProperty("filter_website") &&
         tableSetting.hasOwnProperty("present_filter") ){
           console.log(tableSetting)
-          this.activeBtn = tableSetting.filter_website + "&" + tableSetting.present_filter
+          if(tableSetting.filter_website === ""){
+            this.activeItem = "All Data"  
+          } else {
+            this.activeBtn = tableSetting.filter_website + "&" + tableSetting.present_filter
+          }
 
           for (var key in this.$refs) {
             var ref = this.$refs[key][0];

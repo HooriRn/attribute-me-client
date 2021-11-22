@@ -1,7 +1,7 @@
 <template>
   <div class="page" :class="{ 'mobile-layout': !$device.isDesktop }">
     <div class="page-layout">
-      <div class="side-menu-column" v-if="$device.isDesktop">
+      <div class="side-menu-column">
         <side-menu />
       </div>
       <div class="hands-table-column">
@@ -64,6 +64,7 @@ export default {
         width: '100%',
         stretchH: 'all',
         rowHeaders: true,
+        autoColumnSize: true,
         afterGetColHeader: function(col, th) {
           th.className = ['htLeft']
         },

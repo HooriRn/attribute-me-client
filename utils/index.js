@@ -1,25 +1,11 @@
+var moment = require('moment');
 export function parseEventsData(events){
         events.map(event =>{
-            if(event.time){ // Hourly data
-                event.time += '' // convert into string
-                var dateStr = event.time.substr(0,4)
-                + "-" + event.time.substr(4,2)
-                + "-" + event.time.substr(6,2)
-                var date = new Date(dateStr)
-                var localeDateString = date.toLocaleDateString("en-US",{ year: 'numeric', month: 'short', day: 'numeric' })
-
-                event.time = localeDateString
-                + " " + event.time.substr(8,2)+":00"
+            if(event.time){ // Hourly date
+              event.time = moment(event.time.toString(), 'YYYYMMDDHH').format('DD MMM YYYY, hh:mm A')
             }
             if(event.date){ // Daily data
-                event.date += '' // convert into string
-                var dateStr =
-                event.date.substr(0,4) + "-" +
-                event.date.substr(4,2) + "-" +
-                event.date.substr(6,2) + " "
-                var date = new Date(dateStr)
-                var localeDateString = date.toLocaleDateString("en-US",{ year: 'numeric', month: 'short', day: 'numeric' })
-                event.date = localeDateString
+              event.date = moment(event.date.toString()).format('DD MMM YYYY')
             }
             if(event.event_count_per_user){
                 event.event_count_per_user = event.event_count_per_user.toFixed(2)
@@ -85,5 +71,5 @@ export function getDateInputValue(startDate, endDate){
 
 function numberWithCommas(x) {
     // to fixed 2 decimals first
-    return parseFloat(x).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return parseFloat(x);
 }

@@ -11,7 +11,7 @@
         <div v-if="loading && !loadErr" class="loading-box">
           <div class="loading-text">
             <div>{{ loadingProgress }}%</div>
-            <div>Loading data...</div>
+            <div>{{whileLoadingMsg}}</div>
           </div>
           <img src="~/assets/img/loading.gif" alt="loading" />
         </div>
@@ -56,6 +56,7 @@ export default {
       loading: true,
       loadErr: false,
       loadingProgress: 0,
+      whileLoadingMsg: 'Loading data...'
     };
   },
   mounted() {
@@ -94,6 +95,7 @@ export default {
   methods: {
     async getEvents() {
       console.log("get events called");
+      this.whileLoadingMsg = 'Loading data...'
 
       this.loading = true;
       this.loadingProgress = 0;
@@ -133,22 +135,9 @@ export default {
         var events = res.data.events;
         var totals = res.data.totals;
 
+        this.whileLoadingMsg = 'Processing ...'
+        this.loadingProgress = 100
         events = parseEventsData(events);
-        if(events.length > 0){
-          totals = parseTotalsData(totals)
-          var oneEvent = JSON.parse(JSON.stringify(events[0]))
-
-          for(var key in oneEvent)
-            oneEvent[key] = null
-          if(oneEvent.hasOwnProperty('device_category'))
-            oneEvent.device_category = "Totals"
-          oneEvent.event_count = totals.total_count
-          oneEvent.event_value = totals.total_value
-          // oneEvent.total_users = totals.total_total_users
-          // oneEvent.event_count_per_user = totals.total_event_count_per_user
-          events.unshift(oneEvent)
-        }
-        console.log(events)
         self.handsTableData = events;
         self.handsTableTotals = totals;
         self.loading = false;

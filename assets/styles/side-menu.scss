@@ -61,6 +61,15 @@
     &:active {
       box-shadow: none !important;
     }
+
+    &.disabled {
+      color: #757575;
+      cursor: default;
+
+      &:hover {
+        background-color: initial;
+      }
+    }
   }
   .childs-list {
     margin: 0 !important;
