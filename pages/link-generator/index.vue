@@ -5,28 +5,7 @@
         <side-menu />
       </div>
       <div class="hands-table-column">
-        <hot-table class="hands-table" :data="linkGenerateData" :settings="tableSettings">
-          <hot-column title="Device" read-only="true" data="device">
-          </hot-column>
-          <hot-column title="Funnel Mode" read-only="true" data="funnel">
-          </hot-column>
-          <hot-column title="Category" read-only="true" data="category">
-          </hot-column>
-          <hot-column title="Topic" read-only="true" data="topic">
-          </hot-column>
-          <hot-column title="Landing Page Preview" read-only="true" data="preview" :renderer="showLink">
-          </hot-column>
-          <hot-column title="Your Distribution Channel" data="channel" type="dropdown" :source="channel_source">
-          </hot-column>
-          <hot-column title="Your Campaign Name" data="campaign">
-          </hot-column>
-          <hot-column title="Your THOR.RUNE Address" data="handle">
-          </hot-column>
-          <hot-column title="Your Campaign URL" read-only="true" data="url" :renderer="makeLink">
-          </hot-column>
-          <hot-column title="Important Notes" read-only="true" data="note">
-          </hot-column>
-        </hot-table>
+        <hot-table :settings="hotSettings"></hot-table>
       </div>
     </div>
   </div>
@@ -34,7 +13,7 @@
 
 <script>
 import SideMenu from './side-menu.vue';
-import { HotTable, HotColumn } from '@handsontable/vue';
+
 export default {
   components: { SideMenu, HotTable, HotColumn },
   data() {
@@ -56,32 +35,13 @@ export default {
         "Vimeo",
         "YouTube",
       ],
-      linkGenerateData: [
-        {
-          "device": "Mobile",
-          "funnel": "Main Website",
-          "category": "Homepage",
-          "topic": "Root",
-          "preview": "https://m.thorchain.org",
-          "channel": "Twitter",
-          "campaign": "",
-          "handle": "",
-          "url": "",
-          "note": ""
-        },
-        {
-          "device": "Mobile",
-          "funnel": "Main Website",
-          "category": "Getting Started",
-          "topic": "Technology",
-          "preview": "https://m.thorchain.org/technology",
-          "channel": "Twitter",
-          "campaign": "",
-          "handle": "",
-          "url": "",
-          "note": ""
-        },
-      ],
+      linkGenerateData: linkGenerateData,
+      hotSettings: {
+        data: [['data1', 'data2'], ['data1', 'data2']],
+        colHeaders: true,
+        height: 'auto',
+        licenseKey: 'non-commercial-and-evaluation'
+      },
       tableSettings: {
         height: this.$device.isDesktop? 'calc( 100vh - 5.5625rem )' : '100%',
         licenseKey: 'non-commercial-and-evaluation',
