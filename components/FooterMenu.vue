@@ -49,6 +49,9 @@ export default {
   border-top: 1px solid #DADCE0;
   background: #fff;
   z-index: 1000;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 
 .footer-item {
     display: flex;
