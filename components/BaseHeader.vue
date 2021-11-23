@@ -88,7 +88,6 @@ export default {
     font-size: 1rem;
     font-weight: bold;
     color: #000b12;
-    min-width: 87.5rem;
     .menu-item {
       color: #000b12;
       text-decoration: none;
@@ -111,13 +110,17 @@ export default {
     }
   }
   .last-fields{
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
     margin-left: auto;
     padding-right: 1rem;
     .quick-filter-input{
+      flex: 1;
       background: #F3F3F3;
       border: none;
       border-radius: 0.375rem;
-      width: 28.1875rem;
+      max-width: 28.1875rem;
       height: 3rem;
       padding: 0.5rem;
       padding-left: 0.625rem;
