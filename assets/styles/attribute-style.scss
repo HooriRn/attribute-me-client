@@ -39,7 +39,7 @@ body {
   .page {
     padding-top: 0.625rem;
     padding-bottom: 0;
-    height: initial;
+    max-height: calc(100vh - 60px);
 
     .page-layout {
       flex-direction: column;
