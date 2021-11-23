@@ -67,7 +67,7 @@ export default {
         rowHeaders: true,
         licenseKey: 'non-commercial-and-evaluation',
         height: this.$device.isDesktop? 'calc( 100vh - 5.5625rem )' : '100%',
-        width: '100%',
+        width: this.$device.isDesktop? this.getTableWidth() : '100%',
         stretchH: 'all',
         overflow: 'hidden',
         readOnly: true,
@@ -155,10 +155,46 @@ export default {
       self.removeTotalRow(hot)
     })
 
-    /* Load table filters on mount */
-    // this.loadTableFilters(hot)
+    window.addEventListener('resize',  this.resizeTable);
   },
   methods:{
+    getScrollbarWidth() {
+      // Creating invisible container
+      const outer = document.createElement('div');
+      outer.style.visibility = 'hidden';
+      outer.style.overflow = 'scroll'; // forcing scrollbar to appear
+      outer.style.msOverflowStyle = 'scrollbar'; // needed for WinJS apps
+      document.body.appendChild(outer);
+
+      // Creating inner element and placing it in the container
+      const inner = document.createElement('div');
+      outer.appendChild(inner);
+
+      // Calculating difference between container's full width and the child width
+      const scrollbarWidth = (outer.offsetWidth - inner.offsetWidth);
+
+      // Removing temporary elements from the DOM
+      outer.parentNode.removeChild(outer);
+
+      return scrollbarWidth;
+    },
+    resizeTable() {
+      if (!this.$device.isDesktop) return
+      const hotTableEl = this.$refs['hotTable']
+      if(!hotTableEl) return
+      const hot = this.$refs['hotTable'].hotInstance;
+      hot.updateSettings({
+        width: this.getTableWidth()
+      })
+    },
+    getTableWidth() {
+      if (document.body.offsetWidth <= 1200) {
+        return `calc( 1200px - 13.375rem )`
+      }
+      else {
+        return `calc( 100vw - 13.375rem - ${this.getScrollbarWidth()}px)`
+      }
+    },
     addTotalRow(hotTable){
       console.log('add total row')
       let event_total_value = hotTable.getData().reduce((a, b) => a+parseFloat((b[1 ]??'0').toString().replace(/\,/g, '')), 0).toFixed(2)

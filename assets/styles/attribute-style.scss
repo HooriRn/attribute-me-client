@@ -40,9 +40,11 @@ body {
     padding-top: 0.625rem;
     padding-bottom: 0;
     max-height: calc(100vh - 60px);
+    height: calc(100vh - 7.3125rem);
 
     .page-layout {
       flex-direction: column;
+      margin-bottom: 70px;
 
       .side-menu-column {
         flex: initial;

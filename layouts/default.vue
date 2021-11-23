@@ -14,6 +14,11 @@ import BaseHeader from "/components/BaseHeader.vue";
 export default {
   components: {
     BaseHeader,
+  },
+  mounted() {
+    if (this.$device.isDesktop) {
+      document.body.style.minWidth = "1200px"
+    }
   }
 };
 </script>

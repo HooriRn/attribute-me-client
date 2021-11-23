@@ -47,8 +47,10 @@ export default {
   height: 55px;
   min-height: 55px;
   border-top: 1px solid #DADCE0;
+  background: #fff;
+  z-index: 1000;
 
-  .footer-item {
+.footer-item {
     display: flex;
     flex-direction: column;
     padding: 0 10px;

@@ -5,7 +5,7 @@
         <side-menu />
       </div>
       <div class="hands-table-column">
-        <hot-table :settings="tableSettings">
+        <hot-table :settings="tableSettings" ref="hotTable">
           <hot-column title="Device" read-only="true" data="device">
           </hot-column>
           <hot-column title="Funnel Mode" read-only="true" data="funnel">
@@ -59,9 +59,9 @@ export default {
       ],
       tableSettings: {
         data,
-        height: this.$device.isDesktop? 'calc( 100vh - 5.5625rem )' : '100%',
+        height: this.$device.isDesktop? 'calc( 100vh - 5.5625rem )' : 'calc( 100vh - 9.4375rem )',
         licenseKey: 'non-commercial-and-evaluation',
-        width: '100%',
+        width: this.$device.isDesktop? this.getTableWidth() : '100%',
         stretchH: 'all',
         rowHeaders: true,
         autoColumnSize: true,
@@ -77,9 +77,47 @@ export default {
     };
   },
   mounted() {
-    console.log(this.linkGenerateData);
+    console.log(window)
+    window.addEventListener("resize", this.resizeTable);
   },
   methods: {
+    getScrollbarWidth() {
+      // Creating invisible container
+      const outer = document.createElement('div');
+      outer.style.visibility = 'hidden';
+      outer.style.overflow = 'scroll'; // forcing scrollbar to appear
+      outer.style.msOverflowStyle = 'scrollbar'; // needed for WinJS apps
+      document.body.appendChild(outer);
+
+      // Creating inner element and placing it in the container
+      const inner = document.createElement('div');
+      outer.appendChild(inner);
+
+      // Calculating difference between container's full width and the child width
+      const scrollbarWidth = (outer.offsetWidth - inner.offsetWidth);
+
+      // Removing temporary elements from the DOM
+      outer.parentNode.removeChild(outer);
+
+      return scrollbarWidth;
+    },
+    resizeTable() {
+      if (!this.$device.isDesktop) return
+      const hotTableEl = this.$refs['hotTable']
+      if(!hotTableEl) return
+      const hot = this.$refs['hotTable'].hotInstance;
+      hot.updateSettings({
+        width: this.getTableWidth()
+      })
+    },
+    getTableWidth() {
+      if (document.body.offsetWidth <= 1200) {
+        return `calc( 1200px - 13.375rem )`
+      }
+      else {
+        return `calc( 100vw - 13.375rem - ${this.getScrollbarWidth()}px)`
+      }
+    },
     makeLink(instance, td, row, col, prop, value, cellProperties) {
       Handsontable.renderers.BaseRenderer.apply(this, arguments);
       const data = instance.getSourceData()
