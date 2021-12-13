@@ -6,8 +6,8 @@
       </div>
       <div class="menu-wrapper" v-if="$device.isDesktop">
         <!-- <div class="menu-item">Home</div> -->
-        <nuxt-link class="menu-item" to="/analytics">Analytics</nuxt-link>
-        <nuxt-link class="menu-item" to="/link-generator">Link Generator</nuxt-link>
+        <nuxt-link class="menu-item" to="/thorchain/analytics">Analytics</nuxt-link>
+        <nuxt-link class="menu-item" to="/thorchain/link-generator">Link Generator</nuxt-link>
         <a class="menu-item" :class="{'disabled': true}">Power-tweeters</a>
         <a class="menu-item" :class="{'disabled': true}">SKALD Marketers</a>
       </div>
