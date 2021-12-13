@@ -6,7 +6,7 @@ export default {
     host: '0.0.0.0'
   },
   head: {
-    title: 'attribute-me',
+    title: 'Attribute',
     htmlAttrs: {
       lang: 'en'
     },
@@ -17,7 +17,7 @@ export default {
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon-32x32.png' }
     ],
     script: [
       {
@@ -36,7 +36,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    { src: '~/plugins/vue-handsontable', mode: 'client', ssr: false },
+    { src: '~/plugins/vue-handsontable', ssr: false },
     { src: '~/plugins/vue-md-date-range-picker', ssr: false },
     { src: '~/plugins/vue-mj-daterangepicker', ssr: false }
   ],
