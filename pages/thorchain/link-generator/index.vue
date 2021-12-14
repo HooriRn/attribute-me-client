@@ -56,6 +56,7 @@ export default {
         "Twitter",
         "Vimeo",
         "YouTube",
+        "Other"
       ],
       tableSettings: {
         data,
