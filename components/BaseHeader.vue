@@ -11,13 +11,13 @@
         <a class="menu-item" :class="{'disabled': true}">Power-tweeters</a>
         <a class="menu-item" :class="{'disabled': true}">SKALD Marketers</a>
       </div>
-      <div class="last-fields" v-if="$route.name == 'analytics'">
+      <div class="last-fields" v-if="$route.path == '/thorchain/analytics'">
         <input @change="quickFilterChanged" v-model="quickFilterValue" class="quick-filter-input" placeholder="Quick Filter" type="text">
         <button @click="exportCSVClicked" class="export-btn">Export</button>
       </div>
       <div class="active-link" v-if="!$device.isDesktop">
-        <div class="menu-item menu-item-active" v-if="$route.name == 'analytics'">Analytics</div>
-        <div class="menu-item menu-item-active" v-if="$route.name == 'link-generator'">Generator</div>
+        <div class="menu-item menu-item-active" v-if="$route.path == '/thorchain/analytics'">Analytics</div>
+        <div class="menu-item menu-item-active" v-if="$route.path == '/thorchain/link-generator'">Generator</div>
       </div>
     </div>
   </div>
