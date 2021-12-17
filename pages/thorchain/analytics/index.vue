@@ -10,8 +10,8 @@
       <div v-else class="loading-container">
         <div v-if="loading && !loadErr" class="loading-box">
           <div class="loading-text">
-            <div>{{ loadingProgress }}%</div>
-            <div>{{whileLoadingMsg}}</div>
+            <div id="loading-progress">{{ loadingProgress }}%</div>
+            <div id="loading-msg">{{whileLoadingMsg}}</div>
           </div>
           <img src="~/assets/img/loading.gif" alt="loading" />
         </div>
@@ -134,13 +134,15 @@ export default {
         });
         var events = res.data.events;
         var totals = res.data.totals;
-
-        this.whileLoadingMsg = 'Processing ...'
-        this.loadingProgress = 100
-        events = parseEventsData(events);
-        self.handsTableData = events;
-        self.handsTableTotals = totals;
-        self.loading = false;
+        self.whileLoadingMsg = 'Processing...'
+        self.loadingProgress = 100
+        setTimeout(() => {
+          events = parseEventsData(events);
+          self.handsTableData = events;
+          self.handsTableTotals = totals;
+          self.loading = false;
+          
+        }, 0);
       } catch (err) {
         self.loadErr = true;
         console.error(err);

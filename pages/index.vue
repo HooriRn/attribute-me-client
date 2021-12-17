@@ -7,7 +7,7 @@ export default {
     function ({ redirect }) {
       redirect("/thorchain/analytics");
     },
-  ],
+  ],  
 };
 </script>
 
