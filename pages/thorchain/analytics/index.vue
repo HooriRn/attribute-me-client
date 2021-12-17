@@ -10,7 +10,7 @@
       <div v-else class="loading-container">
         <div v-if="loading && !loadErr" class="loading-box">
           <div class="loading-text">
-            <div id="loading-progress">{{ loadingProgress }}%</div>
+            <div id="loading-progress">{{ loadingProgress }}</div>
             <div id="loading-msg">{{whileLoadingMsg}}</div>
           </div>
           <img src="~/assets/img/loading.gif" alt="loading" />
@@ -129,13 +129,14 @@ export default {
             const total = progressEvent.total;
             const current = progressEvent.loaded;
 
-            self.loadingProgress = Math.floor((current / total) * 100);
+            self.loadingProgress = Math.floor((current / total) * 100) + "%";
           },
         });
         var events = res.data.events;
         var totals = res.data.totals;
-        self.whileLoadingMsg = 'Processing...'
-        self.loadingProgress = 100
+        self.loadingProgress = 'Processing...'
+        self.whileLoadingMsg = 'This might take a few secounds'
+
         setTimeout(() => {
           events = parseEventsData(events);
           self.handsTableData = events;
