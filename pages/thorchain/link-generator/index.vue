@@ -20,7 +20,7 @@
           </hot-column>
           <hot-column title="Campaign Name" data="campaign">
           </hot-column>
-          <hot-column title="THOR.RUNE Address" data="handle">
+          <hot-column title="THOR Address" data="handle">
           </hot-column>
           <hot-column title="Promotion Link" read-only="true" data="url" :renderer="makeLink">
           </hot-column>
