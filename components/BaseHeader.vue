@@ -15,10 +15,10 @@
         <input @change="quickFilterChanged" v-model="quickFilterValue" class="quick-filter-input" placeholder="Search by Address" type="text">
         <button @click="searchBtn" class="search-btn">Search</button>
       </div>
-      <div class="active-link" v-if="!$device.isDesktop">
+      <!--<div class="active-link" v-if="!$device.isDesktop">
         <div class="menu-item menu-item-active" v-if="$route.path == '/thorchain/analytics'">Analytics</div>
         <div class="menu-item menu-item-active" v-if="$route.path == '/thorchain/link-generator'">Generator</div>
-      </div>
+      </div>-->
     </div>
   </div>
 </template>
