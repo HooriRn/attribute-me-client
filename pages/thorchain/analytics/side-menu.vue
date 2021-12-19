@@ -1,7 +1,7 @@
 <template>
   <div class="side-menu" v-if="$device.isDesktop">
     <div class="date-range-field">
-      <div class="field-title">Date range</div>
+      <div class="field-title">Settings</div>
       <div
         @click="toggleDatePicker"
         class="date-input"
@@ -86,7 +86,7 @@
   </div>
   <div class="filter-options" v-else>
     <div class="filter-option date-picker">
-      <div class="filter-name">Date range:</div>
+      <div class="filter-name">Settings:</div>
       <div
         @click="toggleDatePicker"
         class="date-input"

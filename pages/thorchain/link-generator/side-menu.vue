@@ -1,7 +1,7 @@
 <template>
   <div class="side-menu">
     <div class="present-filters-filed" v-if="$device.isDesktop">
-      <div class="field-title">Funnel categories</div>
+      <div class="field-title">Products</div>
       <div class="filters-scroll">
         <div
           class="side-menu-item"
@@ -14,7 +14,7 @@
     </div>
     <div class="filter-options" v-else>
       <div class="filter-option date-picker">
-        <div class="filter-name">Funnel categories:</div>
+        <div class="filter-name">Products:</div>
         <b-dropdown id="preset-filters" variant="outline" text="Dropdown with header" class="drop-down-custom" no-caret>
           <template #button-content>
             {{"THORChain.org"}}
