@@ -41,22 +41,22 @@ export default {
   data() {
     return {
       channel_source: [
-        "Bing",
-        "Discord",
-        "Facebook",
-        "Google",
-        "Instagram",
-        "Linkedin",
-        "Quora",
-        "Reddit",
-        "Snapchat",
-        "Telegram",
-        "TikTok",
-        "Twitch",
-        "Twitter",
-        "Vimeo",
-        "YouTube",
-        "Other"
+        "Affiliate",
+        "Content",
+        "Direct",
+        "Display",
+        "Email",
+        "Events",
+        "Influencer",
+        "Partner",
+        "Press Release",
+        "Retargeting",
+        "Search Organic",
+        "Search Paid",
+        "Social Media",
+        "SMS",
+        "Video",
+        "Not Listed"
       ],
       tableSettings: {
         data,
