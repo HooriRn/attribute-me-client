@@ -16,15 +16,15 @@
           </hot-column>
           <hot-column title="Landing Page Preview" read-only="true" data="preview" :renderer="showLink">
           </hot-column>
-          <hot-column title="Your Distribution Channel" data="channel" type="dropdown" :source="channel_source">
+          <hot-column title="Distribution Channel" data="channel" type="dropdown" :source="channel_source">
           </hot-column>
-          <hot-column title="Your Campaign Name" data="campaign">
+          <hot-column title="Campaign Name" data="campaign">
           </hot-column>
-          <hot-column title="Your THOR.RUNE Address" data="handle">
+          <hot-column title="THOR.RUNE Address" data="handle">
           </hot-column>
-          <hot-column title="Your Campaign URL" read-only="true" data="url" :renderer="makeLink">
+          <hot-column title="Generated Link" read-only="true" data="url" :renderer="makeLink">
           </hot-column>
-          <hot-column title="Important Notes" read-only="true" data="note">
+          <hot-column title="Targeting Notes" read-only="true" data="note">
           </hot-column>
         </hot-table>
       </div>
