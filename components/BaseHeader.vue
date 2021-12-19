@@ -8,8 +8,8 @@
         <!-- <div class="menu-item">Home</div> -->
         <nuxt-link class="menu-item" to="/thorchain/analytics">Analytics</nuxt-link>
         <nuxt-link class="menu-item" to="/thorchain/link-generator">Link Generator</nuxt-link>
-        <a class="menu-item" :class="{'disabled': true}">Power-tweeters</a>
-        <a class="menu-item" :class="{'disabled': true}">SKALD Marketers</a>
+        <a class="menu-item" :class="{'disabled': true}">Tweet Bot</a>
+        <a class="menu-item" :class="{'disabled': true}">Guides</a>
       </div>
       <div class="last-fields" v-if="$route.path == '/thorchain/analytics'">
         <input @change="quickFilterChanged" v-model="quickFilterValue" class="quick-filter-input" placeholder="Search by Address" type="text">

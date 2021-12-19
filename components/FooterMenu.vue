@@ -9,12 +9,12 @@
       <nuxt-link class="footer-link" to="/thorchain/link-generator" >Link Generator</nuxt-link>
     </div>
     <div class="footer-item">
-      <img class="footer-img" :src="getSVGIcon('power-tweeters', 'twitter', true)" alt="power tweeters">
-      <a class="footer-link" :class="{'disabled': true}">Power-Tweeters</a>
+      <img class="footer-img" :src="getSVGIcon('power-tweeters', 'twitter', true)" alt="Tweet Bot">
+      <a class="footer-link" :class="{'disabled': true}">Tweet Bot</a>
     </div>
     <div class="footer-item">
       <img class="footer-img" :src="getSVGIcon('skald-marketers', 'skalds', true)" alt="skalds marketers">
-      <a class="footer-link" :class="{'disabled': true}">SKALDs</a>
+      <a class="footer-link" :class="{'disabled': true}">Guides</a>
     </div>
   </div>
 </template>
