@@ -11,7 +11,13 @@
         <div v-if="loading && !loadErr" class="loading-box">
           <div class="loading-text">
             <div id="loading-progress">{{ loadingProgress }}</div>
-            <div id="loading-msg">{{whileLoadingMsg}}</div>
+            <div v-if="whileLoadingMsg" id="loading-msg">{{whileLoadingMsg}}</div>
+            <div class="process-msg" v-else>    
+        This may take a few minutes, or seconds.
+        <br>Depends on the size of your date range.
+        <br>Even if the animation stops spinning, please just wait.
+        <br>We’re working to improve load times.
+            </div>
           </div>
           <img src="~/assets/img/loading.gif" alt="loading" />
         </div>
@@ -55,7 +61,7 @@ export default {
       },
       loading: true,
       loadErr: false,
-      loadingProgress: 0,
+      loadingProgress: '0%',
       whileLoadingMsg: 'Loading data...'
     };
   },
@@ -135,7 +141,7 @@ export default {
         var events = res.data.events;
         var totals = res.data.totals;
         self.loadingProgress = 'Processing...'
-        self.whileLoadingMsg = 'This might take a few secounds'
+        self.whileLoadingMsg = null
 
         setTimeout(() => {
           events = parseEventsData(events);
@@ -172,5 +178,10 @@ export default {
   position: relative;
   bottom: 34px; // calculated: ((loading-box height)/2 - (icon height)/2) + 10px
   text-align: center;
+  .loading-text{
+    .process-msg{
+      font-size: 0.8rem;
+    }
+  }
 }
 </style>
