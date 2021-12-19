@@ -13,10 +13,10 @@
             <div id="loading-progress">{{ loadingProgress }}</div>
             <div v-if="whileLoadingMsg" id="loading-msg">{{whileLoadingMsg}}</div>
             <div class="process-msg" v-else>    
-        This may take a few minutes, or seconds.
-        <br>Depends on the size of your date range.
-        <br>Even if the animation stops spinning, please just wait.
-        <br>We’re working to improve load times.
+            This may take a few minutes, or seconds.
+            <br>Depends on the size of your date range.
+            <br>Even if the animation stops spinning, please just wait.
+            <br>We’re working to improve load times.
             </div>
           </div>
           <img src="~/assets/img/loading.gif" alt="loading" />
