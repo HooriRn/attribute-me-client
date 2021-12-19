@@ -8,7 +8,7 @@
         <hot-table :settings="tableSettings" ref="hotTable">
           <hot-column title="Device" read-only="true" data="device">
           </hot-column>
-          <hot-column title="Funnel Mode" read-only="true" data="funnel">
+          <hot-column title="Type" read-only="true" data="funnel">
           </hot-column>
           <hot-column title="Category" read-only="true" data="category">
           </hot-column>
@@ -22,7 +22,7 @@
           </hot-column>
           <hot-column title="THOR.RUNE Address" data="handle">
           </hot-column>
-          <hot-column title="Generated Link" read-only="true" data="url" :renderer="makeLink">
+          <hot-column title="Promotion Link" read-only="true" data="url" :renderer="makeLink">
           </hot-column>
           <hot-column title="Targeting Notes" read-only="true" data="note">
           </hot-column>
