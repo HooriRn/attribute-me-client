@@ -12,7 +12,7 @@
         <a class="menu-item" :class="{'disabled': true}">SKALD Marketers</a>
       </div>
       <div class="last-fields" v-if="$route.path == '/thorchain/analytics'">
-        <input @change="quickFilterChanged" v-model="quickFilterValue" class="quick-filter-input" placeholder="Quick Filter" type="text">
+        <input @change="quickFilterChanged" v-model="quickFilterValue" class="quick-filter-input" placeholder="Search by Address" type="text">
         <button @click="searchBtn" class="search-btn">Search</button>
       </div>
       <div class="active-link" v-if="!$device.isDesktop">
