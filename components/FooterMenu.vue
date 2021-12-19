@@ -2,11 +2,11 @@
   <div class="footer-container">
     <div class="footer-item" @click="$router.push('/analytics')">
       <img class="footer-img" :src="getSVGIcon('analytics', 'analytics')" alt="Analytics">
-      <nuxt-link class="footer-link" to="/analytics" >Analytics</nuxt-link>
+      <nuxt-link class="footer-link" to="/thorchain/analytics" >Analytics</nuxt-link>
     </div>
     <div class="footer-item" @click="$router.push('/link-generator')">
       <img class="footer-img" :src="getSVGIcon('link-generator', 'link-generator')" alt="link generator">
-      <nuxt-link class="footer-link" to="/link-generator" >Link Generator</nuxt-link>
+      <nuxt-link class="footer-link" to="/thorchain/link-generator" >Link Generator</nuxt-link>
     </div>
     <div class="footer-item">
       <img class="footer-img" :src="getSVGIcon('power-tweeters', 'twitter', true)" alt="power tweeters">
