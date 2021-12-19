@@ -135,7 +135,11 @@ export default {
         var events = res.data.events;
         var totals = res.data.totals;
         self.loadingProgress = 'Processing...'
-        self.whileLoadingMsg = 'This might take a few secounds'
+        self.whileLoadingMsg = `
+        This may take a few minutes, or seconds.
+        <br>Depends on the size of your date range.
+        <br>Even if the animation stops spinning, please just wait.
+        <br>We’re working to improve load times.`
 
         setTimeout(() => {
           events = parseEventsData(events);
