@@ -28,6 +28,9 @@
           <div>Hourly data</div>
         </b-form-checkbox>
       </div>
+      <div style="display: flex;">
+        <button @click="exportCSVClicked" class="export-btn">Export CSV</button>
+      </div>
     </div>
     <hr class="divider" />
     <div class="present-filters-filed">
@@ -234,7 +237,9 @@ export default {
       this.showDatePicker = false;
       this.$store.commit("tableSetting", tableSetting);
     },
-
+    exportCSVClicked() {
+      this.$store.commit('exportCSV', Math.random())
+    },
     activate(filterName) {
       console.log('activate', filterName)
       this.activeItem = filterName;

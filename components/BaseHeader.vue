@@ -13,7 +13,7 @@
       </div>
       <div class="last-fields" v-if="$route.path == '/thorchain/analytics'">
         <input @change="quickFilterChanged" v-model="quickFilterValue" class="quick-filter-input" placeholder="Quick Filter" type="text">
-        <button @click="exportCSVClicked" class="export-btn">Export</button>
+        <button @click="searchBtn" class="search-btn">Search</button>
       </div>
       <div class="active-link" v-if="!$device.isDesktop">
         <div class="menu-item menu-item-active" v-if="$route.path == '/thorchain/analytics'">Analytics</div>
@@ -48,6 +48,14 @@ export default {
       }
       this.$store.commit('tableSetting', tableSetting)
     },
+    searchBtn() {
+      let filterValue = this.quickFilterValue;
+      let tableSetting = this.tableSetting
+      tableSetting['filters'] = {
+        medium: filterValue
+      }
+      this.$store.commit('tableSetting', tableSetting)
+    },
     loadLocalQuickFilterValue(){
       console.log("loadLocalQuickFilterValue")
       var setting = window.localStorage.ANALYTICS_SETTING
@@ -58,9 +66,6 @@ export default {
           this.quickFilterValue = setting.filters.medium
         }
       }
-    },
-    exportCSVClicked(){
-      this.$store.commit('exportCSV', Math.random())
     },
     mobile() {
       const width = window.innerWidth;
@@ -128,7 +133,7 @@ export default {
         color: #757575;
       }
     }
-    .export-btn{
+    .search-btn{
       border: none;
       background: #000B12;
       color: #fff;
@@ -175,7 +180,7 @@ export default {
       font-size: 14px;
     }
 
-    .export-btn {
+    .search-btn {
       height: 34px;
       width: initial;
       font-size: 14px;
