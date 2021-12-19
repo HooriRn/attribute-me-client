@@ -1,12 +1,12 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
-  mode: 'spa',
+  ssr: false,
   server: {
     port: 3000,
     host: '0.0.0.0'
   },
   head: {
-    title: 'Attribute',
+    title: 'Attribute BETA | Performance Marketing Tool',
     htmlAttrs: {
       lang: 'en'
     },
