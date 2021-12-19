@@ -28,8 +28,8 @@
           <div>Hourly data</div>
         </b-form-checkbox>
       </div>
-      <div style="display: flex;">
-        <button @click="exportCSVClicked" class="export-btn">Export CSV</button>
+      <div class="side-menu-item" style="display: flex;">
+        <button @click="exportCSVClicked" class="side-menu-item">Export to CSV</button>
       </div>
     </div>
     <hr class="divider" />
