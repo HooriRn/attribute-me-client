@@ -1,10 +1,10 @@
 <template>
   <div class="footer-container">
-    <div class="footer-item" @click="$router.push('/analytics')">
+    <div class="footer-item" @click="$router.push('/thorchain/analytics')">
       <img class="footer-img" :src="getSVGIcon('analytics', 'analytics')" alt="Analytics">
       <nuxt-link class="footer-link" to="/thorchain/analytics" >Analytics</nuxt-link>
     </div>
-    <div class="footer-item" @click="$router.push('/link-generator')">
+    <div class="footer-item" @click="$router.push('/thorchain/link-generator')">
       <img class="footer-img" :src="getSVGIcon('link-generator', 'link-generator')" alt="link generator">
       <nuxt-link class="footer-link" to="/thorchain/link-generator" >Link Generator</nuxt-link>
     </div>
