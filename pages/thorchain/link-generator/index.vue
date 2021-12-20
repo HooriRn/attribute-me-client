@@ -134,7 +134,7 @@ export default {
       const data = instance.getSourceData()
       const datum = data[row]
       const preview = datum.preview ?? '';
-      const channel = datum.channel.toLowerCase() ?? '';
+      const channel = datum.channel?.toLowerCase() ?? '';
       const campaign = datum.campaign ?? '';
       const handle = datum.handle ?? '';
       if (td.querySelector('a') && td.querySelector('a').innerText !== 'Generate') {
