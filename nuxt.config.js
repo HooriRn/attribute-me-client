@@ -63,7 +63,7 @@ export default {
   ],
 
   serverMiddleware: isServerlessEnvironment ? [] : [
-    '~/api/index.js'
+    '~/api/rest.js'
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
