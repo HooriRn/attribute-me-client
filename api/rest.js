@@ -11,7 +11,6 @@ const corsOptions = {
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
-app.use(cors(corsOptions))
 
 function checkValid(url) {
   if (validUrls.some(u => url.startsWith(u)))
@@ -21,7 +20,9 @@ function checkValid(url) {
 
 function createExpressApp() {
 
-  app.post('/api/link', async (req, res)=>{
+  app.options('/api/link', cors())
+
+  app.post('/api/link', cors(corsOptions), async (req, res)=>{
     try{
       console.log('links is called!');
       headers = {
