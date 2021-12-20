@@ -1,9 +1,22 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "nuxt.config.js",
-        "use": "@nuxtjs/vercel-builder"
-      }
-    ]
+  "version": 2,
+  "env": {
+    "ON_VERCEL": "true",
+    "BASE_URL": "https://attribute-me-client-skald.vercel.app"
+  },
+  "builds": [
+    {
+      "src": "api/**/*.js",
+      "use": "@now/node"
+    },
+    {
+      "src": "nuxt.config.js",
+      "use": "@nuxtjs/vercel-builder"
+    }
+  ],
+  "routes": [
+    {  "src": "/api/(.*)", "dest": "api/rest.js" },
+    { "src": "/api", "dest": "api/rest.js" },
+    { "src": "/(.*)", "dest": "$1" }
+  ]
 }
