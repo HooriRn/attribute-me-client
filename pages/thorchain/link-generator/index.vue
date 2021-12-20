@@ -24,7 +24,7 @@
           </hot-column>
           <hot-column title="Your Campaign Destination Link" read-only="true" data="url" :renderer="makeLink">
           </hot-column>
-          <hot-column title="Targeting Notes" read-only="true" data="note">
+          <hot-column title="Notes for SKALD Community Marketers" read-only="true" data="note">
           </hot-column>
         </hot-table>
       </div>
