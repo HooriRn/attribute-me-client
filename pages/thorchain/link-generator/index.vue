@@ -22,7 +22,7 @@
           </hot-column>
           <hot-column title="THOR Address" data="handle">
           </hot-column>
-          <hot-column title="Promotion Link" read-only="true" data="url" :renderer="makeLink">
+          <hot-column title="Your Campaign Destination Link" read-only="true" data="url" :renderer="makeLink">
           </hot-column>
           <hot-column title="Targeting Notes" read-only="true" data="note">
           </hot-column>
