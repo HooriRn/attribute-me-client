@@ -1,8 +1,7 @@
 {
   "version": 2,
   "env": {
-    "ON_VERCEL": "true",
-    "BASE_URL": "https://attribute-me-client-skald.vercel.app"
+    "ON_VERCEL": "true"
   },
   "builds": [
     {
