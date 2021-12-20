@@ -1,3 +1,4 @@
+const isServerlessEnvironment = process.env.ON_VERCEL=="true";
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   server: {
@@ -60,8 +61,8 @@ export default {
     ['@nuxtjs/dotenv'],
     '@nuxtjs/axios'
   ],
-  
-  serverMiddleware: [
+
+  serverMiddleware: isServerlessEnvironment ? [] : [
     '~/api/index.js'
   ],
 
