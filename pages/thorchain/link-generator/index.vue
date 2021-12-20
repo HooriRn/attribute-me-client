@@ -78,7 +78,6 @@ export default {
     };
   },
   mounted() {
-    console.log(window)
     window.addEventListener("resize", this.resizeTable);
   },
   methods: {
@@ -119,6 +118,18 @@ export default {
         return `calc( 100vw - 13.375rem - ${this.getScrollbarWidth()}px)`
       }
     },
+    async getRebrandlyLink(preview, channel, handle, campaign) {
+      let rebrandlyRes = await this.$axios.$post(process.env.MS_URL + '/link', { preview, channel, handle, campaign }).catch(error => {
+        if (error.response) {
+          // Request made and server responded
+          if (error.response.data.length > 0)
+            throw error.response.data;
+          else
+            throw error.response.statusText;
+        }
+      });
+      return rebrandlyRes;
+    },
     makeLink(instance, td, row, col, prop, value, cellProperties) {
       Handsontable.renderers.BaseRenderer.apply(this, arguments);
       const data = instance.getSourceData()
@@ -127,20 +138,50 @@ export default {
       const channel = datum.channel.toLowerCase() ?? '';
       const campaign = datum.campaign ?? '';
       const handle = datum.handle ?? '';
-      if (preview) {
-        const url = new URL(preview);
-        url.searchParams.append(`utm_source`, channel);
-        url.searchParams.append(`utm_medium`, handle);
-        url.searchParams.append(`utm_campaign`, campaign);
-
+      if (td.querySelector('a') && td.querySelector('a').innerText !== 'Generate') {
+        return;
+      }
+      if (preview && channel && campaign && handle) {
         let a = document.createElement('a');
-        a.href = url.href;
-        a.innerText = url.href
-        a.target = '_blank'
-
+        a.innerText = 'Generate';
+        a.classList.add('generate');
+        var innerClick = () => {
+          var self = this;
+          //making load text
+          var handler = async function() {
+            // getting the api
+            Handsontable.dom.empty(td);
+            a = document.createElement('a');
+            self.getRebrandlyLink(preview, channel, handle, campaign).then((rebrandlyLink) => {
+              a.innerText = rebrandlyLink;
+              a.href = rebrandlyLink;
+              a.target = '_blank'
+              a.removeEventListener('click', handler)
+              td.appendChild(a)
+            }).catch(error => {
+              a.innerText = error;
+              a.removeEventListener('click', handler);
+              a.classList.add('error')
+              td.appendChild(a)
+            });
+            a.innerText = 'Generating'
+            a.removeEventListener('click', handler)
+            td.appendChild(a)
+          }
+          return handler();
+        }
+        a.addEventListener('click', innerClick);
         Handsontable.dom.empty(td)
         td.appendChild(a)
       }
+      else {
+        let a = document.createElement('a');
+        a.innerText = 'Generate';
+        a.classList.add('generate', 'center', 'disable');
+        Handsontable.dom.empty(td)
+        td.appendChild(a)
+      }
+
       td.className = 'htMiddle'
       const plugin = instance.getPlugin('autoColumnSize');
       // console.log(plugin.calculateColumnsWidth(col, col, true))
@@ -160,5 +201,18 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+.generate {
+  cursor: pointer;
+  &.disable {
+    cursor: initial;
+    color: #777;
+  }
+  &.center {
+    text-align: center;
+  }
+}
+.error {
+  color: #fd624f;
+}
 </style>

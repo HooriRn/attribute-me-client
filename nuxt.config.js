@@ -1,6 +1,5 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
-  ssr: false,
   server: {
     port: 3000,
     host: '0.0.0.0'
@@ -42,7 +41,8 @@ export default {
   ],
 
   env: {
-    BASE_URL: process.env.BASE_URL
+    BASE_URL: process.env.BASE_URL,
+    MS_URL: process.env.MS_URL || 'http://localhost:3000/api'
   },
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -59,6 +59,10 @@ export default {
     'bootstrap-vue/nuxt',
     ['@nuxtjs/dotenv'],
     '@nuxtjs/axios'
+  ],
+  
+  serverMiddleware: [
+    '~/api/index.js'
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

@@ -3,7 +3,9 @@
     <!-- Header Menu for Desktop Devices -->
     <BaseHeader />
     <!-- Main page Content -->
-    <Nuxt />
+    <client-only>
+      <Nuxt />
+    </client-only>
     <!-- Footer Menu for Mobile Devices -->
     <FooterMenu v-if="!$device.isDesktop" />
   </div>
