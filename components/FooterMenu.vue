@@ -1,11 +1,11 @@
 <template>
   <div class="footer-container">
     <div class="footer-item" @click="$router.push('/thorchain/analytics')">
-      <img class="footer-img" :src="getSVGIcon('analytics', 'analytics')" alt="Analytics">
+      <img class="footer-img" :src="getSVGIcon('analytics', 'thorchain-analytics')" alt="Analytics">
       <nuxt-link class="footer-link" to="/thorchain/analytics" >Analytics</nuxt-link>
     </div>
     <div class="footer-item" @click="$router.push('/thorchain/link-generator')">
-      <img class="footer-img" :src="getSVGIcon('link-generator', 'link-generator')" alt="link generator">
+      <img class="footer-img" :src="getSVGIcon('link-generator', 'thorchain-link-generator')" alt="link generator">
       <nuxt-link class="footer-link" to="/thorchain/link-generator" >Link Generator</nuxt-link>
     </div>
     <div class="footer-item">
@@ -27,6 +27,7 @@ export default {
         return require(`~/assets/img/${path}-disabled.svg`)
       }
 
+      console.log(route, this.$route.name)
       if (this.$route.name == route) {
         return require(`~/assets/img/${path}-selected.svg`)
       }
