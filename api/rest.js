@@ -44,7 +44,7 @@ function createExpressApp() {
           fullName: 'click.thorchain.link'
         }
       }, { headers });
-      res.json(rebrandlyRes.data.shortUrl);
+      res.json('https://' + rebrandlyRes.data.shortUrl);
     }
     catch(e){
       console.error(e)
