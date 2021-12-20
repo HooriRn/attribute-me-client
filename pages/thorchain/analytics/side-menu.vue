@@ -84,7 +84,7 @@
       <b-button class="side-menu-button" :class="{'disabled': true}" style="line-height: 0;">Documentation</b-button>
     </div>
   </div>
-  <div class="filter-options" v-else>
+  <div class="filter-options mobile-layout" v-else>
     <div class="filter-option date-picker">
       <div class="filter-name">Settings:</div>
       <div
@@ -154,6 +154,9 @@
           <b-dropdown-divider v-if="index != filters.length - 1"></b-dropdown-divider>
         </div>
       </b-dropdown>
+    </div>
+    <div class="side-menu-item" style="display: flex;">
+      <button @click="exportCSVClicked" class="side-menu-item" style="padding: 0; height: 2rem;">Export to CSV</button>
     </div>
   </div>
 </template>

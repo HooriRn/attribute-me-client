@@ -145,7 +145,15 @@
     margin-left: 1rem;
   }
 }
-
+.mobile-layout {
+  .side-menu-item {
+    &:hover {
+      color: #fd624f;
+      background: transparent;
+      border-radius: 0;
+    }
+  }
+}
 .date-range-field {
   position: relative;
 
