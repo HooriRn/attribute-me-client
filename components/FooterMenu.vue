@@ -27,7 +27,6 @@ export default {
         return require(`~/assets/img/${path}-disabled.svg`)
       }
 
-      console.log(route, this.$route.name)
       if (this.$route.name == route) {
         return require(`~/assets/img/${path}-selected.svg`)
       }

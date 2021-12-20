@@ -73,7 +73,6 @@ export default {
           th.className = 'htMiddle'
         },
         className: 'htMiddle',
-        rowHeights: 43,
       }
     };
   },
