@@ -6,7 +6,7 @@ const validUrls = ['https://m.thorchain.org/', 'https://www.thorchain.org/']
 const cors = require('cors');
 
 const corsOptions = {
-  origin: ['https://www.attribute.me', 'attribute-me-client-git-main-skald.vercel.app']
+  origin: ['https://www.attribute.me', 'https://attribute-me-client-git-main-skald.vercel.app']
 }
 
 app.use(express.urlencoded({extended: true}));
