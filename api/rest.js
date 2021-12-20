@@ -3,9 +3,15 @@ const axios = require('axios');
 const app = express();
 const URL = require("url").URL;
 const validUrls = ['https://m.thorchain.org/', 'https://www.thorchain.org/']
+const cors = require('cors');
+
+const corsOptions = {
+  origin: ['https://www.attribute.me', 'attribute-me-client-git-main-skald.vercel.app']
+}
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+app.use(cors(corsOptions))
 
 function checkValid(url) {
   if (validUrls.some(u => url.startsWith(u)))
