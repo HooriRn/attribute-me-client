@@ -8,17 +8,17 @@
       </hot-column>
       <hot-column title="Event Count" read-only="true" data="event_count" :settings="{type: 'numeric', numericFormat: {pattern: '0,0'}}">
       </hot-column>
-      <hot-column title="Event label" read-only="true" data="event_label">
+      <hot-column title="Event Attributed" read-only="true" data="event_label">
       </hot-column>
       <hot-column title="Event Category" read-only="true" data="event_category">
       </hot-column>
-      <hot-column title="Event Name" read-only="true" data="event_name">
+      <hot-column title="Event Type" read-only="true" data="event_name">
       </hot-column>
-      <hot-column title="Campaign Medium" read-only="true" data="medium">
+      <hot-column title="THOR Address" read-only="true" data="medium">
       </hot-column>
       <hot-column title="Campaign Name" read-only="true" data="campaign_name">
       </hot-column>
-      <hot-column title="Campaign Source" read-only="true" data="source">
+      <hot-column title="Distribution Channel" read-only="true" data="source">
       </hot-column>
       <hot-column title="Device" read-only="true" data="device_category">
       </hot-column>
