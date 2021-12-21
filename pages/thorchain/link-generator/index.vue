@@ -37,6 +37,40 @@ import SideMenu from './side-menu.vue';
 import data from './link-generator';
 
 export default {
+  head: {
+    title: 'Attribute | ',
+    meta: [
+      { property: "og:locale", content: "en_US" },
+      { property: "og:type", content: "website" },
+      { property: "og:title", content: "Link Generator | " },
+      {
+        property: "og:description",
+        content:
+          "THORChain aims to decentralize cryptocurrency liquidity via a network of public THORNodes and ecosystem products. Access to its native and cross-chain liquidity is open to any person, product or institution.",
+      },
+      { property: "og:url", content: process.env.baseUrl },
+      { property: "og:site_name", content: "THORChain" },
+      {
+        property: "og:image",
+        content: process.env.baseUrl + "/images/meta-getting-started.png",
+      },
+      { property: "og:image:width", content: "876" },
+      { property: "og:image:heigh", content: "438" },
+      { name: "twitter:creator", content: "@thorchain" },
+      { name: "twitter:site", content: "@thorchain" },
+      { name: "twitter:title", content: "Link Generator | " },
+      {
+        name: "twitter:description",
+        content:
+          "THORChain aims to decentralize cryptocurrency liquidity via a network of public THORNodes and ecosystem products. Access to its native and cross-chain liquidity is open to any person, product or institution.",
+      },
+      { name: "twitter:card", content: "summary_large_image" },
+      {
+        name: "twitter:image",
+        content: process.env.baseUrl + "/images/meta-getting-started.png",
+      },
+    ],
+  },
   components: { SideMenu },
   data() {
     return {

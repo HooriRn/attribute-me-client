@@ -12,7 +12,7 @@
           <div class="loading-text">
             <div id="loading-progress">{{ loadingProgress }}</div>
             <div v-if="whileLoadingMsg" id="loading-msg">{{whileLoadingMsg}}</div>
-            <div class="process-msg" v-else>    
+            <div class="process-msg" v-else>
             This may take a few minutes, or seconds.
             <br>Depends on the size of your date range.
             <br>Even if the animation stops spinning, please just wait.
@@ -46,6 +46,40 @@ import SideMenu from "./side-menu.vue";
 import HandsTable from './hands-table.vue';
 
 export default {
+  head: {
+    title: 'Attribute | ',
+    meta: [
+      { property: "og:locale", content: "en_US" },
+      { property: "og:type", content: "website" },
+      { property: "og:title", content: "Link Generator | " },
+      {
+        property: "og:description",
+        content:
+          "THORChain aims to decentralize cryptocurrency liquidity via a network of public THORNodes and ecosystem products. Access to its native and cross-chain liquidity is open to any person, product or institution.",
+      },
+      { property: "og:url", content: process.env.baseUrl },
+      { property: "og:site_name", content: "THORChain" },
+      {
+        property: "og:image",
+        content: process.env.baseUrl + "/images/meta-getting-started.png",
+      },
+      { property: "og:image:width", content: "876" },
+      { property: "og:image:heigh", content: "438" },
+      { name: "twitter:creator", content: "@thorchain" },
+      { name: "twitter:site", content: "@thorchain" },
+      { name: "twitter:title", content: "Link Generator | " },
+      {
+        name: "twitter:description",
+        content:
+          "THORChain aims to decentralize cryptocurrency liquidity via a network of public THORNodes and ecosystem products. Access to its native and cross-chain liquidity is open to any person, product or institution.",
+      },
+      { name: "twitter:card", content: "summary_large_image" },
+      {
+        name: "twitter:image",
+        content: process.env.baseUrl + "/images/meta-getting-started.png",
+      },
+    ],
+  },
   components: {
     SideMenu,
     HandsTable
@@ -148,7 +182,7 @@ export default {
           self.handsTableData = events;
           self.handsTableTotals = totals;
           self.loading = false;
-          
+
         }, 0);
       } catch (err) {
         self.loadErr = true;
