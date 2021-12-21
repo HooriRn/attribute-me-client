@@ -312,6 +312,18 @@ export default [
     "note": ""
   },
   {
+    "device": "Desktop",
+    "funnel": "Organic Site",
+    "category": "Weekly Recaps",
+    "topic": "Weekly Recap Dec 15-21, 2021",
+    "preview": "https://www.thorchain.org/recaps/weekly/dec-15-21-2021",
+    "channel": "",
+    "campaign": "",
+    "handle": "",
+    "url": "",
+    "note": ""
+  },
+  {
     "device": "Mobile",
     "funnel": "Organic Site",
     "category": "Homepage",
