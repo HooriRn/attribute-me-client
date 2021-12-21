@@ -55,7 +55,7 @@ export default {
       {
         property: "og:description",
         content:
-          "Attribute aims to decentralize performance marketing by publicly opening cryptocurrency project anaytics data, and giving new marketing tools to track campaign performance.",
+          "Attribute aims to decentralize performance marketing by publicly opening cryptocurrency project analytics data, and giving new marketing tools to track campaign performance.",
       },
       { property: "og:url", content: process.env.baseUrl },
       { property: "og:site_name", content: "Attribute" },
@@ -71,7 +71,7 @@ export default {
       {
         name: "twitter:description",
         content:
-          "Attribute aims to decentralize performance marketing by publicly opening cryptocurrency project anaytics data, and giving new marketing tools to track campaign performance.",
+          "Attribute aims to decentralize performance marketing by publicly opening cryptocurrency project analytics data, and giving new marketing tools to track campaign performance.",
       },
       { name: "twitter:card", content: "summary_large_image" },
       {
