@@ -38,7 +38,7 @@ import data from './link-generator';
 
 export default {
   head: {
-    title: 'THORChain Ecosystem Campaign Link Generator | Attribute',
+    title: 'Link Generator | THORChain Ecosystem | Attribute | Performance Marketing Tool',
     meta: [
       { property: "og:locale", content: "en_US" },
       { property: "og:type", content: "website" },
@@ -58,7 +58,7 @@ export default {
       { property: "og:image:heigh", content: "438" },
       { name: "twitter:creator", content: "@skaldcamp" },
       { name: "twitter:site", content: "@attribute_me" },
-      { name: "twitter:title", content: "THORChain Ecosystem Campaign Link Generator | Attribute" },
+      { name: "twitter:title", content: "Link Generator | THORChain Ecosystem | Attribute | Performance Marketing Tool" },
       {
         name: "twitter:description",
         content:
