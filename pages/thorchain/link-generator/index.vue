@@ -209,7 +209,7 @@ export default {
       }
       else {
         let a = document.createElement('a');
-        a.innerText = 'Generate';
+        a.innerText = '← Fill up these 3 columns to active the generate button';
         a.classList.add('generate', 'center', 'disable');
         Handsontable.dom.empty(td)
         td.appendChild(a)
