@@ -1,4 +1,6 @@
 <template>
+  <div class="side-menu-column">
+
   <div class="side-menu" v-if="$device.isDesktop">
     <div class="date-range-field">
       <div class="field-title">Settings</div>
@@ -159,10 +161,11 @@
       <button @click="exportCSVClicked" class="side-menu-item" style="padding: 0; height: 2rem;">Export to CSV</button>
     </div>
   </div>
+  </div>
 </template>
 
 <script>
-import { getServerCustomDateString, getDateInputValue } from "../../../utils";
+import { getServerCustomDateString, getDateInputValue } from "~/utils";
 import { mapGetters } from "vuex";
 export default {
   computed: {
@@ -263,10 +266,10 @@ export default {
     filterBtnClicked(parentBtnName, childBtnName) {
       var newBtn = parentBtnName + "&" + childBtnName;
       var tableSetting = this.tableSetting;
-        this.activeBtn = newBtn;
-        tableSetting["filter_website"] = parentBtnName;
-        tableSetting["present_filter"] = childBtnName;
-        this.$store.commit("tableSetting", tableSetting);
+      this.activeBtn = newBtn;
+      tableSetting["filter_website"] = parentBtnName;
+      tableSetting["present_filter"] = childBtnName;
+      this.$store.commit("tableSetting", tableSetting);
     },
     toggleDatePicker() {
       console.log("toggle");
@@ -274,9 +277,9 @@ export default {
       console.log(this.showDatePicker);
     },
     dailySwitchChanged(){
-        var tableSetting = this.tableSetting;
-        tableSetting["daily"] = !this.hourlyChecked;
-        this.$store.commit("tableSetting", tableSetting);
+      var tableSetting = this.tableSetting;
+      tableSetting["daily"] = !this.hourlyChecked;
+      this.$store.commit("tableSetting", tableSetting);
     }
   },
   watch: {

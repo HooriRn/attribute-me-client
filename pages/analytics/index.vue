@@ -40,7 +40,7 @@ import {
   parseEventsData,
   getServerCustomDateString,
   getDateInputValue,
-} from "../../../utils";
+} from "~/utils";
 import { mapGetters } from "vuex";
 import SideMenu from "./side-menu.vue";
 import HandsTable from './hands-table.vue';
