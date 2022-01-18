@@ -1,6 +1,4 @@
 <template>
-  <div class="side-menu-column">
-
   <div class="side-menu" v-if="$device.isDesktop">
     <div class="date-range-field">
       <div class="field-title">Settings</div>
@@ -40,8 +38,8 @@
       <div class="filters-scroll">
         <div
           class="side-menu-item"
-          v-for="filter of filters"
-          :key="filters.indexOf(filter)"
+          v-for="(filter, filterIndex) of filters"
+          :key="filterIndex"
         >
           <b-button
             @click="activate(filter.name)"
@@ -68,7 +66,7 @@
             <div
               v-for="child of filter.childs"
               :key="filter.childs.indexOf(child)"
-              @click="filterBtnClicked(filter.name, child.name)"
+              @click="filterBtnClicked(filter, child.name)"
               class="side-menu-button"
               :class="{
                 'side-menu-button-active':
@@ -86,6 +84,7 @@
       <b-button class="side-menu-button" :class="{'disabled': true}" style="line-height: 0;">Documentation</b-button>
     </div>
   </div>
+  <!-- Mobile Layout -->
   <div class="filter-options mobile-layout" v-else>
     <div class="filter-option date-picker">
       <div class="filter-name">Settings:</div>
@@ -143,7 +142,7 @@
             :key="filter.childs.indexOf(child)"
           >
             <b-dropdown-item-button
-              @click="filterBtnClicked(filter.name, child.name)"
+              @click="filterBtnClicked(filter, child.name)"
               :class="{
                 'side-menu-button-active':
                   activeBtn == filter.name + '&' + child.name,
@@ -160,7 +159,6 @@
     <div class="side-menu-item" style="display: flex;">
       <button @click="exportCSVClicked" class="side-menu-item" style="padding: 0; height: 2rem;">Export to CSV</button>
     </div>
-  </div>
   </div>
 </template>
 
@@ -179,9 +177,10 @@ export default {
       hourlyChecked: false,
       dateInputValue: "Filter a date range",
       filters: [
-        { name: "All Data" },
+        { name: "All Data", url: '' },
         {
           name: "THORChain.org",
+          url: 'thorchain',
           childs: [
             { name: "All Data" },
             { name: "Website Loads" },
@@ -191,6 +190,7 @@ export default {
         },
         {
           name: "SKIP.exchange",
+          url: 'skip',
           childs: [
             { name: "All Data" },
             { name: "Interface Loads" },
@@ -222,7 +222,7 @@ export default {
   },
   mounted() {
     window.addEventListener('click', (e) => {
-      if (!document.getElementById('date-picker-holder').contains(e.target) && !document.getElementById('date-input').contains(e.target)){
+      if (!document?.getElementById('date-picker-holder')?.contains(e.target) && !document?.getElementById('date-input')?.contains(e.target)){
         this.showDatePicker = false;
         console.log(this.showDatePicker)
       }
@@ -247,7 +247,6 @@ export default {
       this.$store.commit('exportCSV', Math.random())
     },
     activate(filterName) {
-      console.log('activate', filterName)
       this.activeItem = filterName;
       if (filterName === "All Data") {
         this.activeBtn = null;
@@ -263,13 +262,15 @@ export default {
       }
       console.log(this.activeItem);
     },
-    filterBtnClicked(parentBtnName, childBtnName) {
+    filterBtnClicked(filter, childBtnName) {
+      let parentBtnName = filter.name;
       var newBtn = parentBtnName + "&" + childBtnName;
       var tableSetting = this.tableSetting;
       this.activeBtn = newBtn;
       tableSetting["filter_website"] = parentBtnName;
       tableSetting["present_filter"] = childBtnName;
       this.$store.commit("tableSetting", tableSetting);
+      this.$router.push(`analytics/${filter.url}`);
     },
     toggleDatePicker() {
       console.log("toggle");

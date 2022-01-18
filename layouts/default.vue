@@ -4,7 +4,10 @@
     <BaseHeader />
     <!-- Main page Content -->
     <client-only>
-      <Nuxt />
+      <div class="main-page">
+        <base-side-menu v-if="this.$route.name.includes('analytics')" />
+        <Nuxt />
+      </div>
     </client-only>
     <!-- Footer Menu for Mobile Devices -->
     <FooterMenu v-if="!$device.isDesktop" />
@@ -15,9 +18,10 @@
 import BaseHeader from "/components/BaseHeader.vue";
 export default {
   components: {
-    BaseHeader,
+    BaseHeader
   },
   mounted() {
+    console.log(this.$route.name.includes())
     if (this.$device.isDesktop) {
       document.body.style.minWidth = "1200px"
     }

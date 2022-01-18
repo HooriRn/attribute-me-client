@@ -1,9 +1,6 @@
 <template>
   <div class="page" :class="{ 'mobile-layout': !$device.isDesktop }">
     <div class="page-layout">
-      <div class="side-menu-column">
-        <side-menu />
-      </div>
       <div v-if="!loading && !loadErr && handsTableData.length !== 0" class="hands-table-column">
         <hands-table v-if="!loading" class="hands-table" :tableData="handsTableData" :totals="handsTableTotals"></hands-table>
       </div>
