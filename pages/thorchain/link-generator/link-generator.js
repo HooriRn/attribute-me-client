@@ -634,5 +634,42 @@ export default [
     "handle": "",
     "url": "",
     "note": ""
+  },
+
+  {
+    "device": "Desktop / Mobile",
+    "funnel": "Organic Site",
+    "category": "Homepage",
+    "topic": "Main",
+    "preview": "https://skip.exchange",
+    "channel": "",
+    "campaign": "",
+    "handle": "",
+    "url": "",
+    "note": ""
+  },
+  {
+    "device": "Desktop / Mobile",
+    "funnel": "Organic Site",
+    "category": "Swap",
+    "topic": "Select Pair",
+    "preview": "https://app.skip.exchange/swap/",
+    "channel": "",
+    "campaign": "",
+    "handle": "",
+    "url": "",
+    "note": ""
+  },
+  {
+    "device": "Desktop / Mobile",
+    "funnel": "Organic Site",
+    "category": "Pool",
+    "topic": "Select Pool",
+    "preview": "https://app.skip.exchange/pool",
+    "channel": "",
+    "campaign": "",
+    "handle": "",
+    "url": "",
+    "note": ""
   }
 ]
