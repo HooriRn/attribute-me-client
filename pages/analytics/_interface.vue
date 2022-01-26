@@ -1,9 +1,6 @@
 <template>
   <div class="page" :class="{ 'mobile-layout': !$device.isDesktop }">
     <div class="page-layout">
-      <div class="side-menu-column">
-        <side-menu />
-      </div>
       <div v-if="!loading && !loadErr && handsTableData.length !== 0" class="hands-table-column">
         <hands-table v-if="!loading" class="hands-table" :tableData="handsTableData" :totals="handsTableTotals"></hands-table>
       </div>
@@ -40,7 +37,7 @@ import {
   parseEventsData,
   getServerCustomDateString,
   getDateInputValue,
-} from "../../../utils";
+} from "~/utils";
 import { mapGetters } from "vuex";
 import SideMenu from "./side-menu.vue";
 import HandsTable from './hands-table.vue';
@@ -93,6 +90,11 @@ export default {
         endDate: null,
         daily: true,
       },
+      switchTable: {
+        "": "",
+        "thorchain": "THORChain.org",
+        "skip": "SKIP.exchange"
+      },
       loading: true,
       loadErr: false,
       loadingProgress: '0%',
@@ -114,9 +116,15 @@ export default {
       this.currentTableSetting.endDate = endDate
 
     }
+    let filter = {};
+    if (this.$route.params && this.currentTableSetting.interface !== this.$route.params.interface) {
+      filter.interface = this.$route.params.interface;
+      filter.filter_website = this.switchTable[this.$route.params.interface];
+      filter.present_filter = "All Data"
+    }
     var dateInputValue = getDateInputValue(startDate, endDate);
     this.$store.commit("sideMenuDateLabel", dateInputValue);
-    this.$store.commit("tableSetting", this.currentTableSetting);
+    this.$store.commit("tableSetting", {...this.currentTableSetting, ...filter});
   },
   computed: {
     ...mapGetters(["tableSetting"]),
@@ -126,8 +134,8 @@ export default {
     tableSetting: function (val) {
       console.log("table setting changed");
       this.currentTableSetting = val;
-      console.log('new table setting: ', this.currentTableSetting)
-      this.saveSetting(this.currentTableSetting)
+      //check the route if it's new change the settings to it
+      this.saveSetting(this.currentTableSetting);
       this.getEvents();
       // }
     },

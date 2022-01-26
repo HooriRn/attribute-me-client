@@ -38,12 +38,17 @@ export default {
   plugins: [
     { src: '~/plugins/vue-handsontable', ssr: false },
     { src: '~/plugins/vue-md-date-range-picker', ssr: false },
-    { src: '~/plugins/vue-mj-daterangepicker', ssr: false }
+    { src: '~/plugins/vue-mj-daterangepicker', ssr: false },
+    '~/plugins/route'
   ],
 
   env: {
     BASE_URL: process.env.BASE_URL,
     MS_URL: process.env.MS_URL || 'http://localhost:3000/api'
+  },
+
+  router: {
+    routeNameSplitter: '/',
   },
 
   // Auto import components: https://go.nuxtjs.dev/config-components

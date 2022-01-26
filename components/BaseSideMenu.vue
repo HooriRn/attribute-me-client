@@ -38,8 +38,8 @@
       <div class="filters-scroll">
         <div
           class="side-menu-item"
-          v-for="filter of filters"
-          :key="filters.indexOf(filter)"
+          v-for="(filter, filterIndex) of filters"
+          :key="filterIndex"
         >
           <b-button
             @click="activate(filter.name)"
@@ -66,7 +66,7 @@
             <div
               v-for="child of filter.childs"
               :key="filter.childs.indexOf(child)"
-              @click="filterBtnClicked(filter.name, child.name)"
+              @click="filterBtnClicked(filter, child.name)"
               class="side-menu-button"
               :class="{
                 'side-menu-button-active':
@@ -84,6 +84,7 @@
       <b-button class="side-menu-button" :class="{'disabled': true}" style="line-height: 0;">Documentation</b-button>
     </div>
   </div>
+  <!-- Mobile Layout -->
   <div class="filter-options mobile-layout" v-else>
     <div class="filter-option date-picker">
       <div class="filter-name">Settings:</div>
@@ -141,7 +142,7 @@
             :key="filter.childs.indexOf(child)"
           >
             <b-dropdown-item-button
-              @click="filterBtnClicked(filter.name, child.name)"
+              @click="filterBtnClicked(filter, child.name)"
               :class="{
                 'side-menu-button-active':
                   activeBtn == filter.name + '&' + child.name,
@@ -162,7 +163,7 @@
 </template>
 
 <script>
-import { getServerCustomDateString, getDateInputValue } from "../../../utils";
+import { getServerCustomDateString, getDateInputValue } from "~/utils";
 import { mapGetters } from "vuex";
 export default {
   computed: {
@@ -176,9 +177,10 @@ export default {
       hourlyChecked: false,
       dateInputValue: "Filter a date range",
       filters: [
-        { name: "All Data" },
+        { name: "All Data", url: '' },
         {
           name: "THORChain.org",
+          url: 'thorchain',
           childs: [
             { name: "All Data" },
             { name: "Website Loads" },
@@ -188,6 +190,7 @@ export default {
         },
         {
           name: "SKIP.exchange",
+          url: 'skip',
           childs: [
             { name: "All Data" },
             { name: "Interface Loads" },
@@ -219,7 +222,7 @@ export default {
   },
   mounted() {
     window.addEventListener('click', (e) => {
-      if (!document.getElementById('date-picker-holder').contains(e.target) && !document.getElementById('date-input').contains(e.target)){
+      if (!document?.getElementById('date-picker-holder')?.contains(e.target) && !document?.getElementById('date-input')?.contains(e.target)){
         this.showDatePicker = false;
         console.log(this.showDatePicker)
       }
@@ -244,7 +247,6 @@ export default {
       this.$store.commit('exportCSV', Math.random())
     },
     activate(filterName) {
-      console.log('activate', filterName)
       this.activeItem = filterName;
       if (filterName === "All Data") {
         this.activeBtn = null;
@@ -255,18 +257,25 @@ export default {
         var tableSetting = this.tableSetting;
         tableSetting["filter_website"] = "";
         tableSetting["present_filter"] = "";
-        console.log(tableSetting)
+        tableSetting["interface"] = "";
         this.$store.commit("tableSetting", tableSetting);
+        this.$router.push({path: '/analytics'})
       }
       console.log(this.activeItem);
     },
-    filterBtnClicked(parentBtnName, childBtnName) {
+    filterBtnClicked(filter, childBtnName) {
+      let parentBtnName = filter.name;
       var newBtn = parentBtnName + "&" + childBtnName;
       var tableSetting = this.tableSetting;
-        this.activeBtn = newBtn;
-        tableSetting["filter_website"] = parentBtnName;
-        tableSetting["present_filter"] = childBtnName;
-        this.$store.commit("tableSetting", tableSetting);
+      this.activeBtn = newBtn;
+      tableSetting["filter_website"] = parentBtnName;
+      tableSetting["present_filter"] = childBtnName;
+      tableSetting["interface"] = filter.url;
+      this.$store.commit("tableSetting", tableSetting);
+      if (filter.url) 
+        this.$router.push({path: `/analytics/${filter.url}`});
+      else
+        this.$router.push({path: '/analytics'})
     },
     toggleDatePicker() {
       console.log("toggle");
@@ -274,9 +283,9 @@ export default {
       console.log(this.showDatePicker);
     },
     dailySwitchChanged(){
-        var tableSetting = this.tableSetting;
-        tableSetting["daily"] = !this.hourlyChecked;
-        this.$store.commit("tableSetting", tableSetting);
+      var tableSetting = this.tableSetting;
+      tableSetting["daily"] = !this.hourlyChecked;
+      this.$store.commit("tableSetting", tableSetting);
     }
   },
   watch: {
@@ -292,6 +301,7 @@ export default {
           if(tableSetting.filter_website === ""){
             this.activeItem = "All Data"
           } else {
+            this.activeItem = tableSetting.filter_website
             this.activeBtn = tableSetting.filter_website + "&" + tableSetting.present_filter
           }
 

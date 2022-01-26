@@ -6,18 +6,18 @@
       </div>
       <div class="menu-wrapper" v-if="$device.isDesktop">
         <!-- <div class="menu-item">Home</div> -->
-        <nuxt-link class="menu-item" to="/thorchain/analytics">Analytics</nuxt-link>
-        <nuxt-link class="menu-item" to="/thorchain/link-generator">Link Generator</nuxt-link>
+        <nuxt-link class="menu-item" to="/analytics">Analytics</nuxt-link>
+        <nuxt-link class="menu-item" to="/link-generator">Link Generator</nuxt-link>
         <a class="menu-item" :class="{'disabled': true}">Tweet Bot</a>
         <a class="menu-item" :class="{'disabled': true}">Guides</a>
       </div>
-      <div class="last-fields" v-if="$route.path == '/thorchain/analytics'" style="margin-left: 1rem;">
+      <div class="last-fields" v-if="$route.path.includes('analytics')" style="margin-left: 1rem;">
         <input @change="quickFilterChanged" v-model="quickFilterValue" class="quick-filter-input" placeholder="Search by Address" type="text">
         <button @click="searchBtn" class="search-btn">Search</button>
       </div>
       <!--<div class="active-link" v-if="!$device.isDesktop">
-        <div class="menu-item menu-item-active" v-if="$route.path == '/thorchain/analytics'">Analytics</div>
-        <div class="menu-item menu-item-active" v-if="$route.path == '/thorchain/link-generator'">Generator</div>
+        <div class="menu-item menu-item-active" v-if="$route.path == '/analytics'">Analytics</div>
+        <div class="menu-item menu-item-active" v-if="$route.path == '/link-generator'">Generator</div>
       </div>-->
     </div>
   </div>
