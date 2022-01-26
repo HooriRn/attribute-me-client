@@ -257,8 +257,9 @@ export default {
         var tableSetting = this.tableSetting;
         tableSetting["filter_website"] = "";
         tableSetting["present_filter"] = "";
-        console.log(tableSetting)
+        tableSetting["interface"] = "";
         this.$store.commit("tableSetting", tableSetting);
+        this.$router.push({path: '/analytics'})
       }
       console.log(this.activeItem);
     },
@@ -269,8 +270,12 @@ export default {
       this.activeBtn = newBtn;
       tableSetting["filter_website"] = parentBtnName;
       tableSetting["present_filter"] = childBtnName;
+      tableSetting["interface"] = filter.url;
       this.$store.commit("tableSetting", tableSetting);
-      this.$router.push(`analytics/${filter.url}`);
+      if (filter.url) 
+        this.$router.push({path: `/analytics/${filter.url}`});
+      else
+        this.$router.push({path: '/analytics'})
     },
     toggleDatePicker() {
       console.log("toggle");
@@ -296,6 +301,7 @@ export default {
           if(tableSetting.filter_website === ""){
             this.activeItem = "All Data"
           } else {
+            this.activeItem = tableSetting.filter_website
             this.activeBtn = tableSetting.filter_website + "&" + tableSetting.present_filter
           }
 

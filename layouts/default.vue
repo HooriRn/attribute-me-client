@@ -5,7 +5,7 @@
     <!-- Main page Content -->
     <client-only>
       <div class="main-page">
-        <base-side-menu v-if="this.$route.name.includes('analytics')" />
+        <base-side-menu v-if="this.$route.path.includes('analytics')" />
         <Nuxt />
       </div>
     </client-only>
@@ -21,7 +21,6 @@ export default {
     BaseHeader
   },
   mounted() {
-    console.log(this.$route.name.includes())
     if (this.$device.isDesktop) {
       document.body.style.minWidth = "1200px"
     }

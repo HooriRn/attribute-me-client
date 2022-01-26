@@ -11,7 +11,7 @@
         <a class="menu-item" :class="{'disabled': true}">Tweet Bot</a>
         <a class="menu-item" :class="{'disabled': true}">Guides</a>
       </div>
-      <div class="last-fields" v-if="$route.path == '/analytics'" style="margin-left: 1rem;">
+      <div class="last-fields" v-if="$route.path.includes('analytics')" style="margin-left: 1rem;">
         <input @change="quickFilterChanged" v-model="quickFilterValue" class="quick-filter-input" placeholder="Search by Address" type="text">
         <button @click="searchBtn" class="search-btn">Search</button>
       </div>

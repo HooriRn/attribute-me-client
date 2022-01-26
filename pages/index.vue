@@ -5,7 +5,7 @@
 export default {
   middleware: [
     function ({ redirect }) {
-      redirect("/thorchain/analytics");
+      redirect("/analytics");
     },
   ],  
 };

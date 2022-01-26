@@ -39,6 +39,7 @@ import {
   getDateInputValue,
 } from "~/utils";
 import { mapGetters } from "vuex";
+import SideMenu from "./side-menu.vue";
 import HandsTable from './hands-table.vue';
 
 export default {
@@ -77,6 +78,7 @@ export default {
     ],
   },
   components: {
+    SideMenu,
     HandsTable
   },
   data() {
@@ -88,6 +90,11 @@ export default {
         endDate: null,
         daily: true,
       },
+      switchTable: {
+        "": "",
+        "thorchain": "THORChain.org",
+        "skip": "SKIP.exchange"
+      },
       loading: true,
       loadErr: false,
       loadingProgress: '0%',
@@ -95,7 +102,6 @@ export default {
     };
   },
   mounted() {
-    console.log(this.$route.name)
     var setting = this.loadSetting()
     if(setting.startDate && setting.endDate){
       var startDate = setting.startDate
@@ -110,9 +116,15 @@ export default {
       this.currentTableSetting.endDate = endDate
 
     }
+    let filter = {};
+    if (this.$route.params && this.currentTableSetting.interface !== this.$route.params.interface) {
+      filter.interface = this.$route.params.interface;
+      filter.filter_website = this.switchTable[this.$route.params.interface];
+      filter.present_filter = "All Data"
+    }
     var dateInputValue = getDateInputValue(startDate, endDate);
     this.$store.commit("sideMenuDateLabel", dateInputValue);
-    this.$store.commit("tableSetting", this.currentTableSetting);
+    this.$store.commit("tableSetting", {...this.currentTableSetting, ...filter});
   },
   computed: {
     ...mapGetters(["tableSetting"]),
@@ -122,8 +134,8 @@ export default {
     tableSetting: function (val) {
       console.log("table setting changed");
       this.currentTableSetting = val;
-      console.log('new table setting: ', this.currentTableSetting)
-      this.saveSetting(this.currentTableSetting)
+      //check the route if it's new change the settings to it
+      this.saveSetting(this.currentTableSetting);
       this.getEvents();
       // }
     },
