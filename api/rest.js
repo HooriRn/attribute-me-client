@@ -2,7 +2,7 @@ const express = require('express');
 const axios = require('axios');
 const app = express();
 const URL = require("url").URL;
-const validUrls = ['https://m.thorchain.org/', 'https://www.thorchain.org/']
+const validUrls = ['https://m.thorchain.org/', 'https://www.thorchain.org/', 'https://skip.exchange/', 'https://app.skip.exchange/']
 const cors = require('cors');
 
 const corsOptions = {
