@@ -14,7 +14,7 @@
       </hot-column>
       <hot-column title="Event Type" read-only="true" data="event_name">
       </hot-column>
-      <hot-column title="Attributed To " read-only="true" data="medium">
+      <hot-column title="Attributed To" read-only="true" data="medium">
       </hot-column>
       <hot-column title="Campaign Name" read-only="true" data="campaign_name">
       </hot-column>
