@@ -8,8 +8,6 @@
         <!-- <div class="menu-item">Home</div> -->
         <nuxt-link class="menu-item" to="/analytics">Analytics</nuxt-link>
         <nuxt-link class="menu-item" to="/link-generator">Link Generator</nuxt-link>
-        <a class="menu-item" :class="{'disabled': true}">Tweet Bot</a>
-        <a class="menu-item" :class="{'disabled': true}">Guides</a>
       </div>
       <div class="last-fields" v-if="$route.path.includes('analytics')" style="margin-left: 1rem;">
         <input @change="quickFilterChanged" v-model="quickFilterValue" class="quick-filter-input" placeholder="Search by Address" type="text">
