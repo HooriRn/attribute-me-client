@@ -47,6 +47,12 @@ body {
     max-height: calc(100vh - 60px);
     height: calc(100vh - 7.3125rem);
 
+    &.mobile-layout {
+      padding-top: 0;
+      height: auto;
+      flex: 1;
+    }
+
     .page-layout {
       flex-direction: column;
       margin-bottom: 70px;
@@ -125,6 +131,10 @@ body {
 
   .filter-name {
     padding-right: 10px;
+  }
+
+  &.mobile-layout {
+    padding-top: 10px;
   }
 }
 

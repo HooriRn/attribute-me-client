@@ -4,6 +4,11 @@
   .side-menu {
     flex: 0 0 13.375rem;
   }
+
+  &.mobile-layout {
+    flex-direction: column;
+    margin-bottom: 55px;
+  }
 }
 
 .side-menu {

@@ -4,7 +4,7 @@
     <BaseHeader />
     <!-- Main page Content -->
     <client-only>
-      <div class="main-page">
+      <div class="main-page" :class="{'mobile-layout': !$device.isDesktop}">
         <base-side-menu v-if="this.$route.path.includes('analytics')" />
         <Nuxt />
       </div>
